@@ -223,37 +223,12 @@ function activar(){
         title.innerHTML = "SYSTEM ONLINE";
         text.innerHTML = "WELCOME TO ALE RIOT MATRIX";
         button.innerHTML = "ENTER";
-    },4000);
-
-    if(panel){
-        panel.style.animation = "pulse 1s infinite";
-    }
-button.innerHTML = "INICIANDO...";
-
-setTimeout(()=>{
-
-    title.innerHTML = "ACCESS GRANTED";
-    text.innerHTML = "CONNECTING NODE 3991";
-
-},1000);
+        button.onclick = ()=>{
+    document.querySelector(".panel").style.opacity = "0";
+    setTimeout(()=>{
+        title.innerHTML = "ALE RIOT 3991";
+        text.innerHTML = "WELCOME TO MY WORLD";
+        button.innerHTML = "ENTERING...";
+    },1000);
 
 
-setTimeout(()=>{
-
-    title.innerHTML = "ALE RIOT 3991";
-    text.innerHTML = "MATRIX SYSTEM ACTIVADO";
-    button.innerHTML = "SISTEMA ONLINE";
-
-},2500);
-
-}
-    
-
-
-
-
-
-</script>
-
-</body>
-</html>
