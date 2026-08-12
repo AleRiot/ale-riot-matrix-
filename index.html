@@ -2,29 +2,195 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Ale Riot Matrix Red</title>
+
 <style>
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050000}
-canvas{position:fixed;inset:0;width:100%;height:100%}
-.vignette{position:fixed;inset:0;background:radial-gradient(circle,transparent 20%,#100000 150%);pointer-events:none}
-.scanlines{position:fixed;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(0,0,0,.2) 50%);background-size:100% 4px;opacity:.25}
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#050000;
+    color:#ff3b3b;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+canvas{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+}
+
+.vignette{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle,transparent 20%,#000 95%);
+    pointer-events:none;
+}
+
+.scanlines{
+    position:fixed;
+    inset:0;
+    background:linear-gradient(
+        transparent 50%,
+        rgba(255,0,0,.08) 50%
+    );
+    background-size:100% 4px;
+    pointer-events:none;
+}
+
+.panel{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    z-index:5;
+    padding:40px;
+    border:1px solid rgba(255,50,50,.4);
+    background:rgba(0,0,0,.45);
+    box-shadow:0 0 40px red;
+}
+
+h1{
+    font-size:50px;
+    letter-spacing:10px;
+    text-shadow:0 0 20px red;
+}
+
+p{
+    font-size:18px;
+    color:#ffaaaa;
+}
+
+button{
+    margin-top:20px;
+    padding:15px 30px;
+    background:#900;
+    color:white;
+    border:1px solid red;
+    cursor:pointer;
+    font-size:18px;
+    box-shadow:0 0 20px red;
+}
+
+button:hover{
+    background:red;
+}
 </style>
 </head>
+
 <body>
-<canvas id="matrix"></canvas><div class="vignette"></div><div class="scanlines"></div>
+
+<canvas id="matrix"></canvas>
+
+<div class="panel">
+<h1>ALE RIOT</h1>
+<p>MATRIX RED SYSTEM</p>
+<button onclick="activate()">ACTIVAR</button>
+</div>
+
+<div class="vignette"></div>
+<div class="scanlines"></div>
+
 <script>
-const c=document.getElementById("matrix"),x=c.getContext("2d");
-let w,h,a=[];
-const chars="ｱｲｳｴｵｶｷｸｹｺ0123456789<>/#@";
-function size(){w=c.width=innerWidth;h=c.height=innerHeight;a=[];for(let i=0;i<w;i+=18)a.push({x:i,y:Math.random()*h,s:.8+Math.random()})}
-onresize=size;size();
-function go(){
-x.fillStyle="rgba(5,0,0,.18)";x.fillRect(0,0,w,h);
-x.font="18px monospace";
-a.forEach(o=>{x.fillStyle="#ff1616";x.shadowColor="#ff5555";x.shadowBlur=12;x.fillText(chars[Math.random()*chars.length|0],o.x,o.y);o.y+=o.s;if(o.y>h)o.y=0});
-requestAnimationFrame(go)}
-go();
+  const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+let width;
+let height;
+let columns = [];
+let fontSize = 18;
+
+const chars = "ｱｲｳｴｵｶｷｸｹｺ0123456789<>/#@ALE RIOT 3991";
+
+function resize(){
+
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+
+    columns = [];
+
+    let count = Math.floor(width / fontSize);
+
+    for(let i = 0; i < count; i++){
+
+        columns.push({
+            x:i * fontSize,
+            y:Math.random() * height,
+            speed:0.8 + Math.random() * 1.2
+        });
+
+    }
+}
+
+window.addEventListener("resize",resize);
+
+resize();
+
+
+function drawMatrix(){
+
+    ctx.fillStyle = "rgba(0,0,0,0.18)";
+    ctx.fillRect(0,0,width,height);
+
+
+    ctx.font = fontSize+"px Courier New";
+
+
+    columns.forEach(col=>{
+
+        let text = chars.charAt(
+            Math.floor(Math.random()*chars.length)
+        );
+
+
+        ctx.fillStyle="#ff1616";
+        ctx.shadowColor="#ff4444";
+        ctx.shadowBlur=15;
+
+
+        ctx.fillText(
+            text,
+            col.x,
+            col.y
+        );
+
+
+        col.y += col.speed;
+
+
+        if(col.y > height){
+
+            col.y = 0;
+
+        }
+
+    });
+
+
+    requestAnimationFrame(drawMatrix);
+
+}
+
+
+drawMatrix();
+
+
+
+function activate(){
+
+    document.body.style.animation =
+    "pulse 2s infinite";
+
+}
+
+
+
 </script>
+
 </body>
 </html>
