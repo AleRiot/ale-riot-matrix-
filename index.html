@@ -207,7 +207,6 @@ function activar(){
     const text = document.querySelector("p");
 
     button.innerHTML = "INICIANDO...";
-
     title.innerHTML = "ACCESS GRANTED";
     text.innerHTML = "INITIALIZING ALE RIOT 3991...";
 
@@ -223,12 +222,20 @@ function activar(){
         title.innerHTML = "SYSTEM ONLINE";
         text.innerHTML = "WELCOME TO ALE RIOT MATRIX";
         button.innerHTML = "ENTER";
+
         button.onclick = ()=>{
-    document.querySelector(".panel").style.opacity = "0";
-    setTimeout(()=>{
-        title.innerHTML = "ALE RIOT 3991";
-        text.innerHTML = "WELCOME TO MY WORLD";
-        button.innerHTML = "ENTERING...";
-    },1000);
-};
+            panel.style.opacity = "0";
+
+            setTimeout(()=>{
+                title.innerHTML = "ALE RIOT 3991";
+                text.innerHTML = "WELCOME TO MY WORLD";
+                button.innerHTML = "ENTERING...";
+            },1000);
+        };
+
+    },4000);
+
 }
+    </script>
+</body>
+</html>
