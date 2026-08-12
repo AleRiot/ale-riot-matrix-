@@ -202,16 +202,27 @@ drawMatrix();
 function activar(){ 
 
     const panel = document.querySelector(".panel");
+    const button = document.querySelector("button");
+    const title = document.querySelector("h1");
+    const text = document.querySelector("p");
 
     if(panel){
         panel.style.animation = "pulse 1s infinite";
     }
 
-    document.querySelector("button").innerHTML = "SISTEMA ONLINE";
+    button.innerHTML = "INICIANDO...";
 
-    document.querySelector("h1").innerHTML = "ALE RIOT 3991";
+    setTimeout(()=>{
+        title.innerHTML = "ACCESS GRANTED";
+        text.innerHTML = "CONNECTING NODE 3991";
+    },1000);
 
-    document.querySelector("p").innerHTML = "MATRIX SYSTEM ACTIVADO";
+
+    setTimeout(()=>{
+        title.innerHTML = "ALE RIOT 3991";
+        text.innerHTML = "MATRIX SYSTEM ACTIVADO";
+        button.innerHTML = "SISTEMA ONLINE";
+    },2500);
 
 }
 
