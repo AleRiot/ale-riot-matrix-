@@ -181,10 +181,19 @@ drawMatrix();
 
 
 
-function activate(){
+function activar(){
 
-    document.body.style.animation =
-    "pulse 2s infinite";
+    const panel = document.querySelector(".Panel");
+
+    if(panel){
+        panel.style.animation = "pulse 1s";
+    }
+
+    document.querySelector("button").innerHTML = "SISTEMA ONLINE";
+
+    document.querySelector("h1").innerHTML = "ALE RIOT 3991";
+
+    document.querySelector("p").innerHTML = "MATRIX SYSTEM ACTIVADO";
 
 }
 
