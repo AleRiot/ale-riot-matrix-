@@ -199,14 +199,16 @@ drawMatrix();
 
 
 
-function activar(){ 
+function activar(){
 
     const panel = document.querySelector(".panel");
     const button = document.querySelector("button");
     const title = document.querySelector("h1");
     const text = document.querySelector("p");
 
+    button.disabled = true;
     button.innerHTML = "INICIANDO...";
+
     title.innerHTML = "ACCESS GRANTED";
     text.innerHTML = "INITIALIZING ALE RIOT 3991...";
 
@@ -221,23 +223,1282 @@ function activar(){
     setTimeout(()=>{
         title.innerHTML = "SYSTEM ONLINE";
         text.innerHTML = "WELCOME TO ALE RIOT MATRIX";
+
         button.innerHTML = "ENTER";
+        button.disabled = false;
 
-       button.onclick = ()=>{
-
-    button.innerHTML = "ENTERING...";
-
-    setTimeout(()=>{
-
-        title.innerHTML = "ALE RIOT 3991";
-        text.innerHTML = "WELCOME TO MY WORLD";
-        button.innerHTML = "SYSTEM READY";
-
-    },1000);
-
-};
+        button.onclick = abrirMatrixMenu;
 
     },4000);
+
+
+    function abrirMatrixMenu(){
+
+        panel.classList.add("matrix-open");
+
+        panel.innerHTML = `
+
+            <div class="matrix-header">
+
+                <div>
+
+                    <span class="matrix-tag">
+                        ALE RIOT / 3991
+                    </span>
+
+                    <h1>
+                        WELCOME TO<br>
+                        <strong>MY WORLD</strong>
+                    </h1>
+
+                    <p>
+                        SELECT A MODULE
+                    </p>
+
+                </div>
+
+                <button
+                    class="matrix-close"
+                    id="matrixClose">
+                    ×
+                </button>
+
+            </div>
+
+
+            <nav class="matrix-nav">
+
+                <button
+                    class="matrix-nav-btn active"
+                    data-section="home">
+                    ⌂ INICIO
+                </button>
+
+                <button
+                    class="matrix-nav-btn"
+                    data-section="gallery">
+                    ▣ GALERÍA
+                </button>
+
+                <button
+                    class="matrix-nav-btn"
+                    data-section="music">
+                    ♫ MÚSICA
+                </button>
+
+                <button
+                    class="matrix-nav-btn"
+                    data-section="video">
+                    ▶ VIDEO
+                </button>
+
+                <button
+                    class="matrix-nav-btn"
+                    data-section="social">
+                    ◎ REDES
+                </button>
+
+            </nav>
+
+
+            <main class="matrix-content">
+
+
+                <!-- INICIO -->
+
+                <section
+                    class="matrix-section active"
+                    id="section-home">
+
+                    <div class="hero-card">
+
+                        <span>
+                            01 / SYSTEM
+                        </span>
+
+                        <h2>
+                            ALE RIOT <b>3991</b>
+                        </h2>
+
+                        <p>
+                            Bienvenido a mi mundo.
+                            Música, imágenes, videos y
+                            todos mis enlaces en un solo lugar.
+                        </p>
+
+                    </div>
+
+
+                    <div class="quick-grid">
+
+                        <button
+                            class="quick-card"
+                            data-go="gallery">
+
+                            <span>▣</span>
+
+                            <b>GALERÍA</b>
+
+                            <small>
+                                Fotos y momentos
+                            </small>
+
+                        </button>
+
+
+                        <button
+                            class="quick-card"
+                            data-go="music">
+
+                            <span>♫</span>
+
+                            <b>MÚSICA</b>
+
+                            <small>
+                                Spotify y playlist
+                            </small>
+
+                        </button>
+
+
+                        <button
+                            class="quick-card"
+                            data-go="video">
+
+                            <span>▶</span>
+
+                            <b>VIDEO</b>
+
+                            <small>
+                                Contenido audiovisual
+                            </small>
+
+                        </button>
+
+
+                        <button
+                            class="quick-card"
+                            data-go="social">
+
+                            <span>◎</span>
+
+                            <b>REDES</b>
+
+                            <small>
+                                Encuéntrame online
+                            </small>
+
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- GALERÍA -->
+
+                <section
+                    class="matrix-section"
+                    id="section-gallery">
+
+                    <div class="section-title">
+
+                        <span>
+                            02 / ARCHIVE
+                        </span>
+
+                        <h2>
+                            GALERÍA
+                        </h2>
+
+                    </div>
+
+
+                    <div class="gallery-grid">
+
+                        <div class="gallery-item">
+                            <span>FOTO 01</span>
+                        </div>
+
+                        <div class="gallery-item">
+                            <span>FOTO 02</span>
+                        </div>
+
+                        <div class="gallery-item">
+                            <span>FOTO 03</span>
+                        </div>
+
+                        <div class="gallery-item">
+                            <span>FOTO 04</span>
+                        </div>
+
+                        <div class="gallery-item">
+                            <span>FOTO 05</span>
+                        </div>
+
+                        <div class="gallery-item">
+                            <span>FOTO 06</span>
+                        </div>
+
+                    </div>
+
+
+                    <p class="hint">
+                        Después podemos colocar aquí tus propias fotografías.
+                    </p>
+
+                </section>
+
+
+                <!-- MÚSICA -->
+
+                <section
+                    class="matrix-section"
+                    id="section-music">
+
+                    <div class="section-title">
+
+                        <span>
+                            03 / AUDIO
+                        </span>
+
+                        <h2>
+                            MÚSICA
+                        </h2>
+
+                    </div>
+
+
+                    <div class="music-player">
+
+                        <div class="album-art">
+                            ♫
+                        </div>
+
+
+                        <div class="track-info">
+
+                            <span>
+                                NOW PLAYING
+                            </span>
+
+                            <h3>
+                                ALE RIOT — MATRIX RED
+                            </h3>
+
+                            <p>
+                                Tu reproductor de música
+                            </p>
+
+
+                            <audio
+                                id="aleAudio"
+                                controls>
+
+                            </audio>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="music-links">
+
+                        <a
+                            href="https://open.spotify.com/"
+                            target="_blank"
+                            class="music-link">
+
+                            <span>♫</span>
+
+                            <b>
+                                SPOTIFY
+                            </b>
+
+                            <small>
+                                ABRIR MI MÚSICA
+                            </small>
+
+                        </a>
+
+
+                        <a
+                            href="https://www.youtube.com/"
+                            target="_blank"
+                            class="music-link">
+
+                            <span>▶</span>
+
+                            <b>
+                                YOUTUBE
+                            </b>
+
+                            <small>
+                                ABRIR PLAYLIST
+                            </small>
+
+                        </a>
+
+                    </div>
+
+                </section>
+
+
+                <!-- VIDEO -->
+
+                <section
+                    class="matrix-section"
+                    id="section-video">
+
+                    <div class="section-title">
+
+                        <span>
+                            04 / VISUAL
+                        </span>
+
+                        <h2>
+                            VIDEO
+                        </h2>
+
+                    </div>
+
+
+                    <div class="video-box">
+
+                        <div class="video-placeholder">
+
+                            <span>
+                                ▶
+                            </span>
+
+                            <h3>
+                                YOUR VIDEO
+                            </h3>
+
+                            <p>
+                                Aquí colocaremos tu video de YouTube.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <p class="hint">
+                        Después conectaremos aquí tu video o playlist.
+                    </p>
+
+                </section>
+
+
+                <!-- REDES -->
+
+                <section
+                    class="matrix-section"
+                    id="section-social">
+
+                    <div class="section-title">
+
+                        <span>
+                            05 / NETWORK
+                        </span>
+
+                        <h2>
+                            REDES SOCIALES
+                        </h2>
+
+                    </div>
+
+
+                    <div class="social-grid">
+
+
+                        <a
+                            href="https://instagram.com/"
+                            target="_blank"
+                            class="social-card">
+
+                            <span>◎</span>
+
+                            <b>
+                                INSTAGRAM
+                            </b>
+
+                            <small>
+                                @TU_USUARIO
+                            </small>
+
+                        </a>
+
+
+                        <a
+                            href="https://www.tiktok.com/"
+                            target="_blank"
+                            class="social-card">
+
+                            <span>♪</span>
+
+                            <b>
+                                TIKTOK
+                            </b>
+
+                            <small>
+                                @TU_USUARIO
+                            </small>
+
+                        </a>
+
+
+                        <a
+                            href="https://www.youtube.com/"
+                            target="_blank"
+                            class="social-card">
+
+                            <span>▶</span>
+
+                            <b>
+                                YOUTUBE
+                            </b>
+
+                            <small>
+                                MI CANAL
+                            </small>
+
+                        </a>
+
+
+                        <a
+                            href="https://www.facebook.com/"
+                            target="_blank"
+                            class="social-card">
+
+                            <span>f</span>
+
+                            <b>
+                                FACEBOOK
+                            </b>
+
+                            <small>
+                                MI PERFIL
+                            </small>
+
+                        </a>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+
+            <footer class="matrix-footer">
+
+                <span>
+                    SYSTEM ONLINE
+                </span>
+
+                <span>
+                    ● 3991
+                </span>
+
+            </footer>
+
+        `;
+
+
+        if(!document.getElementById("matrix-modern-style")){
+
+            const style = document.createElement("style");
+
+            style.id = "matrix-modern-style";
+
+            style.innerHTML = `
+
+                .panel.matrix-open{
+
+                    width:min(1000px,88vw);
+
+                    max-height:82vh;
+
+                    overflow:hidden;
+
+                    padding:30px;
+
+                    box-sizing:border-box;
+
+                    text-align:left;
+
+                    background:
+                    linear-gradient(
+                        145deg,
+                        rgba(20,0,5,.94),
+                        rgba(0,0,0,.86)
+                    );
+
+                    border:
+                    1px solid rgba(255,60,60,.5);
+
+                    box-shadow:
+                    0 0 30px rgba(255,0,0,.35),
+                    inset 0 0 50px rgba(255,0,0,.08);
+
+                    backdrop-filter:blur(12px);
+
+                    animation:matrixIn .5s ease;
+
+                }
+
+
+                @keyframes matrixIn{
+
+                    from{
+
+                        opacity:0;
+
+                        transform:
+                        translate(-50%,-48%)
+                        scale(.96);
+
+                    }
+
+                    to{
+
+                        opacity:1;
+
+                        transform:
+                        translate(-50%,-50%)
+                        scale(1);
+
+                    }
+
+                }
+
+
+                .matrix-header{
+
+                    display:flex;
+
+                    justify-content:space-between;
+
+                    align-items:flex-start;
+
+                    gap:20px;
+
+                }
+
+
+                .matrix-tag,
+                .section-title span{
+
+                    color:#ff4d4d;
+
+                    font-size:11px;
+
+                    letter-spacing:3px;
+
+                    text-transform:uppercase;
+
+                }
+
+
+                .matrix-header h1{
+
+                    margin:8px 0;
+
+                    font-size:
+                    clamp(30px,5vw,54px);
+
+                    line-height:.95;
+
+                    letter-spacing:5px;
+
+                }
+
+
+                .matrix-header h1 strong{
+
+                    color:#fff;
+
+                }
+
+
+                .matrix-header p{
+
+                    margin:10px 0 0;
+
+                    font-size:12px;
+
+                    letter-spacing:3px;
+
+                }
+
+
+                .matrix-close{
+
+                    margin:0;
+
+                    padding:4px 14px;
+
+                    background:transparent;
+
+                    border:
+                    1px solid rgba(255,70,70,.5);
+
+                    box-shadow:none;
+
+                    color:#ff5555;
+
+                    font-size:28px;
+
+                }
+
+
+                .matrix-close:hover{
+
+                    background:#900;
+
+                }
+
+
+                .matrix-nav{
+
+                    display:flex;
+
+                    gap:8px;
+
+                    flex-wrap:wrap;
+
+                    margin:25px 0 20px;
+
+                    padding-bottom:15px;
+
+                    border-bottom:
+                    1px solid rgba(255,50,50,.2);
+
+                }
+
+
+                .matrix-nav-btn{
+
+                    margin:0;
+
+                    padding:10px 14px;
+
+                    background:
+                    rgba(255,0,0,.04);
+
+                    border:
+                    1px solid rgba(255,60,60,.25);
+
+                    box-shadow:none;
+
+                    color:#ffb0b0;
+
+                    font-size:11px;
+
+                    letter-spacing:1px;
+
+                }
+
+
+                .matrix-nav-btn:hover,
+                .matrix-nav-btn.active{
+
+                    background:#900;
+
+                    color:#fff;
+
+                    box-shadow:
+                    0 0 15px
+                    rgba(255,0,0,.35);
+
+                }
+
+
+                .matrix-content{
+
+                    overflow-y:auto;
+
+                    max-height:52vh;
+
+                    padding-right:5px;
+
+                }
+
+
+                .matrix-section{
+
+                    display:none;
+
+                    animation:sectionIn .35s ease;
+
+                }
+
+
+                .matrix-section.active{
+
+                    display:block;
+
+                }
+
+
+                @keyframes sectionIn{
+
+                    from{
+
+                        opacity:0;
+
+                        transform:translateY(8px);
+
+                    }
+
+                    to{
+
+                        opacity:1;
+
+                        transform:translateY(0);
+
+                    }
+
+                }
+
+
+                .hero-card{
+
+                    padding:28px;
+
+                    border:
+                    1px solid rgba(255,50,50,.25);
+
+                    background:
+                    linear-gradient(
+                        120deg,
+                        rgba(255,0,0,.12),
+                        rgba(0,0,0,.2)
+                    );
+
+                }
+
+
+                .hero-card span{
+
+                    color:#ff4d4d;
+
+                    font-size:11px;
+
+                    letter-spacing:3px;
+
+                }
+
+
+                .hero-card h2{
+
+                    font-size:34px;
+
+                    margin:12px 0;
+
+                    color:#fff;
+
+                }
+
+
+                .hero-card h2 b{
+
+                    color:#ff3333;
+
+                }
+
+
+                .hero-card p{
+
+                    max-width:650px;
+
+                    line-height:1.6;
+
+                }
+
+
+                .quick-grid,
+                .gallery-grid,
+                .social-grid,
+                .music-links{
+
+                    display:grid;
+
+                    grid-template-columns:
+                    repeat(2,1fr);
+
+                    gap:12px;
+
+                    margin-top:14px;
+
+                }
+
+
+                .quick-card{
+
+                    padding:20px;
+
+                    text-align:left;
+
+                    background:
+                    rgba(255,0,0,.04);
+
+                    border:
+                    1px solid rgba(255,60,60,.2);
+
+                    box-shadow:none;
+
+                }
+
+
+                .quick-card:hover{
+
+                    background:
+                    rgba(255,0,0,.13);
+
+                    transform:
+                    translateY(-2px);
+
+                }
+
+
+                .quick-card span{
+
+                    display:block;
+
+                    font-size:26px;
+
+                    color:#ff4040;
+
+                    margin-bottom:10px;
+
+                }
+
+
+                .quick-card b,
+                .social-card b,
+                .music-link b{
+
+                    display:block;
+
+                    color:#fff;
+
+                    letter-spacing:2px;
+
+                }
+
+
+                .quick-card small,
+                .social-card small,
+                .music-link small{
+
+                    color:#c98f8f;
+
+                    display:block;
+
+                    margin-top:6px;
+
+                }
+
+
+                .section-title{
+
+                    margin-bottom:18px;
+
+                }
+
+
+                .section-title h2{
+
+                    color:#fff;
+
+                    font-size:30px;
+
+                    letter-spacing:4px;
+
+                    margin:7px 0;
+
+                }
+
+
+                .gallery-item{
+
+                    min-height:140px;
+
+                    display:flex;
+
+                    align-items:flex-end;
+
+                    padding:15px;
+
+                    border:
+                    1px solid rgba(255,60,60,.25);
+
+                    background:
+                    radial-gradient(
+                        circle at 30% 30%,
+                        rgba(255,60,60,.3),
+                        transparent 30%
+                    ),
+                    linear-gradient(
+                        135deg,
+                        #180307,
+                        #050000
+                    );
+
+                    box-shadow:
+                    inset 0 0 30px
+                    rgba(255,0,0,.12);
+
+                }
+
+
+                .gallery-item span{
+
+                    color:#fff;
+
+                    font-size:11px;
+
+                    letter-spacing:2px;
+
+                }
+
+
+                .music-player{
+
+                    display:flex;
+
+                    gap:20px;
+
+                    align-items:center;
+
+                    padding:20px;
+
+                    border:
+                    1px solid rgba(255,60,60,.25);
+
+                    background:
+                    rgba(255,0,0,.05);
+
+                }
+
+
+                .album-art{
+
+                    width:100px;
+
+                    height:100px;
+
+                    display:grid;
+
+                    place-items:center;
+
+                    flex:none;
+
+                    font-size:40px;
+
+                    color:#fff;
+
+                    background:
+                    linear-gradient(
+                        135deg,
+                        #ff2020,
+                        #250000
+                    );
+
+                    box-shadow:
+                    0 0 30px
+                    rgba(255,0,0,.4);
+
+                }
+
+
+                .track-info{
+
+                    flex:1;
+
+                }
+
+
+                .track-info span{
+
+                    font-size:10px;
+
+                    letter-spacing:3px;
+
+                    color:#ff5555;
+
+                }
+
+
+                .track-info h3{
+
+                    color:#fff;
+
+                    margin:8px 0;
+
+                }
+
+
+                .track-info p{
+
+                    margin:5px 0 12px;
+
+                }
+
+
+                audio{
+
+                    width:100%;
+
+                    height:35px;
+
+                }
+
+
+                .music-link,
+                .social-card{
+
+                    padding:22px;
+
+                    border:
+                    1px solid rgba(255,60,60,.25);
+
+                    background:
+                    rgba(255,0,0,.04);
+
+                    transition:.2s;
+
+                    text-decoration:none;
+
+                }
+
+
+                .music-link:hover,
+                .social-card:hover{
+
+                    transform:
+                    translateY(-3px);
+
+                    background:
+                    rgba(255,0,0,.12);
+
+                    box-shadow:
+                    0 0 20px
+                    rgba(255,0,0,.2);
+
+                }
+
+
+                .music-link span,
+                .social-card span{
+
+                    font-size:28px;
+
+                    color:#ff4040;
+
+                    display:block;
+
+                    margin-bottom:12px;
+
+                }
+
+
+                .video-box{
+
+                    width:100%;
+
+                    aspect-ratio:16/9;
+
+                    border:
+                    1px solid rgba(255,60,60,.3);
+
+                    background:#030000;
+
+                    display:grid;
+
+                    place-items:center;
+
+                }
+
+
+                .video-placeholder{
+
+                    text-align:center;
+
+                }
+
+
+                .video-placeholder span{
+
+                    font-size:50px;
+
+                    color:#ff3030;
+
+                }
+
+
+                .video-placeholder h3{
+
+                    color:#fff;
+
+                    letter-spacing:3px;
+
+                }
+
+
+                .video-placeholder p,
+                .hint{
+
+                    font-size:12px;
+
+                    color:#b87878;
+
+                    line-height:1.5;
+
+                }
+
+
+                .matrix-footer{
+
+                    display:flex;
+
+                    justify-content:space-between;
+
+                    margin-top:18px;
+
+                    padding-top:12px;
+
+                    border-top:
+                    1px solid rgba(255,50,50,.2);
+
+                    color:#ff5555;
+
+                    font-size:10px;
+
+                    letter-spacing:2px;
+
+                }
+
+
+                @media(max-width:650px){
+
+                    .panel.matrix-open{
+
+                        width:94vw;
+
+                        padding:20px;
+
+                    }
+
+
+                    .quick-grid,
+                    .gallery-grid,
+                    .social-grid,
+                    .music-links{
+
+                        grid-template-columns:1fr;
+
+                    }
+
+
+                    .music-player{
+
+                        flex-direction:column;
+
+                        align-items:stretch;
+
+                    }
+
+
+                    .album-art{
+
+                        width:100%;
+
+                    }
+
+
+                    .matrix-content{
+
+                        max-height:55vh;
+
+                    }
+
+                }
+
+            `;
+
+            document.head.appendChild(style);
+
+        }
+
+
+        const navButtons =
+            panel.querySelectorAll(".matrix-nav-btn");
+
+        const sections =
+            panel.querySelectorAll(".matrix-section");
+
+
+        function mostrarSeccion(nombre){
+
+            navButtons.forEach(btn=>{
+
+                btn.classList.toggle(
+                    "active",
+                    btn.dataset.section === nombre
+                );
+
+            });
+
+
+            sections.forEach(section=>{
+
+                section.classList.toggle(
+                    "active",
+                    section.id ===
+                    "section-" + nombre
+                );
+
+            });
+
+        }
+
+
+        navButtons.forEach(btn=>{
+
+            btn.addEventListener("click",()=>{
+
+                mostrarSeccion(
+                    btn.dataset.section
+                );
+
+            });
+
+        });
+
+
+        panel.querySelectorAll(".quick-card")
+        .forEach(card=>{
+
+            card.addEventListener("click",()=>{
+
+                mostrarSeccion(
+                    card.dataset.go
+                );
+
+            });
+
+        });
+
+
+        panel.querySelector("#matrixClose")
+        .addEventListener("click",()=>{
+
+            location.reload();
+
+    
 
 }
     </script>
