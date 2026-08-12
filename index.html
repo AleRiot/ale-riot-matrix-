@@ -206,27 +206,48 @@ function activar(){
     const title = document.querySelector("h1");
     const text = document.querySelector("p");
 
+    button.innerHTML = "INICIANDO...";
+
+    title.innerHTML = "ACCESS GRANTED";
+    text.innerHTML = "INITIALIZING ALE RIOT 3991...";
+
+    setTimeout(()=>{
+        text.innerHTML = "LOADING MATRIX CORE...";
+    },1200);
+
+    setTimeout(()=>{
+        text.innerHTML = "CONNECTING NODE 3991...";
+    },2400);
+
+    setTimeout(()=>{
+        title.innerHTML = "SYSTEM ONLINE";
+        text.innerHTML = "WELCOME TO ALE RIOT MATRIX";
+        button.innerHTML = "ENTER";
+    },4000);
+
     if(panel){
         panel.style.animation = "pulse 1s infinite";
     }
+button.innerHTML = "INICIANDO...";
 
-    button.innerHTML = "INICIANDO...";
+setTimeout(()=>{
 
-    setTimeout(()=>{
-        title.innerHTML = "ACCESS GRANTED";
-        text.innerHTML = "CONNECTING NODE 3991";
-    },1000);
+    title.innerHTML = "ACCESS GRANTED";
+    text.innerHTML = "CONNECTING NODE 3991";
+
+},1000);
 
 
-    setTimeout(()=>{
-        title.innerHTML = "ALE RIOT 3991";
-        text.innerHTML = "MATRIX SYSTEM ACTIVADO";
-        button.innerHTML = "SISTEMA ONLINE";
-    },2500);
+setTimeout(()=>{
+
+    title.innerHTML = "ALE RIOT 3991";
+    text.innerHTML = "MATRIX SYSTEM ACTIVADO";
+    button.innerHTML = "SISTEMA ONLINE";
+
+},2500);
 
 }
-
-
+    
 
 
 
