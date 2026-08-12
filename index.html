@@ -928,7 +928,7 @@ window.activar = function(){
 
                     overflow-y:auto;
 
-                    max-height:80vh;
+                    max-height:85vh;
 
                     padding-right:5px;
 
@@ -1028,20 +1028,20 @@ window.activar = function(){
 
 
                 .quick-grid,
-                .gallery-grid,
-                .social-grid,
-                .music-links{
+               .gallery-grid,
+.social-grid,
+.music-links{
+    display:grid;
 
-                    display:grid;
+    grid-template-columns:
+    repeat(2,1fr);
 
-                    grid-template-columns:
-                    repeat(2,1fr);
+    gap:12px;
 
-                    gap:12px;
+    margin-top:14px;
 
-                    margin-top:14px;
-
-                }
+    height:auto;
+}
 
 
                 .quick-card{
