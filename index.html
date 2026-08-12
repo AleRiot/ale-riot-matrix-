@@ -223,15 +223,19 @@ function activar(){
         text.innerHTML = "WELCOME TO ALE RIOT MATRIX";
         button.innerHTML = "ENTER";
 
-        button.onclick = ()=>{
-            panel.style.opacity = "0";
+       button.onclick = ()=>{
 
-            setTimeout(()=>{
-                title.innerHTML = "ALE RIOT 3991";
-                text.innerHTML = "WELCOME TO MY WORLD";
-                button.innerHTML = "ENTERING...";
-            },1000);
-        };
+    button.innerHTML = "ENTERING...";
+
+    setTimeout(()=>{
+
+        title.innerHTML = "ALE RIOT 3991";
+        text.innerHTML = "WELCOME TO MY WORLD";
+        button.innerHTML = "SYSTEM READY";
+
+    },1000);
+
+};
 
     },4000);
 
