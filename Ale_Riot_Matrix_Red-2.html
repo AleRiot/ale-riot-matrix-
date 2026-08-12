@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Ale Riot Matrix Red</title>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050000}
+canvas{position:fixed;inset:0;width:100%;height:100%}
+.vignette{position:fixed;inset:0;background:radial-gradient(circle,transparent 20%,#100000 150%);pointer-events:none}
+.scanlines{position:fixed;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(0,0,0,.2) 50%);background-size:100% 4px;opacity:.25}
+</style>
+</head>
+<body>
+<canvas id="matrix"></canvas><div class="vignette"></div><div class="scanlines"></div>
+<script>
+const c=document.getElementById("matrix"),x=c.getContext("2d");
+let w,h,a=[];
+const chars="ｱｲｳｴｵｶｷｸｹｺ0123456789<>/#@";
+function size(){w=c.width=innerWidth;h=c.height=innerHeight;a=[];for(let i=0;i<w;i+=18)a.push({x:i,y:Math.random()*h,s:.8+Math.random()})}
+onresize=size;size();
+function go(){
+x.fillStyle="rgba(5,0,0,.18)";x.fillRect(0,0,w,h);
+x.font="18px monospace";
+a.forEach(o=>{x.fillStyle="#ff1616";x.shadowColor="#ff5555";x.shadowBlur=12;x.fillText(chars[Math.random()*chars.length|0],o.x,o.y);o.y+=o.s;if(o.y>h)o.y=0});
+requestAnimationFrame(go)}
+go();
+</script>
+</body>
+</html>
