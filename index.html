@@ -3,367 +3,1954 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ALE Riot — 3991</title>
+
+<title>ALE RIOT — 3991</title>
+
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap');
 
+
 :root{
-  --bg:#06070a;
-  --ink:#f2f0eb;
-  --muted:#98989b;
-  --line:rgba(255,255,255,.14);
-  --red:#8f1f25;
-  --red2:#c63a40;
+ --bg:#050609;
+ --ink:#f3f1ed;
+ --muted:#92939a;
+ --line:rgba(255,255,255,.14);
+ --red:#8f1f25;
+ --red2:#c63a40;
 }
 
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;background:var(--bg);color:var(--ink);font-family:Inter,Arial,sans-serif;overflow:hidden}
-button,a{font:inherit;color:inherit}
-button{border:0;background:none;cursor:pointer}
-a{text-decoration:none}
 
-/* ATMOSPHERE */
+*{
+ box-sizing:border-box;
+}
+
+
+html,body{
+ margin:0;
+ width:100%;
+ height:100%;
+ background:var(--bg);
+ color:var(--ink);
+ font-family:Inter,Arial,sans-serif;
+ overflow:hidden;
+}
+
+
+button{
+ font-family:inherit;
+ background:none;
+ border:0;
+ color:inherit;
+ cursor:pointer;
+}
+
+
+a{
+ color:inherit;
+ text-decoration:none;
+}
+
+
+/* FONDO */
+
 body:before{
-  content:"";position:fixed;inset:-15%;z-index:0;
-  background:
-    radial-gradient(ellipse at 50% 40%,rgba(180,190,205,.18),transparent 30%),
-    radial-gradient(ellipse at 15% 70%,rgba(80,85,100,.15),transparent 32%),
-    radial-gradient(ellipse at 85% 25%,rgba(110,115,135,.10),transparent 30%),
-    linear-gradient(180deg,#0c1017 0%,#080a0f 45%,#020305 100%);
-  filter:blur(2px);
-  animation:sky 14s ease-in-out infinite alternate;
+
+content:"";
+position:fixed;
+inset:-20%;
+z-index:0;
+
+background:
+
+radial-gradient(
+ellipse at center,
+rgba(150,160,180,.18),
+transparent 35%
+),
+
+radial-gradient(
+ellipse at 20% 80%,
+rgba(120,20,30,.15),
+transparent 30%
+),
+
+linear-gradient(
+180deg,
+#0b0d14,
+#020304
+);
+
+filter:blur(3px);
+
+animation:
+backgroundMove 15s infinite alternate;
+
 }
 
-body:after{
-  content:"";position:fixed;inset:0;z-index:3;pointer-events:none;
-  background:
-    radial-gradient(circle at center,transparent 35%,rgba(0,0,0,.62) 100%),
-    linear-gradient(90deg,rgba(0,0,0,.2),transparent 20%,transparent 80%,rgba(0,0,0,.2));
+
+@keyframes backgroundMove{
+
+from{
+transform:scale(1);
 }
 
-@keyframes sky{from{transform:scale(1)}to{transform:scale(1.08) translate3d(0,-1%,0)}}
+to{
+transform:scale(1.08);
+}
 
-#particles{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.55}
+}
 
-/* CLOUD-LIKE LAYERS */
-.cloud{position:fixed;z-index:1;pointer-events:none;border-radius:50%;filter:blur(35px);opacity:.22}
-.cloud.one{width:55vw;height:18vw;left:-8vw;top:16vh;background:#a8adb9;transform:rotate(-8deg);animation:cloud1 16s ease-in-out infinite alternate}
-.cloud.two{width:45vw;height:14vw;right:-6vw;top:9vh;background:#737987;transform:rotate(9deg);animation:cloud2 19s ease-in-out infinite alternate}
-.cloud.three{width:65vw;height:20vw;left:18vw;bottom:5vh;background:#626876;opacity:.12;animation:cloud3 22s ease-in-out infinite alternate}
-@keyframes cloud1{to{transform:translate(8vw,2vh) rotate(-4deg)}}
-@keyframes cloud2{to{transform:translate(-7vw,4vh) rotate(13deg)}}
-@keyframes cloud3{to{transform:translate(0,-4vh) scale(1.1)}}
 
-/* ENTRY */
+/* PARTICULAS */
+
+#particles{
+
+position:fixed;
+inset:0;
+z-index:1;
+pointer-events:none;
+
+}
+
+
+/* ENTRADA */
+
 #entry{
-  position:fixed;inset:0;z-index:50;display:grid;place-items:center;
-  background:rgba(3,4,6,.82);backdrop-filter:blur(12px);
-  transition:opacity 1.1s ease,visibility 1.1s;
+
+position:fixed;
+inset:0;
+z-index:50;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:
+rgba(0,0,0,.82);
+
+backdrop-filter:blur(12px);
+
+transition:1s;
+
 }
-#entry.hide{opacity:0;visibility:hidden;pointer-events:none}
-.entry-inner{text-align:center;animation:entryIn 1.4s ease both}
-.entry-kicker{font-size:9px;letter-spacing:6px;color:#777;margin-bottom:24px}
-.entry-title{font-family:"Cormorant Garamond",serif;font-size:clamp(52px,9vw,110px);font-weight:500;letter-spacing:.18em;margin:0 0 22px}
-.entry-title span{display:block;font-size:.46em;letter-spacing:.65em;color:#aaa;margin-top:7px}
+
+
+#entry.hide{
+
+opacity:0;
+visibility:hidden;
+
+}
+
+
+
+.entry-inner{
+
+text-align:center;
+
+}
+
+
+
+.entry-kicker{
+
+font-size:9px;
+letter-spacing:6px;
+color:#777;
+margin-bottom:25px;
+
+}
+
+
+
+.entry-title{
+
+font-family:"Cormorant Garamond",serif;
+
+font-size:
+clamp(60px,10vw,120px);
+
+font-weight:400;
+
+letter-spacing:.18em;
+
+margin:0;
+
+}
+
+
+.entry-title span{
+
+display:block;
+
+font-size:.45em;
+
+letter-spacing:.65em;
+
+color:#aaa;
+
+}
+
+
+
 .enter{
-  position:relative;padding:13px 28px;border:1px solid var(--line);font-size:9px;letter-spacing:4px;color:#cfcfd1;
-  transition:.35s;overflow:hidden
+
+margin-top:35px;
+
+padding:14px 35px;
+
+border:1px solid var(--line);
+
+font-size:9px;
+
+letter-spacing:4px;
+
+transition:.4s;
+
 }
-.enter:before{content:"";position:absolute;inset:0;background:var(--red);transform:translateX(-105%);transition:.4s;z-index:-1}
-.enter:hover{border-color:rgba(255,255,255,.35);letter-spacing:5px}
-.enter:hover:before{transform:translateX(0)}
-.entry-note{margin-top:14px;font-size:8px;letter-spacing:2px;color:#5e5f63}
+
+
+.enter:hover{
+
+background:var(--red);
+
+border-color:var(--red);
+
+}
+
+
+
+.entry-note{
+
+margin-top:15px;
+
+font-size:8px;
+
+letter-spacing:3px;
+
+color:#666;
+
+}
+
+
 
 /* APP */
-.app{position:relative;z-index:10;width:100%;height:100%;opacity:0;transform:scale(1.025);transition:opacity 1.2s ease,transform 1.4s ease}
-.app.ready{opacity:1;transform:scale(1)}
+
+.app{
+
+position:relative;
+
+width:100%;
+
+height:100%;
+
+z-index:10;
+
+opacity:0;
+
+transform:scale(1.03);
+
+transition:1.2s;
+
+}
+
+
+.app.ready{
+
+opacity:1;
+
+transform:none;
+
+}
+
+
+
+/* HEADER */
 
 .top{
-  position:absolute;left:0;right:0;top:0;height:76px;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;
-  border-bottom:1px solid rgba(255,255,255,.09);z-index:20
+
+position:absolute;
+
+top:0;
+
+left:0;
+
+right:0;
+
+height:76px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+padding:0 6vw;
+
+border-bottom:1px solid rgba(255,255,255,.08);
+
+z-index:20;
+
 }
 
-.brand{display:flex;align-items:center;gap:16px}
-.brand-mark{width:28px;height:28px;border:1px solid rgba(255,255,255,.35);display:grid;place-items:center;font-family:"Cormorant Garamond",serif;font-size:18px}
-.brand-name{font-size:10px;letter-spacing:4px}
-.brand-id{font-size:8px;color:#777;letter-spacing:2px;margin-top:4px}
-.top-nav{display:flex;gap:28px}
-.top-nav button{font-size:8px;letter-spacing:3px;color:#85858a;transition:.3s;position:relative}
-.top-nav button:after{content:"";position:absolute;left:0;right:100%;bottom:-10px;height:1px;background:var(--red);transition:.35s}
-.top-nav button:hover,.top-nav button.active{color:#eee}
-.top-nav button.active:after{right:0}
 
-.audio{
-  position:absolute;right:5vw;bottom:30px;z-index:25;display:flex;align-items:center;gap:11px
+
+.brand{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
 }
-.audio button{width:34px;height:34px;border:1px solid var(--line);font-size:10px;transition:.3s}
-.audio button:hover{border-color:#aaa}
-.audio-bars{display:flex;align-items:flex-end;gap:2px;height:16px}
-.audio-bars i{display:block;width:2px;height:5px;background:#aaa;animation:eq .8s ease-in-out infinite alternate}
-.audio-bars i:nth-child(2){height:11px;animation-delay:.1s}.audio-bars i:nth-child(3){height:7px;animation-delay:.25s}.audio-bars i:nth-child(4){height:13px;animation-delay:.18s}
-.audio.paused i{animation-play-state:paused;height:3px}
-@keyframes eq{to{transform:scaleY(.35)}}
-.audio-label{font-size:7px;letter-spacing:3px;color:#777}
 
-/* SECTIONS */
-.viewport{position:absolute;inset:76px 0 0;overflow:hidden}
-.section{position:absolute;inset:0;padding:7vh 9vw;opacity:0;visibility:hidden;transform:translateY(30px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.75,.2,1),visibility .8s}
-.section.active{opacity:1;visibility:visible;transform:none}
 
-/* HERO */
-.hero{display:flex;align-items:center;height:100%;position:relative}
-.hero-copy{width:min(700px,75vw)}
-.kicker{font-size:9px;letter-spacing:6px;color:#8f9298;margin-bottom:22px}
-.hero h1{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:clamp(70px,12vw,170px);line-height:.68;letter-spacing:.12em;margin:0}
-.hero h1 .last{display:block;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.65);margin-left:8vw}
-.hero-sub{font-family:"Cormorant Garamond",serif;font-size:18px;letter-spacing:.28em;color:#b6b5b3;margin:45px 0 0}
-.hero-line{width:150px;height:1px;background:linear-gradient(90deg,#aaa,transparent);margin-top:25px}
-.hero-copy p{max-width:500px;color:#7d7e83;font-size:11px;line-height:1.9;margin-top:20px}
-.scroll-hint{position:absolute;left:9vw;bottom:5vh;font-size:7px;letter-spacing:4px;color:#666;display:flex;align-items:center;gap:12px}
-.scroll-hint:before{content:"";width:45px;height:1px;background:#555}
+.brand-mark{
 
-/* side monogram */
-.hero-deco{position:absolute;right:7vw;top:50%;transform:translateY(-50%);width:28vw;height:28vw;max-width:390px;max-height:390px;border:1px solid rgba(255,255,255,.08);border-radius:50%;display:grid;place-items:center}
-.hero-deco:before,.hero-deco:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.06);border-radius:50%}
-.hero-deco:before{inset:8%}.hero-deco:after{inset:18%}
-.hero-deco b{font-family:"Cormorant Garamond",serif;font-size:9vw;font-weight:400;color:rgba(255,255,255,.07);letter-spacing:.08em}
+width:30px;
 
-/* OTHER PAGES */
-.page-head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:28px}
-.page-head h2{font-family:"Cormorant Garamond",serif;font-size:52px;font-weight:400;letter-spacing:.14em;margin:0}
-.page-head span{font-size:8px;letter-spacing:4px;color:#777}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.card{min-height:170px;padding:24px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.025);position:relative;overflow:hidden;transition:.35s}
-.card:hover{transform:translateY(-5px);background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.2)}
-.card:after{content:"";position:absolute;width:100px;height:100px;border-radius:50%;right:-50px;bottom:-50px;background:rgba(130,20,25,.16);filter:blur(10px)}
-.card small{font-size:7px;letter-spacing:3px;color:#777}
-.card h3{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:28px;letter-spacing:.12em;margin:35px 0 10px}
-.card p{font-size:10px;line-height:1.7;color:#777;max-width:260px}
+height:30px;
 
-/* GALLERY */
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.photo{height:190px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,.08);background:#111}
-.photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(.85) contrast(1.08) brightness(.75);transition:.7s}
-.photo:hover img{transform:scale(1.08);filter:grayscale(.15) contrast(1.08) brightness(.9)}
-.photo span{position:absolute;left:12px;bottom:10px;font-size:7px;letter-spacing:3px;text-shadow:0 2px 8px #000}
+border:1px solid rgba(255,255,255,.4);
 
-/* MUSIC */
-.music-box{display:grid;grid-template-columns:190px 1fr;gap:35px;align-items:center;max-width:850px}
-.cover{height:190px;border:1px solid rgba(255,255,255,.13);display:grid;place-items:center;background:radial-gradient(circle at 50% 35%,#5d1115,#15151a 52%,#050506);box-shadow:0 25px 60px rgba(0,0,0,.5)}
-.cover strong{font-family:"Cormorant Garamond",serif;font-size:38px;font-weight:400;letter-spacing:.15em}
-.track small{font-size:7px;letter-spacing:4px;color:#8e9299}
-.track h3{font-family:"Cormorant Garamond",serif;font-size:32px;font-weight:400;letter-spacing:.12em;margin:13px 0}
-.track p{font-size:10px;color:#777;line-height:1.7}
-.track audio{width:100%;margin-top:20px}
+display:flex;
 
-/* NETWORK */
-.network{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:800px}
-.social{padding:26px;border:1px solid rgba(255,255,255,.09);transition:.3s;display:flex;justify-content:space-between;align-items:center}
-.social:hover{background:rgba(255,255,255,.04);transform:translateX(5px);border-color:rgba(255,255,255,.2)}
-.social b{font-family:"Cormorant Garamond",serif;font-size:25px;font-weight:400;letter-spacing:.1em}
-.social span{font-size:8px;color:#666;letter-spacing:2px}
+align-items:center;
 
-/* CURSOR */
-.cursor-dot,.cursor-ring{position:fixed;z-index:100;pointer-events:none;top:0;left:0;transform:translate(-50%,-50%);mix-blend-mode:screen}
-.cursor-dot{width:4px;height:4px;border-radius:50%;background:#fff}
-.cursor-ring{width:28px;height:28px;border:1px solid rgba(255,255,255,.55);border-radius:50%;transition:width .25s,height .25s,border-color .25s,background .25s}
-.cursor-ring.hover{width:55px;height:55px;border-color:rgba(198,58,64,.9);background:rgba(143,31,37,.08)}
-@media(pointer:coarse){.cursor-dot,.cursor-ring{display:none}}
+justify-content:center;
+
+font-family:"Cormorant Garamond";
+
+}
+
+
+
+.brand-name{
+
+font-size:10px;
+
+letter-spacing:4px;
+
+}
+
+
+.brand-id{
+
+font-size:8px;
+
+color:#777;
+
+letter-spacing:3px;
+
+}
+
+
+
+.top-nav{
+
+display:flex;
+
+gap:30px;
+
+}
+
+
+.top-nav button{
+
+font-size:8px;
+
+letter-spacing:3px;
+
+color:#777;
+
+position:relative;
+
+}
+
+
+.top-nav button.active{
+
+color:white;
+
+}
+
+
+
+.top-nav button.active:after{
+
+content:"";
+
+position:absolute;
+
+bottom:-12px;
+
+left:0;
+
+right:0;
+
+height:1px;
+
+background:var(--red);
+
+}
+
+
+/* CONTENEDOR */
+
+.viewport{
+
+position:absolute;
+
+top:76px;
+
+bottom:0;
+
+left:0;
+
+right:0;
+
+overflow:hidden;
+
+}
+
+
+
+.section{
+
+position:absolute;
+
+inset:0;
+
+padding:7vh 9vw;
+
+opacity:0;
+
+visibility:hidden;
+
+transform:translateY(30px);
+
+transition:.8s;
+
+}
+
+
+.section.active{
+
+opacity:1;
+
+visibility:visible;
+
+transform:none;
+
+}
+
+
+/* HOME */
+
+.hero{
+
+height:100%;
+
+display:flex;
+
+align-items:center;
+
+}
+
+
+.hero-copy{
+
+max-width:700px;
+
+}
+
+
+.kicker{
+
+font-size:9px;
+
+letter-spacing:6px;
+
+color:#888;
+
+margin-bottom:25px;
+
+}
+
+
+.hero h1{
+
+font-family:"Cormorant Garamond";
+
+font-weight:400;
+
+font-size:
+
+clamp(70px,12vw,170px);
+
+line-height:.7;
+
+letter-spacing:.15em;
+
+margin:0;
+
+}
+
+
+
+.hero h1 .last{
+
+display:block;
+
+color:transparent;
+
+-webkit-text-stroke:
+
+1px rgba(255,255,255,.6);
+
+margin-left:8vw;
+
+}
+
+
+
+.hero-sub{
+
+margin-top:45px;
+
+font-family:"Cormorant Garamond";
+
+font-size:18px;
+
+letter-spacing:.3em;
+
+color:#aaa;
+
+}
+
+
+.hero-line{
+
+height:1px;
+
+width:150px;
+
+background:linear-gradient(
+90deg,
+white,
+transparent
+);
+
+margin-top:25px;
+
+}
+
+
+
+.hero p{
+
+max-width:500px;
+
+font-size:11px;
+
+line-height:2;
+
+color:#777;
+
+}
+  /* ARCHIVE */
+
+.page-head{
+
+display:flex;
+justify-content:space-between;
+align-items:flex-end;
+
+border-bottom:1px solid var(--line);
+
+padding-bottom:18px;
+
+margin-bottom:30px;
+
+}
+
+
+.page-head h2{
+
+font-family:"Cormorant Garamond";
+
+font-size:55px;
+
+font-weight:400;
+
+letter-spacing:.15em;
+
+margin:0;
+
+}
+
+
+
+.page-head span{
+
+font-size:8px;
+
+letter-spacing:4px;
+
+color:#777;
+
+}
+
+
+
+/* CARDS */
+
+.cards{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:12px;
+
+margin-bottom:20px;
+
+}
+
+
+.card{
+
+padding:25px;
+
+border:1px solid rgba(255,255,255,.09);
+
+background:rgba(255,255,255,.025);
+
+transition:.4s;
+
+}
+
+
+.card:hover{
+
+transform:translateY(-6px);
+
+border-color:rgba(255,255,255,.25);
+
+}
+
+
+.card small{
+
+font-size:7px;
+
+letter-spacing:3px;
+
+color:#777;
+
+}
+
+
+.card h3{
+
+font-family:"Cormorant Garamond";
+
+font-size:30px;
+
+font-weight:400;
+
+letter-spacing:.12em;
+
+margin:30px 0 10px;
+
+}
+
+
+.card p{
+
+font-size:10px;
+
+color:#777;
+
+line-height:1.8;
+
+}
+
+
+
+/* GALERIA */
+
+.gallery{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:12px;
+
+}
+
+
+
+.photo{
+
+height:230px;
+
+overflow:hidden;
+
+position:relative;
+
+border:1px solid rgba(255,255,255,.1);
+
+cursor:pointer;
+
+background:#111;
+
+}
+
+
+
+.photo img{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+transition:.8s;
+
+filter:
+
+brightness(.75)
+contrast(1.1);
+
+}
+
+
+
+.photo:hover img{
+
+transform:scale(1.08);
+
+filter:
+
+brightness(1)
+contrast(1.1);
+
+}
+
+
+
+.photo span{
+
+position:absolute;
+
+bottom:15px;
+
+left:15px;
+
+font-size:8px;
+
+letter-spacing:4px;
+
+text-shadow:0 2px 10px black;
+
+}
+
+
+
+/* VISOR */
+
+.viewer{
+
+position:fixed;
+
+inset:0;
+
+background:
+
+rgba(0,0,0,.92);
+
+backdrop-filter:blur(12px);
+
+z-index:100;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+opacity:0;
+
+visibility:hidden;
+
+transition:.5s;
+
+}
+
+
+
+.viewer.active{
+
+opacity:1;
+
+visibility:visible;
+
+}
+
+
+
+.viewer img{
+
+max-width:85%;
+
+max-height:85%;
+
+object-fit:contain;
+
+border:1px solid rgba(255,255,255,.15);
+
+box-shadow:
+
+0 30px 80px black;
+
+animation:
+
+viewerIn .5s ease;
+
+}
+
+
+
+@keyframes viewerIn{
+
+from{
+
+transform:scale(.9);
+
+opacity:0;
+
+}
+
+to{
+
+transform:scale(1);
+
+opacity:1;
+
+}
+
+}
+
+
+
+.viewer-close{
+
+position:absolute;
+
+top:35px;
+
+right:45px;
+
+font-size:30px;
+
+color:white;
+
+}
+
+
+
+/* AUDIO */
+
+.music-box{
+
+display:grid;
+
+grid-template-columns:220px 1fr;
+
+gap:40px;
+
+align-items:center;
+
+}
+
+
+
+.cover{
+
+height:220px;
+
+background:
+
+radial-gradient(
+circle,
+#8f1f25,
+#08090d 65%
+);
+
+border:1px solid rgba(255,255,255,.15);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+box-shadow:
+
+0 30px 80px rgba(0,0,0,.6);
+
+}
+
+
+
+.cover strong{
+
+font-family:"Cormorant Garamond";
+
+font-size:55px;
+
+font-weight:400;
+
+letter-spacing:.2em;
+
+}
+
+
+
+.track small{
+
+font-size:8px;
+
+letter-spacing:4px;
+
+color:#888;
+
+}
+
+
+
+.track h3{
+
+font-family:"Cormorant Garamond";
+
+font-size:38px;
+
+font-weight:400;
+
+letter-spacing:.12em;
+
+}
+
+
+
+.track p{
+
+font-size:11px;
+
+color:#777;
+
+line-height:2;
+
+}
+
+
+
+audio{
+
+width:100%;
+
+margin-top:25px;
+
+}
+
+
+
+/* UNIVERSE */
+
+.network{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:15px;
+
+max-width:800px;
+
+}
+
+
+
+.social{
+
+padding:30px;
+
+border:1px solid rgba(255,255,255,.1);
+
+background:rgba(255,255,255,.02);
+
+transition:.4s;
+
+}
+
+
+
+.social:hover{
+
+transform:translateX(8px);
+
+border-color:var(--red);
+
+}
+
+
+
+.social b{
+
+font-family:"Cormorant Garamond";
+
+font-size:30px;
+
+font-weight:400;
+
+letter-spacing:.1em;
+
+}
+
+
+
+.social span{
+
+display:block;
+
+margin-top:10px;
+
+font-size:9px;
+
+letter-spacing:3px;
+
+color:#777;
+
+}
+
+
+/* RESPONSIVE */
 
 @media(max-width:800px){
-  .top{height:64px;padding:0 5vw}.viewport{inset:64px 0 0}
-  .top-nav{gap:12px}.top-nav button{font-size:7px;letter-spacing:2px}
-  .brand-id{display:none}
-  .section{padding:6vh 7vw}
-  .hero-deco{display:none}
-  .hero h1{font-size:18vw}.hero h1 .last{margin-left:5vw}
-  .cards,.gallery{grid-template-columns:1fr 1fr}
-  .music-box{grid-template-columns:1fr}.cover{height:150px}
+
+.cards,
+.gallery{
+
+grid-template-columns:1fr 1fr;
+
 }
+
+
+.music-box{
+
+grid-template-columns:1fr;
+
+}
+
+
+}
+
 
 @media(max-width:520px){
-  .top-nav button:nth-child(3),.top-nav button:nth-child(4){display:none}
-  .page-head h2{font-size:38px}
-  .cards,.gallery,.network{grid-template-columns:1fr}
-  .photo{height:210px}
-  .audio-label{display:none}
+
+.cards,
+.gallery,
+.network{
+
+grid-template-columns:1fr;
+
 }
-</style>
-</head>
-<body>
+
+
+.photo{
+
+height:250px;
+
+}
+
+}
+  <body>
 
 <canvas id="particles"></canvas>
-<div class="cloud one"></div><div class="cloud two"></div><div class="cloud three"></div>
+
 
 <div id="entry">
-  <div class="entry-inner">
-    <div class="entry-kicker">PRIVATE DIGITAL SPACE / 3991</div>
-    <h1 class="entry-title">ALE <span>RIOT</span></h1>
-    <button class="enter" id="enter">ENTER EXPERIENCE</button>
-    <div class="entry-note">SOUND ON · FULLSCREEN RECOMMENDED</div>
-  </div>
+
+<div class="entry-inner">
+
+<div class="entry-kicker">
+PRIVATE DIGITAL SPACE / 3991
 </div>
 
-<div class="cursor-dot"></div>
-<div class="cursor-ring"></div>
+
+<h1 class="entry-title">
+ALE
+<span>RIOT</span>
+</h1>
+
+
+<button class="enter" id="enter">
+ENTER EXPERIENCE
+</button>
+
+
+<div class="entry-note">
+SOUND ON · DIGITAL EXPERIENCE
+</div>
+
+
+</div>
+
+</div>
+
+
 
 <div class="app" id="app">
 
-  <header class="top">
-    <div class="brand">
-      <div class="brand-mark">A</div>
-      <div>
-        <div class="brand-name">ALE RIOT</div>
-        <div class="brand-id">3991 / DIGITAL IDENTITY</div>
-      </div>
-    </div>
 
-    <nav class="top-nav">
-      <button class="active" data-go="home">01 HOME</button>
-      <button data-go="archive">02 ARCHIVE</button>
-      <button data-go="music">03 AUDIO</button>
-      <button data-go="network">04 NETWORK</button>
-    </nav>
-  </header>
+<header class="top">
 
-  <main class="viewport">
 
-    <section class="section active" id="home">
-      <div class="hero">
-        <div class="hero-copy">
-          <div class="kicker">WELCOME TO MY SPACE</div>
-          <h1>ALE <span class="last">RIOT</span></h1>
-          <div class="hero-sub">PRIVATE / DIGITAL / PERSONAL</div>
-          <div class="hero-line"></div>
-          <p>
-            Música, imágenes, videos y enlaces reunidos en un espacio
-            diseñado para sentirse más como una experiencia que como un perfil.
-          </p>
-        </div>
-        <div class="hero-deco"><b>AR</b></div>
-        <div class="scroll-hint">EXPLORE THE SPACE</div>
-      </div>
-    </section>
+<div class="brand">
 
-    <section class="section" id="archive">
-      <div class="page-head"><h2>ARCHIVE</h2><span>02 / SELECTED MOMENTS</span></div>
-      <div class="cards">
-        <article class="card"><small>001 / MOMENTS</small><h3>MEMORIES</h3><p>Fotografías y momentos personales seleccionados.</p></article>
-        <article class="card"><small>002 / COLLECTION</small><h3>VISUALS</h3><p>Una colección visual con la estética de ALE Riot.</p></article>
-        <article class="card"><small>003 / PRIVATE</small><h3>3991</h3><p>Un pequeño archivo de detalles, ideas y recuerdos.</p></article>
-      </div>
-      <div style="height:12px"></div>
-      <div class="gallery">
-        <div class="photo"><img src="https://picsum.photos/900/600?random=71"><span>FRAME 01</span></div>
-        <div class="photo"><img src="https://picsum.photos/900/600?random=72"><span>FRAME 02</span></div>
-        <div class="photo"><img src="https://picsum.photos/900/600?random=73"><span>FRAME 03</span></div>
-      </div>
-    </section>
-
-    <section class="section" id="music">
-      <div class="page-head"><h2>AUDIO</h2><span>03 / SOUNDTRACK</span></div>
-      <div class="music-box">
-        <div class="cover"><strong>AR</strong></div>
-        <div class="track">
-          <small>NOW PLAYING / YOUR SOUNDTRACK</small>
-          <h3>ALE RIOT — 3991</h3>
-          <p>Coloca aquí tu archivo de audio. La música comienza después de entrar al sitio para respetar las restricciones de reproducción automática del navegador.</p>
-          <audio id="player" controls preload="metadata"></audio>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="network">
-      <div class="page-head"><h2>NETWORK</h2><span>04 / FIND ME ONLINE</span></div>
-      <div class="network">
-        <a class="social" href="https://www.instagram.com/" target="_blank"><b>Instagram</b><span>@TU_USUARIO</span></a>
-        <a class="social" href="https://www.tiktok.com/" target="_blank"><b>TikTok</b><span>@TU_USUARIO</span></a>
-        <a class="social" href="https://www.youtube.com/" target="_blank"><b>YouTube</b><span>MY CHANNEL</span></a>
-        <a class="social" href="https://www.facebook.com/" target="_blank"><b>Facebook</b><span>MY PROFILE</span></a>
-      </div>
-    </section>
-
-  </main>
-
-  <div class="audio">
-    <button id="mute">II</button>
-    <div class="audio-bars"><i></i><i></i><i></i><i></i></div>
-    <div class="audio-label">AMBIENCE</div>
-  </div>
+<div class="brand-mark">
+A
 </div>
 
-<script>
-/* PARTICLES */
-const c=document.getElementById('particles'),ctx=c.getContext('2d');
-let W,H,pts=[];
-function resize(){
-  W=c.width=innerWidth;H=c.height=innerHeight;pts=[];
-  for(let i=0;i<70;i++)pts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.2+.2,s:Math.random()*.18+.04,a:Math.random()*.35+.05});
-}
 
-resize();addEventListener('resize',resize);
-function draw(){
-  ctx.clearRect(0,0,W,H);
-  pts.forEach(p=>{
-    p.y-=p.s;if(p.y<0)p.y=H;
-    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(220,220,225,${p.a})`;ctx.fill();
-  });
-  requestAnimationFrame(draw);
-}
+<div>
 
-draw();
+<div class="brand-name">
+ALE RIOT
+</div>
 
-/* NAVIGATION */
-const nav=document.querySelectorAll('[data-go]');
-const sections=document.querySelectorAll('.section');
-function go(id){
-  sections.forEach(s=>s.classList.toggle('active',s.id===id));
-  nav.forEach(n=>n.classList.toggle('active',n.dataset.go===id));
-}
 
-nav.forEach(n=>n.addEventListener('click',()=>go(n.dataset.go)));
+<div class="brand-id">
+3991 / DIGITAL IDENTITY
+</div>
 
-/* ENTRY + AUDIO */
-const entry=document.getElementById('entry'),app=document.getElementById('app');
-const audio=document.getElementById('player'),mute=document.getElementById('mute'),bars=document.querySelector('.audio');
-document.getElementById('enter').addEventListener('click',()=>{
-  entry.classList.add('hide');app.classList.add('ready');
-  // Put your music file here:
-  // audio.src='music/ale-riot.mp3';
-  // audio.play().catch(()=>{});
+
+</div>
+
+</div>
+
+
+
+<nav class="top-nav">
+
+<button class="active" data-go="home">
+01 HOME
+</button>
+
+
+<button data-go="archive">
+02 ARCHIVE
+</button>
+
+
+<button data-go="music">
+03 AUDIO
+</button>
+
+
+<button data-go="universe">
+04 UNIVERSE
+</button>
+
+
+</nav>
+
+
+</header>
+
+
+
+
+
+<main class="viewport">
+
+
+
+<!-- HOME -->
+
+<section class="section active" id="home">
+
+
+<div class="hero">
+
+
+<div class="hero-copy">
+
+
+<div class="kicker">
+WELCOME TO MY SPACE
+</div>
+
+
+
+<h1>
+
+ALE
+
+<span class="last">
+RIOT
+</span>
+
+</h1>
+
+
+
+<div class="hero-sub">
+PRIVATE / DIGITAL / PERSONAL
+</div>
+
+
+
+<div class="hero-line"></div>
+
+
+
+<p>
+
+No todos conocen mi historia.
+
+Algunos conocen mi nombre.
+Otros, apenas una versión de mí.
+
+Y quizá eso sea suficiente.
+
+Este espacio es una pequeña parte de mi mundo:
+música, imágenes, historias, pensamientos y momentos
+que decidí guardar aquí.
+
+Lo que no está escrito,
+también forma parte de la historia.
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<!-- ARCHIVE -->
+
+
+<section class="section" id="archive">
+
+
+<div class="page-head">
+
+<h2>
+ARCHIVE
+</h2>
+
+<span>
+02 / SELECTED MOMENTS
+</span>
+
+</div>
+
+
+
+
+<div class="cards">
+
+
+<article class="card">
+
+<small>
+001 / VISUALS
+</small>
+
+<h3>
+MEMORIES
+</h3>
+
+<p>
+Fragmentos visuales que forman parte de mi universo.
+</p>
+
+</article>
+
+
+
+<article class="card">
+
+<small>
+002 / COLLECTION
+</small>
+
+<h3>
+ANIME
+</h3>
+
+<p>
+Historias, mundos y estilos que inspiran mi imaginación.
+</p>
+
+</article>
+
+
+
+<article class="card">
+
+<small>
+003 / PRIVATE
+</small>
+
+<h3>
+3991
+</h3>
+
+<p>
+Un archivo personal de momentos seleccionados.
+</p>
+
+</article>
+
+
+</div>
+
+
+
+
+
+<div class="gallery">
+
+
+
+<div class="photo">
+
+<img src="images/anime01.jpg">
+
+<span>
+FRAME 01
+</span>
+
+</div>
+
+
+
+
+<div class="photo">
+
+<img src="images/anime02.jpg">
+
+<span>
+FRAME 02
+</span>
+
+</div>
+
+
+
+
+
+<div class="photo">
+
+<img src="images/anime03.jpg">
+
+<span>
+FRAME 03
+</span>
+
+</div>
+
+
+
+
+
+<div class="photo">
+
+<img src="images/anime04.jpg">
+
+<span>
+FRAME 04
+</span>
+
+</div>
+
+
+
+
+
+<div class="photo">
+
+<img src="images/anime05.jpg">
+
+<span>
+FRAME 05
+</span>
+
+</div>
+
+
+
+
+
+<div class="photo">
+
+<img src="images/anime06.jpg">
+
+<span>
+FRAME 06
+</span>
+
+</div>
+
+
+
+
+
+<div class="photo">
+
+<img src="images/anime07.jpg">
+
+<span>
+FRAME 07
+</span>
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<!-- AUDIO -->
+
+
+<section class="section" id="music">
+
+
+<div class="page-head">
+
+<h2>
+AUDIO
+</h2>
+
+<span>
+03 / SOUNDTRACK
+</span>
+
+</div>
+
+
+
+<div class="music-box">
+
+
+<div class="cover">
+
+<strong>
+AR
+</strong>
+
+</div>
+
+
+
+<div class="track">
+
+
+<small>
+NOW PLAYING
+</small>
+
+
+<h3>
+ALE RIOT SOUNDTRACK
+</h3>
+
+
+
+<p>
+
+Un espacio acompañado por sonidos
+elegantes, cinematográficos y nocturnos.
+
+</p>
+
+
+
+<audio controls id="player">
+
+<source src="music/ambient.mp3" type="audio/mpeg">
+
+</audio>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- UNIVERSE -->
+
+
+<section class="section" id="universe">
+
+
+<div class="page-head">
+
+<h2>
+UNIVERSE
+</h2>
+
+<span>
+04 / DIGITAL WORLD
+</span>
+
+
+</div>
+
+
+
+
+<div class="network">
+
+
+<div class="social">
+
+<b>
+ANIME
+</b>
+
+<span>
+Stories that inspire me
+</span>
+
+</div>
+
+
+
+<div class="social">
+
+<b>
+CINEMA
+</b>
+
+<span>
+Movies and visual worlds
+</span>
+
+</div>
+
+
+
+<div class="social">
+
+<b>
+MUSIC
+</b>
+
+<span>
+Soundtracks of my life
+</span>
+
+</div>
+
+
+
+<div class="social">
+
+<b>
+STREAMING
+</b>
+
+<span>
+Netflix · HBO · Crunchyroll · Vix
+</span>
+
+</div>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+</main>
+
+
+
+
+<!-- VISOR -->
+
+<div class="viewer" id="viewer">
+
+
+<button class="viewer-close" id="closeViewer">
+×
+</button>
+
+
+<img id="viewerImage">
+
+
+</div>
+
+
+
+</div>
+  <script>
+
+
+/* =========================
+   PARTICULAS
+========================= */
+
+
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+
+let particles=[];
+
+function resizeCanvas(){
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+particles=[];
+
+for(let i=0;i<80;i++){
+
+particles.push({
+
+x:Math.random()*canvas.width,
+
+y:Math.random()*canvas.height,
+
+size:Math.random()*1.5,
+
+speed:Math.random()*0.3+.1,
+
+opacity:Math.random()*.5
+
 });
 
-mute.addEventListener('click',()=>{
-  if(audio.paused){audio.play().catch(()=>{});mute.textContent='II';bars.classList.remove('paused')}
-  else{audio.pause();mute.textContent='▶';bars.classList.add('paused')}
-});
-
-/* CUSTOM CURSOR */
-const dot=document.querySelector('.cursor-dot'),ring=document.querySelector('.cursor-ring');
-let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
-addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
-function cursor(){
-  dot.style.left=mx+'px';dot.style.top=my+'px';
-  rx+=(mx-rx)*.16;ry+=(my-ry)*.16;
-  ring.style.left=rx+'px';ring.style.top=ry+'px';
-  requestAnimationFrame(cursor);
 }
 
-cursor();
-document.querySelectorAll('button,a').forEach(el=>{
-  el.addEventListener('mouseenter',()=>ring.classList.add('hover'));
-  el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));
+}
+
+
+resizeCanvas();
+
+window.addEventListener("resize",resizeCanvas);
+
+
+
+function animateParticles(){
+
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+
+particles.forEach(p=>{
+
+
+p.y-=p.speed;
+
+
+if(p.y<0){
+
+p.y=canvas.height;
+
+}
+
+
+ctx.beginPath();
+
+ctx.arc(
+p.x,
+p.y,
+p.size,
+0,
+Math.PI*2
+);
+
+
+ctx.fillStyle=
+`rgba(255,255,255,${p.opacity})`;
+
+
+ctx.fill();
+
+
 });
 
-/* subtle parallax */
-addEventListener('mousemove',e=>{
-  const x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);
-  document.querySelectorAll('.cloud').forEach((el,i)=>{
-    el.style.marginLeft=(x*(i+1)*10)+'px';
-    el.style.marginTop=(y*(i+1)*6)+'px';
-  });
+
+requestAnimationFrame(animateParticles);
+
+
+}
+
+
+animateParticles();
+
+
+
+
+
+
+/* =========================
+   ENTRADA
+========================= */
+
+
+const enter=document.getElementById("enter");
+
+const entry=document.getElementById("entry");
+
+const app=document.getElementById("app");
+
+
+enter.addEventListener("click",()=>{
+
+
+entry.classList.add("hide");
+
+
+setTimeout(()=>{
+
+app.classList.add("ready");
+
+},500);
+
+
+
 });
+
+
+
+
+
+
+/* =========================
+   NAVEGACION
+========================= */
+
+
+const buttons=
+document.querySelectorAll("[data-go]");
+
+
+const sections=
+document.querySelectorAll(".section");
+
+
+
+buttons.forEach(btn=>{
+
+
+btn.addEventListener("click",()=>{
+
+
+let target=
+btn.dataset.go;
+
+
+
+sections.forEach(section=>{
+
+
+section.classList.remove("active");
+
+
+});
+
+
+
+document
+.getElementById(target)
+.classList.add("active");
+
+
+
+
+buttons.forEach(b=>{
+
+b.classList.remove("active");
+
+});
+
+
+btn.classList.add("active");
+
+
+
+});
+
+
+
+});
+
+
+
+
+
+
+
+
+/* =========================
+   VISOR DE IMAGENES
+========================= */
+
+
+const viewer=
+document.getElementById("viewer");
+
+
+const viewerImage=
+document.getElementById("viewerImage");
+
+
+const photos=
+document.querySelectorAll(".photo img");
+
+
+
+photos.forEach(photo=>{
+
+
+photo.addEventListener("click",()=>{
+
+
+viewerImage.src=
+photo.src;
+
+
+viewer.classList.add("active");
+
+
+
+});
+
+
+});
+
+
+
+
+document
+.getElementById("closeViewer")
+.addEventListener("click",()=>{
+
+
+viewer.classList.remove("active");
+
+
+});
+
+
+
+
+
+viewer.addEventListener("click",(e)=>{
+
+
+if(e.target===viewer){
+
+viewer.classList.remove("active");
+
+}
+
+
+});
+
+
+
+
+
+
+
+
+/* =========================
+   AUDIO
+========================= */
+
+
+const player=
+document.getElementById("player");
+
+
+
+/*
+IMPORTANTE:
+
+Para agregar tu música:
+
+1.- Crea carpeta:
+
+music
+
+
+2.- Mete tu canción:
+
+ambient.mp3
+
+
+3.- La página la cargará desde:
+
+music/ambient.mp3
+
+
+*/
+
+
+
+
+
 </script>
+
+
 </body>
+
 </html>
