@@ -15,7 +15,6 @@
   --red:#8f1f25;
   --red2:#c63a40;
 }
-
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;background:var(--bg);color:var(--ink);font-family:Inter,Arial,sans-serif;overflow:hidden}
 button,a{font:inherit;color:inherit}
@@ -33,19 +32,15 @@ body:before{
   filter:blur(2px);
   animation:sky 14s ease-in-out infinite alternate;
 }
-
 body:after{
   content:"";position:fixed;inset:0;z-index:3;pointer-events:none;
   background:
     radial-gradient(circle at center,transparent 35%,rgba(0,0,0,.62) 100%),
     linear-gradient(90deg,rgba(0,0,0,.2),transparent 20%,transparent 80%,rgba(0,0,0,.2));
 }
-
 @keyframes sky{from{transform:scale(1)}to{transform:scale(1.08) translate3d(0,-1%,0)}}
-
 #particles{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.55}
 
-/* CLOUD-LIKE LAYERS */
 .cloud{position:fixed;z-index:1;pointer-events:none;border-radius:50%;filter:blur(35px);opacity:.22}
 .cloud.one{width:55vw;height:18vw;left:-8vw;top:16vh;background:#a8adb9;transform:rotate(-8deg);animation:cloud1 16s ease-in-out infinite alternate}
 .cloud.two{width:45vw;height:14vw;right:-6vw;top:9vh;background:#737987;transform:rotate(9deg);animation:cloud2 19s ease-in-out infinite alternate}
@@ -62,6 +57,7 @@ body:after{
 }
 #entry.hide{opacity:0;visibility:hidden;pointer-events:none}
 .entry-inner{text-align:center;animation:entryIn 1.4s ease both}
+@keyframes entryIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 .entry-kicker{font-size:9px;letter-spacing:6px;color:#777;margin-bottom:24px}
 .entry-title{font-family:"Cormorant Garamond",serif;font-size:clamp(52px,9vw,110px);font-weight:500;letter-spacing:.18em;margin:0 0 22px}
 .entry-title span{display:block;font-size:.46em;letter-spacing:.65em;color:#aaa;margin-top:7px}
@@ -82,7 +78,6 @@ body:after{
   position:absolute;left:0;right:0;top:0;height:76px;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;
   border-bottom:1px solid rgba(255,255,255,.09);z-index:20
 }
-
 .brand{display:flex;align-items:center;gap:16px}
 .brand-mark{width:28px;height:28px;border:1px solid rgba(255,255,255,.35);display:grid;place-items:center;font-family:"Cormorant Garamond",serif;font-size:18px}
 .brand-name{font-size:10px;letter-spacing:4px}
@@ -100,18 +95,33 @@ body:after{
 .audio button:hover{border-color:#aaa}
 .audio-bars{display:flex;align-items:flex-end;gap:2px;height:16px}
 .audio-bars i{display:block;width:2px;height:5px;background:#aaa;animation:eq .8s ease-in-out infinite alternate}
-.audio-bars i:nth-child(2){height:11px;animation-delay:.1s}.audio-bars i:nth-child(3){height:7px;animation-delay:.25s}.audio-bars i:nth-child(4){height:13px;animation-delay:.18s}
+.audio-bars i:nth-child(2){height:11px;animation-delay:.1s}
+.audio-bars i:nth-child(3){height:7px;animation-delay:.25s}
+.audio-bars i:nth-child(4){height:13px;animation-delay:.18s}
 .audio.paused i{animation-play-state:paused;height:3px}
 @keyframes eq{to{transform:scaleY(.35)}}
 .audio-label{font-size:7px;letter-spacing:3px;color:#777}
 
 /* SECTIONS */
-.viewport{position:absolute;inset:76px 0 0;overflow:hidden}
-.section{position:absolute;inset:0;padding:7vh 9vw;opacity:0;visibility:hidden;transform:translateY(30px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.75,.2,1),visibility .8s}
+.viewport{
+  position:absolute;inset:76px 0 0;
+  overflow:hidden;
+  touch-action:pan-y;
+}
+.section{
+  position:absolute;inset:0;
+  padding:7vh 9vw;
+  opacity:0;visibility:hidden;
+  transform:translateY(50px) scale(.985);
+  transition:opacity .75s ease,transform .85s cubic-bezier(.2,.75,.2,1),visibility .75s;
+  overflow-y:auto;
+  scrollbar-width:none;
+}
+.section::-webkit-scrollbar{display:none}
 .section.active{opacity:1;visibility:visible;transform:none}
 
 /* HERO */
-.hero{display:flex;align-items:center;height:100%;position:relative}
+.hero{display:flex;align-items:center;height:100%;min-height:500px;position:relative}
 .hero-copy{width:min(700px,75vw)}
 .kicker{font-size:9px;letter-spacing:6px;color:#8f9298;margin-bottom:22px}
 .hero h1{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:clamp(70px,12vw,170px);line-height:.68;letter-spacing:.12em;margin:0}
@@ -119,10 +129,8 @@ body:after{
 .hero-sub{font-family:"Cormorant Garamond",serif;font-size:18px;letter-spacing:.28em;color:#b6b5b3;margin:45px 0 0}
 .hero-line{width:150px;height:1px;background:linear-gradient(90deg,#aaa,transparent);margin-top:25px}
 .hero-copy p{max-width:500px;color:#7d7e83;font-size:11px;line-height:1.9;margin-top:20px}
-.scroll-hint{position:absolute;left:9vw;bottom:5vh;font-size:7px;letter-spacing:4px;color:#666;display:flex;align-items:center;gap:12px}
+.scroll-hint{position:absolute;left:0;bottom:5vh;font-size:7px;letter-spacing:4px;color:#666;display:flex;align-items:center;gap:12px}
 .scroll-hint:before{content:"";width:45px;height:1px;background:#555}
-
-/* side monogram */
 .hero-deco{position:absolute;right:7vw;top:50%;transform:translateY(-50%);width:28vw;height:28vw;max-width:390px;max-height:390px;border:1px solid rgba(255,255,255,.08);border-radius:50%;display:grid;place-items:center}
 .hero-deco:before,.hero-deco:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.06);border-radius:50%}
 .hero-deco:before{inset:8%}.hero-deco:after{inset:18%}
@@ -141,11 +149,51 @@ body:after{
 .card p{font-size:10px;line-height:1.7;color:#777;max-width:260px}
 
 /* GALLERY */
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.photo{height:190px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,.08);background:#111}
-.photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(.85) contrast(1.08) brightness(.75);transition:.7s}
+.gallery-wrap{position:relative}
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+}
+.photo{
+  height:190px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,.08);
+  background:#111;cursor:zoom-in;
+}
+.photo img{
+  width:100%;height:100%;object-fit:cover;
+  filter:grayscale(.85) contrast(1.08) brightness(.75);
+  transition:.7s
+}
 .photo:hover img{transform:scale(1.08);filter:grayscale(.15) contrast(1.08) brightness(.9)}
 .photo span{position:absolute;left:12px;bottom:10px;font-size:7px;letter-spacing:3px;text-shadow:0 2px 8px #000}
+.gallery-note{text-align:center;font-size:7px;letter-spacing:3px;color:#666;margin-top:14px}
+
+/* LIGHTBOX */
+#lightbox{
+  position:fixed;inset:0;z-index:200;
+  display:flex;align-items:center;justify-content:center;
+  padding:50px;
+  background:rgba(0,0,0,.88);
+  backdrop-filter:blur(10px);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:.35s;
+}
+#lightbox.open{opacity:1;visibility:visible;pointer-events:auto}
+.lightbox-img{
+  max-width:min(1100px,88vw);max-height:82vh;
+  object-fit:contain;
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 30px 100px rgba(0,0,0,.8);
+}
+.lb-close,.lb-prev,.lb-next{
+  position:absolute;width:42px;height:42px;border:1px solid rgba(255,255,255,.25);
+  color:#ddd;background:rgba(0,0,0,.25);transition:.3s;z-index:2
+}
+.lb-close{right:30px;top:25px;font-size:20px}
+.lb-prev{left:30px;top:50%;transform:translateY(-50%);font-size:20px}
+.lb-next{right:30px;top:50%;transform:translateY(-50%);font-size:20px}
+.lb-close:hover,.lb-prev:hover,.lb-next:hover{border-color:#fff;background:rgba(143,31,37,.35)}
+.lb-caption{position:absolute;bottom:25px;left:0;right:0;text-align:center;font-size:8px;letter-spacing:4px;color:#aaa}
 
 /* MUSIC */
 .music-box{display:grid;grid-template-columns:190px 1fr;gap:35px;align-items:center;max-width:850px}
@@ -163,8 +211,18 @@ body:after{
 .social b{font-family:"Cormorant Garamond",serif;font-size:25px;font-weight:400;letter-spacing:.1em}
 .social span{font-size:8px;color:#666;letter-spacing:2px}
 
+/* SECTION INDICATOR */
+.section-indicator{
+  position:absolute;right:5vw;top:50%;transform:translateY(-50%);
+  z-index:24;display:flex;flex-direction:column;gap:9px
+}
+.section-indicator button{
+  width:5px;height:5px;border-radius:50%;padding:0;background:#555;transition:.3s
+}
+.section-indicator button.active{height:22px;border-radius:4px;background:#ddd}
+
 /* CURSOR */
-.cursor-dot,.cursor-ring{position:fixed;z-index:100;pointer-events:none;top:0;left:0;transform:translate(-50%,-50%);mix-blend-mode:screen}
+.cursor-dot,.cursor-ring{position:fixed;z-index:300;pointer-events:none;top:0;left:0;transform:translate(-50%,-50%);mix-blend-mode:screen}
 .cursor-dot{width:4px;height:4px;border-radius:50%;background:#fff}
 .cursor-ring{width:28px;height:28px;border:1px solid rgba(255,255,255,.55);border-radius:50%;transition:width .25s,height .25s,border-color .25s,background .25s}
 .cursor-ring.hover{width:55px;height:55px;border-color:rgba(198,58,64,.9);background:rgba(143,31,37,.08)}
@@ -179,14 +237,17 @@ body:after{
   .hero h1{font-size:18vw}.hero h1 .last{margin-left:5vw}
   .cards,.gallery{grid-template-columns:1fr 1fr}
   .music-box{grid-template-columns:1fr}.cover{height:150px}
+  .section-indicator{display:none}
 }
-
 @media(max-width:520px){
   .top-nav button:nth-child(3),.top-nav button:nth-child(4){display:none}
   .page-head h2{font-size:38px}
   .cards,.gallery,.network{grid-template-columns:1fr}
   .photo{height:210px}
   .audio-label{display:none}
+  #lightbox{padding:20px}
+  .lightbox-img{max-width:94vw;max-height:75vh}
+  .lb-prev{left:10px}.lb-next{right:10px}.lb-close{right:12px}
 }
 </style>
 </head>
@@ -208,7 +269,6 @@ body:after{
 <div class="cursor-ring"></div>
 
 <div class="app" id="app">
-
   <header class="top">
     <div class="brand">
       <div class="brand-mark">A</div>
@@ -226,6 +286,13 @@ body:after{
     </nav>
   </header>
 
+  <div class="section-indicator" aria-label="Navegación de secciones">
+    <button class="active" data-go="home" aria-label="Home"></button>
+    <button data-go="archive" aria-label="Archive"></button>
+    <button data-go="music" aria-label="Audio"></button>
+    <button data-go="network" aria-label="Network"></button>
+  </div>
+
   <main class="viewport">
 
     <section class="section active" id="home">
@@ -235,28 +302,52 @@ body:after{
           <h1>ALE <span class="last">RIOT</span></h1>
           <div class="hero-sub">PRIVATE / DIGITAL / PERSONAL</div>
           <div class="hero-line"></div>
-          <p>
-            Música, imágenes, videos y enlaces reunidos en un espacio
-            diseñado para sentirse más como una experiencia que como un perfil.
-          </p>
+          <p>Música, imágenes, videos y enlaces reunidos en un espacio diseñado para sentirse más como una experiencia que como un perfil.</p>
         </div>
         <div class="hero-deco"><b>AR</b></div>
-        <div class="scroll-hint">EXPLORE THE SPACE</div>
+        <div class="scroll-hint">SCROLL / SWIPE TO EXPLORE</div>
       </div>
     </section>
 
     <section class="section" id="archive">
       <div class="page-head"><h2>ARCHIVE</h2><span>02 / SELECTED MOMENTS</span></div>
+
       <div class="cards">
         <article class="card"><small>001 / MOMENTS</small><h3>MEMORIES</h3><p>Fotografías y momentos personales seleccionados.</p></article>
         <article class="card"><small>002 / COLLECTION</small><h3>VISUALS</h3><p>Una colección visual con la estética de ALE Riot.</p></article>
         <article class="card"><small>003 / PRIVATE</small><h3>3991</h3><p>Un pequeño archivo de detalles, ideas y recuerdos.</p></article>
       </div>
-      <div style="height:12px"></div>
-      <div class="gallery">
-        <div class="photo"><img src="https://picsum.photos/900/600?random=71"><span>FRAME 01</span></div>
-        <div class="photo"><img src="https://picsum.photos/900/600?random=72"><span>FRAME 02</span></div>
-        <div class="photo"><img src="https://picsum.photos/900/600?random=73"><span>FRAME 03</span></div>
+
+      <div style="height:18px"></div>
+
+      <div class="gallery-wrap">
+        <div class="gallery">
+          <button class="photo" data-image="https://picsum.photos/1400/900?random=71" data-caption="FRAME 01">
+            <img src="https://picsum.photos/900/600?random=71" alt="Frame 01">
+            <span>FRAME 01 · OPEN</span>
+          </button>
+          <button class="photo" data-image="https://picsum.photos/1400/900?random=72" data-caption="FRAME 02">
+            <img src="https://picsum.photos/900/600?random=72" alt="Frame 02">
+            <span>FRAME 02 · OPEN</span>
+          </button>
+          <button class="photo" data-image="https://picsum.photos/1400/900?random=73" data-caption="FRAME 03">
+            <img src="https://picsum.photos/900/600?random=73" alt="Frame 03">
+            <span>FRAME 03 · OPEN</span>
+          </button>
+          <button class="photo" data-image="https://picsum.photos/1400/900?random=74" data-caption="FRAME 04">
+            <img src="https://picsum.photos/900/600?random=74" alt="Frame 04">
+            <span>FRAME 04 · OPEN</span>
+          </button>
+          <button class="photo" data-image="https://picsum.photos/1400/900?random=75" data-caption="FRAME 05">
+            <img src="https://picsum.photos/900/600?random=75" alt="Frame 05">
+            <span>FRAME 05 · OPEN</span>
+          </button>
+          <button class="photo" data-image="https://picsum.photos/1400/900?random=76" data-caption="FRAME 06">
+            <img src="https://picsum.photos/900/600?random=76" alt="Frame 06">
+            <span>FRAME 06 · OPEN</span>
+          </button>
+        </div>
+        <div class="gallery-note">CLICK A FRAME TO OPEN · USE ← → TO MOVE BETWEEN IMAGES · ESC TO CLOSE</div>
       </div>
     </section>
 
@@ -276,10 +367,10 @@ body:after{
     <section class="section" id="network">
       <div class="page-head"><h2>NETWORK</h2><span>04 / FIND ME ONLINE</span></div>
       <div class="network">
-        <a class="social" href="https://www.instagram.com/" target="_blank"><b>Instagram</b><span>@TU_USUARIO</span></a>
-        <a class="social" href="https://www.tiktok.com/" target="_blank"><b>TikTok</b><span>@TU_USUARIO</span></a>
-        <a class="social" href="https://www.youtube.com/" target="_blank"><b>YouTube</b><span>MY CHANNEL</span></a>
-        <a class="social" href="https://www.facebook.com/" target="_blank"><b>Facebook</b><span>MY PROFILE</span></a>
+        <a class="social" href="https://www.instagram.com/" target="_blank" rel="noopener"><b>Instagram</b><span>@TU_USUARIO</span></a>
+        <a class="social" href="https://www.tiktok.com/" target="_blank" rel="noopener"><b>TikTok</b><span>@TU_USUARIO</span></a>
+        <a class="social" href="https://www.youtube.com/" target="_blank" rel="noopener"><b>YouTube</b><span>MY CHANNEL</span></a>
+        <a class="social" href="https://www.facebook.com/" target="_blank" rel="noopener"><b>Facebook</b><span>MY PROFILE</span></a>
       </div>
     </section>
 
@@ -292,6 +383,15 @@ body:after{
   </div>
 </div>
 
+<!-- VISOR DE IMÁGENES -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de imágenes">
+  <button class="lb-close" id="lbClose" aria-label="Cerrar">×</button>
+  <button class="lb-prev" id="lbPrev" aria-label="Imagen anterior">‹</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <button class="lb-next" id="lbNext" aria-label="Imagen siguiente">›</button>
+  <div class="lb-caption" id="lbCaption"></div>
+</div>
+
 <script>
 /* PARTICLES */
 const c=document.getElementById('particles'),ctx=c.getContext('2d');
@@ -300,7 +400,6 @@ function resize(){
   W=c.width=innerWidth;H=c.height=innerHeight;pts=[];
   for(let i=0;i<70;i++)pts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.2+.2,s:Math.random()*.18+.04,a:Math.random()*.35+.05});
 }
-
 resize();addEventListener('resize',resize);
 function draw(){
   ctx.clearRect(0,0,W,H);
@@ -311,35 +410,136 @@ function draw(){
   });
   requestAnimationFrame(draw);
 }
-
 draw();
 
-/* NAVIGATION */
+/* NAVEGACIÓN ENTRE SECCIONES */
 const nav=document.querySelectorAll('[data-go]');
-const sections=document.querySelectorAll('.section');
+const sections=[...document.querySelectorAll('.section')];
+let current=0;
+let changing=false;
+
+function setSection(index){
+  index=Math.max(0,Math.min(sections.length-1,index));
+  if(index===current && sections[index].classList.contains('active')) return;
+
+  current=index;
+  sections.forEach((s,i)=>s.classList.toggle('active',i===current));
+  nav.forEach(n=>n.classList.toggle('active',n.dataset.go===sections[current].id));
+  document.querySelectorAll('.section-indicator button').forEach((b,i)=>b.classList.toggle('active',i===current));
+
+  // Reinicia el desplazamiento interno de la sección al cambiar.
+  sections[current].scrollTop=0;
+}
+
 function go(id){
-  sections.forEach(s=>s.classList.toggle('active',s.id===id));
-  nav.forEach(n=>n.classList.toggle('active',n.dataset.go===id));
+  const index=sections.findIndex(s=>s.id===id);
+  if(index>=0)setSection(index);
 }
 
 nav.forEach(n=>n.addEventListener('click',()=>go(n.dataset.go)));
 
-/* ENTRY + AUDIO */
+/* RUEDA DEL RATÓN: CAMBIA DE SECCIÓN */
+const viewport=document.querySelector('.viewport');
+viewport.addEventListener('wheel',e=>{
+  if(document.getElementById('lightbox').classList.contains('open')) return;
+  if(changing)return;
+
+  // Si una sección tiene contenido que realmente necesita scroll interno,
+  // primero permite llegar a sus extremos.
+  const active=sections[current];
+  const canScroll=active.scrollHeight>active.clientHeight+5;
+  const atTop=active.scrollTop<=2;
+  const atBottom=active.scrollTop+active.clientHeight>=active.scrollHeight-2;
+
+  if(canScroll && ((e.deltaY>0 && !atBottom)||(e.deltaY<0 && !atTop))) return;
+
+  e.preventDefault();
+  changing=true;
+  setSection(current+(e.deltaY>0?1:-1));
+  setTimeout(()=>changing=false,850);
+},{passive:false});
+
+/* TECLADO */
+addEventListener('keydown',e=>{
+  if(document.getElementById('lightbox').classList.contains('open')) return;
+  if(['ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();setSection(current+1)}
+  if(['ArrowUp','PageUp'].includes(e.key)){e.preventDefault();setSection(current-1)}
+});
+
+/* SWIPE EN TELÉFONO */
+let touchStartY=0;
+viewport.addEventListener('touchstart',e=>{touchStartY=e.changedTouches[0].clientY},{passive:true});
+viewport.addEventListener('touchend',e=>{
+  const dy=e.changedTouches[0].clientY-touchStartY;
+  if(Math.abs(dy)<45)return;
+  setSection(current+(dy<0?1:-1));
+},{passive:true});
+
+/* ENTRADA + AUDIO */
 const entry=document.getElementById('entry'),app=document.getElementById('app');
 const audio=document.getElementById('player'),mute=document.getElementById('mute'),bars=document.querySelector('.audio');
+
 document.getElementById('enter').addEventListener('click',()=>{
-  entry.classList.add('hide');app.classList.add('ready');
-  // Put your music file here:
+  entry.classList.add('hide');
+  app.classList.add('ready');
+  // Para poner tu música, descomenta y cambia esta línea:
   // audio.src='music/ale-riot.mp3';
   // audio.play().catch(()=>{});
 });
 
 mute.addEventListener('click',()=>{
-  if(audio.paused){audio.play().catch(()=>{});mute.textContent='II';bars.classList.remove('paused')}
-  else{audio.pause();mute.textContent='▶';bars.classList.add('paused')}
+  if(audio.paused){
+    audio.play().catch(()=>{});
+    mute.textContent='II';
+    bars.classList.remove('paused');
+  }else{
+    audio.pause();
+    mute.textContent='▶';
+    bars.classList.add('paused');
+  }
 });
 
-/* CUSTOM CURSOR */
+/* VISOR / LIGHTBOX DE IMÁGENES */
+const photos=[...document.querySelectorAll('.photo')];
+const lightbox=document.getElementById('lightbox');
+const lightboxImg=document.getElementById('lightboxImg');
+const lbCaption=document.getElementById('lbCaption');
+let photoIndex=0;
+
+function openPhoto(index){
+  photoIndex=(index+photos.length)%photos.length;
+  const item=photos[photoIndex];
+  lightboxImg.src=item.dataset.image;
+  lightboxImg.alt=item.dataset.caption;
+  lbCaption.textContent=item.dataset.caption;
+  lightbox.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closePhoto(){
+  lightbox.classList.remove('open');
+  lightboxImg.src='';
+  document.body.style.overflow='hidden';
+}
+function nextPhoto(){openPhoto(photoIndex+1)}
+function prevPhoto(){openPhoto(photoIndex-1)}
+
+photos.forEach((photo,i)=>photo.addEventListener('click',()=>openPhoto(i)));
+document.getElementById('lbClose').addEventListener('click',closePhoto);
+document.getElementById('lbNext').addEventListener('click',nextPhoto);
+document.getElementById('lbPrev').addEventListener('click',prevPhoto);
+
+lightbox.addEventListener('click',e=>{
+  if(e.target===lightbox)closePhoto();
+});
+
+addEventListener('keydown',e=>{
+  if(!lightbox.classList.contains('open'))return;
+  if(e.key==='Escape')closePhoto();
+  if(e.key==='ArrowRight')nextPhoto();
+  if(e.key==='ArrowLeft')prevPhoto();
+});
+
+/* CURSOR */
 const dot=document.querySelector('.cursor-dot'),ring=document.querySelector('.cursor-ring');
 let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
 addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
@@ -349,14 +549,14 @@ function cursor(){
   ring.style.left=rx+'px';ring.style.top=ry+'px';
   requestAnimationFrame(cursor);
 }
-
 cursor();
+
 document.querySelectorAll('button,a').forEach(el=>{
   el.addEventListener('mouseenter',()=>ring.classList.add('hover'));
   el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));
 });
 
-/* subtle parallax */
+/* PARALLAX */
 addEventListener('mousemove',e=>{
   const x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);
   document.querySelectorAll('.cloud').forEach((el,i)=>{
