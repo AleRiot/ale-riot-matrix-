@@ -4,1539 +4,2094 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ale Riot Matrix Red</title>
+<title>ALE Riot // 3991</title>
 
 <style>
-html,body{
+
+/* =========================================================
+   ALE RIOT // CYBER NOIR
+   ========================================================= */
+
+*{
+    box-sizing:border-box;
+}
+
+html,
+body{
     margin:0;
     width:100%;
     height:100%;
     overflow:hidden;
-    background:#050000;
-    color:#ff3b3b;
-    font-family:Arial,Helvetica,sans-serif;
+    background:#030405;
+    color:#e9edf0;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 }
+
+body{
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(130,15,15,.16),
+            transparent 38%
+        ),
+        linear-gradient(
+            135deg,
+            #020303,
+            #08090a 50%,
+            #020303
+        );
+}
+
+
+/* =========================================================
+   BACKGROUND
+   ========================================================= */
 
 canvas{
     position:fixed;
     inset:0;
     width:100%;
     height:100%;
+    z-index:0;
+}
+
+.noise{
+    position:fixed;
+    inset:0;
+    z-index:2;
+    pointer-events:none;
+    opacity:.035;
+
+    background-image:
+        repeating-radial-gradient(
+            circle at 0 0,
+            #fff 0,
+            #fff 1px,
+            transparent 1px,
+            transparent 3px
+        );
+}
+
+.scan{
+    position:fixed;
+    inset:0;
+    z-index:3;
+    pointer-events:none;
+
+    background:
+        linear-gradient(
+            transparent 50%,
+            rgba(255,255,255,.025) 50%
+        );
+
+    background-size:100% 5px;
 }
 
 .vignette{
     position:fixed;
     inset:0;
-    background:radial-gradient(circle,transparent 20%,#000 95%);
+    z-index:4;
     pointer-events:none;
+
+    background:
+        radial-gradient(
+            circle,
+            transparent 20%,
+            rgba(0,0,0,.35) 65%,
+            rgba(0,0,0,.9) 100%
+        );
 }
 
-.scanlines{
-    position:fixed;
-    inset:0;
-    background:linear-gradient(
-        transparent 50%,
-        rgba(255,0,0,.08) 50%
-    );
-    background-size:100% 4px;
-    pointer-events:none;
-}
 
-.panel{
+/* =========================================================
+   MAIN TERMINAL
+   ========================================================= */
+
+.shell{
+
     position:absolute;
+
+    width:min(1050px,92vw);
+    height:min(720px,88vh);
+
     top:50%;
     left:50%;
-    transform:translate(-50%,-50%);
-    text-align:center;
-    z-index:5;
-    padding:40px;
-    border:1px solid rgba(255,50,50,.4);
-    background:rgba(0,0,0,.45);
-    box-shadow:0 0 40px red;
+
+    transform:
+        translate(-50%,-50%);
+
+    z-index:10;
+
+    display:flex;
+    flex-direction:column;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(13,15,17,.96),
+            rgba(3,4,5,.94)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.10);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.85),
+        0 0 80px rgba(130,0,0,.12);
+
+    backdrop-filter:blur(18px);
+
+    overflow:hidden;
+
+    animation:
+        shellIn .8s ease;
 }
 
-h1{
-    font-size:50px;
-    letter-spacing:10px;
-    text-shadow:0 0 20px red;
+
+@keyframes shellIn{
+
+    from{
+        opacity:0;
+        transform:
+            translate(-50%,-48%)
+            scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
 }
 
-p{
-    font-size:18px;
-    color:#ffaaaa;
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.topbar{
+
+    height:52px;
+
+    flex:none;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:
+        0 20px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
+
+    background:
+        rgba(0,0,0,.35);
+
+    font-size:10px;
+    letter-spacing:2px;
+    color:#777;
 }
 
-button{
-    margin-top:20px;
-    padding:15px 30px;
-    background:#900;
-    color:white;
-    border:1px solid red;
-    cursor:pointer;
-    font-size:18px;
-    box-shadow:0 0 20px red;
+
+.status{
+
+    display:flex;
+    align-items:center;
+    gap:9px;
 }
 
-button:hover{
-    background:red;
-}
-    @keyframes pulse{
 
-    0%{
-        box-shadow:0 0 40px red;
-        transform:translate(-50%,-50%) scale(1);
+.status-dot{
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#b91c1c;
+
+    box-shadow:
+        0 0 10px #b91c1c;
+
+    animation:
+        blink 2s infinite;
+}
+
+
+@keyframes blink{
+
+    0%,100%{
+        opacity:1;
     }
 
     50%{
-        box-shadow:0 0 80px #ff0000;
-        transform:translate(-50%,-50%) scale(1.05);
+        opacity:.35;
     }
-
-    100%{
-        box-shadow:0 0 40px red;
-        transform:translate(-50%,-50%) scale(1);
-    }
-
 }
+
+
+.top-code{
+    color:#666;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.main{
+
+    flex:1;
+
+    min-height:0;
+
+    display:flex;
+}
+
+
+/* =========================================================
+   SIDE NAV
+   ========================================================= */
+
+.sidebar{
+
+    width:205px;
+
+    flex:none;
+
+    padding:25px 15px;
+
+    border-right:
+        1px solid rgba(255,255,255,.07);
+
+    background:
+        rgba(0,0,0,.18);
+}
+
+
+.logo-small{
+
+    padding:
+        0 10px 25px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.07);
+
+    margin-bottom:25px;
+}
+
+
+.logo-small .mark{
+
+    color:#8e1717;
+
+    font-size:10px;
+
+    letter-spacing:4px;
+
+    margin-bottom:9px;
+}
+
+
+.logo-small h2{
+
+    margin:0;
+
+    color:#f2f2f2;
+
+    font-size:20px;
+
+    letter-spacing:4px;
+}
+
+
+.logo-small span{
+
+    color:#555;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+}
+
+
+.nav-label{
+
+    color:#4e4e4e;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    padding:
+        0 10px 10px;
+}
+
+
+.nav{
+
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+
+.nav button{
+
+    margin:0;
+
+    width:100%;
+
+    padding:13px 12px;
+
+    text-align:left;
+
+    background:transparent;
+
+    border:
+        1px solid transparent;
+
+    color:#777;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+
+.nav button:hover{
+
+    color:#ddd;
+
+    background:
+        rgba(255,255,255,.035);
+
+    border-color:
+        rgba(255,255,255,.06);
+}
+
+
+.nav button.active{
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(125,15,15,.28),
+            transparent
+        );
+
+    border-left:
+        2px solid #9b1919;
+}
+
+
+.nav-number{
+
+    color:#555;
+
+    margin-right:10px;
+}
+
+
+/* =========================================================
+   DISPLAY
+   ========================================================= */
+
+.display{
+
+    flex:1;
+
+    min-width:0;
+
+    min-height:0;
+
+    overflow-y:auto;
+
+    padding:42px;
+}
+
+
+.section{
+
+    display:none;
+
+    animation:
+        sectionIn .4s ease;
+}
+
+
+.section.active{
+
+    display:block;
+}
+
+
+@keyframes sectionIn{
+
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero{
+
+    min-height:100%;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    position:relative;
+}
+
+
+.eyebrow{
+
+    color:#8d1b1b;
+
+    font-size:10px;
+
+    letter-spacing:4px;
+
+    margin-bottom:18px;
+}
+
+
+.hero h1{
+
+    margin:0;
+
+    font-size:
+        clamp(55px,9vw,105px);
+
+    line-height:.82;
+
+    letter-spacing:
+        -3px;
+
+    font-weight:800;
+
+    color:#f0f0f0;
+
+    text-transform:uppercase;
+}
+
+
+.hero h1 span{
+
+    display:block;
+
+    color:#111;
+
+    -webkit-text-stroke:
+        1px rgba(255,255,255,.38);
+
+    text-shadow:
+        0 0 30px rgba(255,255,255,.05);
+}
+
+
+.hero-line{
+
+    width:90px;
+    height:2px;
+
+    margin:
+        28px 0 20px;
+
+    background:#8e1717;
+
+    box-shadow:
+        0 0 15px rgba(150,0,0,.7);
+}
+
+
+.hero-description{
+
+    max-width:530px;
+
+    color:#777;
+
+    font-size:13px;
+
+    line-height:1.8;
+}
+
+
+.hero-description strong{
+
+    color:#ccc;
+}
+
+
+.hero-meta{
+
+    display:flex;
+
+    gap:35px;
+
+    margin-top:35px;
+
+    flex-wrap:wrap;
+}
+
+
+.meta-item{
+
+    border-left:
+        1px solid #6d1515;
+
+    padding-left:12px;
+}
+
+
+.meta-item small{
+
+    display:block;
+
+    color:#444;
+
+    font-size:8px;
+
+    letter-spacing:2px;
+
+    margin-bottom:5px;
+}
+
+
+.meta-item b{
+
+    color:#aaa;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+}
+
+
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
+
+.section-header{
+
+    margin-bottom:28px;
+}
+
+
+.section-header small{
+
+    color:#8e1717;
+
+    font-size:9px;
+
+    letter-spacing:4px;
+}
+
+
+.section-header h2{
+
+    margin:8px 0 0;
+
+    color:#eee;
+
+    font-size:35px;
+
+    letter-spacing:4px;
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:12px;
+}
+
+
+.card{
+
+    position:relative;
+
+    padding:25px;
+
+    min-height:145px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.012)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    transition:.3s;
+
+    overflow:hidden;
+}
+
+
+.card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:80px;
+    height:80px;
+
+    right:-30px;
+    bottom:-30px;
+
+    border:
+        1px solid rgba(140,20,20,.3);
+
+    transform:rotate(45deg);
+}
+
+
+.card:hover{
+
+    transform:translateY(-4px);
+
+    border-color:
+        rgba(150,30,30,.45);
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.4);
+}
+
+
+.card-number{
+
+    color:#6c1616;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+}
+
+
+.card h3{
+
+    margin:
+        18px 0 8px;
+
+    color:#eee;
+
+    font-size:16px;
+
+    letter-spacing:2px;
+}
+
+
+.card p{
+
+    margin:0;
+
+    color:#666;
+
+    font-size:11px;
+
+    line-height:1.6;
+}
+
+
+/* =========================================================
+   GALLERY
+   ========================================================= */
+
+.gallery{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:10px;
+}
+
+
+.photo{
+
+    height:190px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:#08090a;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+}
+
+
+.photo img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    opacity:.62;
+
+    filter:
+        grayscale(.85)
+        contrast(1.15);
+
+    transition:.5s;
+}
+
+
+.photo:hover img{
+
+    opacity:1;
+
+    transform:scale(1.08);
+
+    filter:
+        grayscale(.15)
+        contrast(1.15);
+}
+
+
+.photo span{
+
+    position:absolute;
+
+    left:12px;
+    bottom:10px;
+
+    color:#eee;
+
+    font-size:8px;
+
+    letter-spacing:3px;
+
+    text-shadow:
+        0 2px 8px #000;
+}
+
+
+/* =========================================================
+   MUSIC
+   ========================================================= */
+
+.music-main{
+
+    padding:30px;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(120,10,10,.12),
+            rgba(0,0,0,.3)
+        );
+
+    display:flex;
+
+    gap:25px;
+
+    align-items:center;
+}
+
+
+.album{
+
+    width:125px;
+    height:125px;
+
+    flex:none;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111,
+            #4c0808
+        );
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.5);
+}
+
+
+.album b{
+
+    font-size:25px;
+
+    letter-spacing:3px;
+
+    color:#eee;
+}
+
+
+.music-info{
+
+    flex:1;
+}
+
+
+.music-info small{
+
+    color:#8e1717;
+
+    letter-spacing:3px;
+
+    font-size:8px;
+}
+
+
+.music-info h3{
+
+    margin:10px 0;
+
+    color:#eee;
+
+    letter-spacing:2px;
+}
+
+
+.music-info p{
+
+    color:#666;
+
+    font-size:11px;
+}
+
+
+audio{
+
+    width:100%;
+
+    margin-top:12px;
+}
+
+
+/* =========================================================
+   SOCIAL
+   ========================================================= */
+
+.social{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:10px;
+}
+
+
+.social a{
+
+    text-decoration:none;
+
+    padding:25px;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    background:
+        rgba(255,255,255,.025);
+
+    transition:.25s;
+}
+
+
+.social a:hover{
+
+    background:
+        rgba(130,15,15,.12);
+
+    border-color:
+        rgba(150,30,30,.4);
+
+    transform:translateY(-3px);
+}
+
+
+.social-icon{
+
+    font-size:25px;
+
+    color:#8e1717;
+
+    margin-bottom:18px;
+}
+
+
+.social b{
+
+    display:block;
+
+    color:#eee;
+
+    letter-spacing:2px;
+
+    font-size:12px;
+}
+
+
+.social span{
+
+    display:block;
+
+    color:#555;
+
+    font-size:10px;
+
+    margin-top:7px;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer{
+
+    height:40px;
+
+    flex:none;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:
+        0 20px;
+
+    border-top:
+        1px solid rgba(255,255,255,.07);
+
+    color:#444;
+
+    font-size:8px;
+
+    letter-spacing:3px;
+}
+
+
+.footer strong{
+
+    color:#721414;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width:750px){
+
+    .shell{
+
+        width:95vw;
+
+        height:92vh;
+    }
+
+    .sidebar{
+
+        width:65px;
+
+        padding:20px 7px;
+    }
+
+    .logo-small h2{
+
+        font-size:0;
+    }
+
+    .logo-small h2::after{
+
+        content:"A";
+
+        font-size:20px;
+
+        color:#eee;
+    }
+
+    .logo-small span,
+    .logo-small .mark,
+    .nav-label{
+
+        display:none;
+    }
+
+    .nav button{
+
+        text-align:center;
+
+        padding:14px 4px;
+
+        font-size:0;
+    }
+
+    .nav-number{
+
+        margin:0;
+
+        font-size:10px;
+
+        color:#777;
+    }
+
+    .display{
+
+        padding:25px;
+    }
+
+    .gallery{
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .photo{
+
+        height:150px;
+    }
+
+    .grid,
+    .social{
+
+        grid-template-columns:1fr;
+    }
+
+    .music-main{
+
+        flex-direction:column;
+
+        align-items:stretch;
+    }
+
+    .album{
+
+        width:100%;
+
+        height:130px;
+    }
+
+    .hero h1{
+
+        font-size:
+            clamp(45px,15vw,80px);
+    }
+}
+
+
+@media(max-width:480px){
+
+    .topbar{
+
+        padding:0 12px;
+    }
+
+    .display{
+
+        padding:20px;
+    }
+
+    .gallery{
+
+        grid-template-columns:1fr;
+    }
+
+    .photo{
+
+        height:190px;
+    }
+
+    .section-header h2{
+
+        font-size:25px;
+    }
+
+    .hero-meta{
+
+        gap:18px;
+    }
+}
+
 </style>
 </head>
 
+
 <body>
+
+
+<!-- =========================================================
+     BACKGROUND MATRIX
+     ========================================================= -->
 
 <canvas id="matrix"></canvas>
 
-<div class="panel">
-<h1>ALE RIOT</h1>
-<p>MATRIX RED SYSTEM</p>
-<button onclick="activar()">ACTIVAR</button>
+<div class="noise"></div>
+<div class="scan"></div>
+<div class="vignette"></div>
+
+
+<!-- =========================================================
+     MAIN INTERFACE
+     ========================================================= -->
+
+<div class="shell">
+
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <div class="status">
+
+            <span class="status-dot"></span>
+
+            SYSTEM ONLINE
+
+        </div>
+
+        <div class="top-code">
+
+            ALE RIOT // 3991
+
+        </div>
+
+    </header>
+
+
+
+    <div class="main">
+
+
+        <!-- =================================================
+             SIDEBAR
+             ================================================= -->
+
+        <aside class="sidebar">
+
+
+            <div class="logo-small">
+
+                <div class="mark">
+                    DIGITAL IDENTITY
+                </div>
+
+                <h2>
+                    ALE
+                </h2>
+
+                <span>
+                    RIOT / 3991
+                </span>
+
+            </div>
+
+
+            <div class="nav-label">
+                NAVIGATION
+            </div>
+
+
+            <nav class="nav">
+
+
+                <button
+                    class="active"
+                    data-section="home">
+
+                    <span class="nav-number">
+                        01
+                    </span>
+
+                    PROFILE
+
+                </button>
+
+
+                <button
+                    data-section="archive">
+
+                    <span class="nav-number">
+                        02
+                    </span>
+
+                    ARCHIVE
+
+                </button>
+
+
+                <button
+                    data-section="music">
+
+                    <span class="nav-number">
+                        03
+                    </span>
+
+                    AUDIO
+
+                </button>
+
+
+                <button
+                    data-section="visual">
+
+                    <span class="nav-number">
+                        04
+                    </span>
+
+                    VISUALS
+
+                </button>
+
+
+                <button
+                    data-section="network">
+
+                    <span class="nav-number">
+                        05
+                    </span>
+
+                    NETWORK
+
+                </button>
+
+
+            </nav>
+
+
+        </aside>
+
+
+
+        <!-- =================================================
+             DISPLAY
+             ================================================= -->
+
+        <main class="display">
+
+
+            <!-- =================================================
+                 PROFILE
+                 ================================================= -->
+
+            <section
+                id="section-home"
+                class="section active">
+
+
+                <div class="hero">
+
+
+                    <div class="eyebrow">
+
+                        // DIGITAL IDENTITY / 3991
+
+                    </div>
+
+
+                    <h1>
+
+                        ALE
+
+                        <span>
+                            RIOT
+                        </span>
+
+                    </h1>
+
+
+                    <div class="hero-line"></div>
+
+
+                    <p class="hero-description">
+
+                        Un espacio personal construido
+                        alrededor de <strong>música</strong>,
+                        <strong>imágenes</strong>,
+                        <strong>videos</strong> y
+                        conexiones digitales.
+
+                    </p>
+
+
+                    <div class="hero-meta">
+
+
+                        <div class="meta-item">
+
+                            <small>
+                                STATUS
+                            </small>
+
+                            <b>
+                                ONLINE
+                            </b>
+
+                        </div>
+
+
+                        <div class="meta-item">
+
+                            <small>
+                                ID
+                            </small>
+
+                            <b>
+                                3991
+                            </b>
+
+                        </div>
+
+
+                        <div class="meta-item">
+
+                            <small>
+                                MODE
+                            </small>
+
+                            <b>
+                                RIOT
+                            </b>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 ARCHIVE
+                 ================================================= -->
+
+            <section
+                id="section-archive"
+                class="section">
+
+
+                <div class="section-header">
+
+                    <small>
+                        02 / ARCHIVE
+                    </small>
+
+                    <h2>
+                        ARCHIVO
+                    </h2>
+
+                </div>
+
+
+                <div class="grid">
+
+
+                    <div class="card">
+
+                        <div class="card-number">
+                            001
+                        </div>
+
+                        <h3>
+                            MOMENTS
+                        </h3>
+
+                        <p>
+                            Fotografías, recuerdos y
+                            momentos seleccionados.
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <div class="card-number">
+                            002
+                        </div>
+
+                        <h3>
+                            COLLECTION
+                        </h3>
+
+                        <p>
+                            Imágenes y contenido que
+                            forman parte de mi mundo.
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <div class="card-number">
+                            003
+                        </div>
+
+                        <h3>
+                            PERSONAL
+                        </h3>
+
+                        <p>
+                            Una mirada más personal
+                            detrás de la identidad.
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <div class="card-number">
+                            004
+                        </div>
+
+                        <h3>
+                            3991
+                        </h3>
+
+                        <p>
+                            Archivo privado //
+                            digital identity.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 MUSIC
+                 ================================================= -->
+
+            <section
+                id="section-music"
+                class="section">
+
+
+                <div class="section-header">
+
+                    <small>
+                        03 / AUDIO
+                    </small>
+
+                    <h2>
+                        AUDIO
+                    </h2>
+
+                </div>
+
+
+                <div class="music-main">
+
+
+                    <div class="album">
+
+                        <b>
+                            AR
+                        </b>
+
+                    </div>
+
+
+                    <div class="music-info">
+
+                        <small>
+                            NOW PLAYING
+                        </small>
+
+                        <h3>
+                            ALE RIOT // 3991
+                        </h3>
+
+                        <p>
+                            Conecta aquí tu música,
+                            playlist o reproductor.
+                        </p>
+
+
+                        <audio
+                            id="audio"
+                            controls>
+                        </audio>
+
+                    </div>
+
+
+                </div>
+
+
+                <br>
+
+
+                <div class="grid">
+
+
+                    <div class="card">
+
+                        <div class="card-number">
+                            AUDIO / 01
+                        </div>
+
+                        <h3>
+                            SPOTIFY
+                        </h3>
+
+                        <p>
+                            Tu música y playlists.
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <div class="card-number">
+                            AUDIO / 02
+                        </div>
+
+                        <h3>
+                            PLAYLIST
+                        </h3>
+
+                        <p>
+                            Tus canciones favoritas.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 VISUALS
+                 ================================================= -->
+
+            <section
+                id="section-visual"
+                class="section">
+
+
+                <div class="section-header">
+
+                    <small>
+                        04 / VISUALS
+                    </small>
+
+                    <h2>
+                        VISUALS
+                    </h2>
+
+                </div>
+
+
+                <div class="gallery">
+
+
+                    <div class="photo">
+
+                        <img
+                            src="https://picsum.photos/700/500?random=21">
+
+                        <span>
+                            FRAME 01
+                        </span>
+
+                    </div>
+
+
+                    <div class="photo">
+
+                        <img
+                            src="https://picsum.photos/700/500?random=22">
+
+                        <span>
+                            FRAME 02
+                        </span>
+
+                    </div>
+
+
+                    <div class="photo">
+
+                        <img
+                            src="https://picsum.photos/700/500?random=23">
+
+                        <span>
+                            FRAME 03
+                        </span>
+
+                    </div>
+
+
+                    <div class="photo">
+
+                        <img
+                            src="https://picsum.photos/700/500?random=24">
+
+                        <span>
+                            FRAME 04
+                        </span>
+
+                    </div>
+
+
+                    <div class="photo">
+
+                        <img
+                            src="https://picsum.photos/700/500?random=25">
+
+                        <span>
+                            FRAME 05
+                        </span>
+
+                    </div>
+
+
+                    <div class="photo">
+
+                        <img
+                            src="https://picsum.photos/700/500?random=26">
+
+                        <span>
+                            FRAME 06
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 NETWORK
+                 ================================================= -->
+
+            <section
+                id="section-network"
+                class="section">
+
+
+                <div class="section-header">
+
+                    <small>
+                        05 / NETWORK
+                    </small>
+
+                    <h2>
+                        NETWORK
+                    </h2>
+
+                </div>
+
+
+                <div class="social">
+
+
+                    <a
+                        href="https://www.instagram.com/"
+                        target="_blank">
+
+                        <div class="social-icon">
+                            ◎
+                        </div>
+
+                        <b>
+                            INSTAGRAM
+                        </b>
+
+                        <span>
+                            @TU_USUARIO
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="https://www.tiktok.com/"
+                        target="_blank">
+
+                        <div class="social-icon">
+                            ♪
+                        </div>
+
+                        <b>
+                            TIKTOK
+                        </b>
+
+                        <span>
+                            @TU_USUARIO
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="https://www.youtube.com/"
+                        target="_blank">
+
+                        <div class="social-icon">
+                            ▶
+                        </div>
+
+                        <b>
+                            YOUTUBE
+                        </b>
+
+                        <span>
+                            MI CANAL
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="https://www.facebook.com/"
+                        target="_blank">
+
+                        <div class="social-icon">
+                            F
+                        </div>
+
+                        <b>
+                            FACEBOOK
+                        </b>
+
+                        <span>
+                            MI PERFIL
+                        </span>
+
+                    </a>
+
+
+                </div>
+
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- =================================================
+         FOOTER
+         ================================================= -->
+
+    <footer class="footer">
+
+        <span>
+            ALE RIOT // DIGITAL IDENTITY
+        </span>
+
+        <strong>
+            ● 3991
+        </strong>
+
+    </footer>
+
+
 </div>
 
-<div class="vignette"></div>
-<div class="scanlines"></div>
+
 
 <script>
-  const canvas = document.getElementById("matrix");
-const ctx = canvas.getContext("2d");
+
+/* =========================================================
+   CYBER BACKGROUND
+   ========================================================= */
+
+const canvas =
+    document.getElementById("matrix");
+
+const ctx =
+    canvas.getContext("2d");
+
 
 let width;
 let height;
-let columns = [];
-let fontSize = 18;
 
-const chars = "ｱｲｳｴｵｶｷｸｹｺ0123456789<>/#@ALE RIOT 3991";
+let columns = [];
+
+const fontSize = 15;
+
+
+/*
+   Caracteres discretos.
+   Ya no es la típica lluvia Matrix.
+*/
+
+const chars =
+    "01 0101 <> / + - × ALE RIOT 3991";
+
 
 function resize(){
 
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
+    width =
+        canvas.width =
+        window.innerWidth;
+
+    height =
+        canvas.height =
+        window.innerHeight;
+
 
     columns = [];
 
-    let count = Math.floor(width / fontSize);
 
-    for(let i = 0; i < count; i++){
+    const count =
+        Math.floor(
+            width / fontSize
+        );
+
+
+    for(
+        let i = 0;
+        i < count;
+        i++
+    ){
 
         columns.push({
-            x:i * fontSize,
-            y:Math.random() * height,
-            speed:0.8 + Math.random() * 1.2
+
+            x:
+                i * fontSize,
+
+            y:
+                Math.random() *
+                height,
+
+            speed:
+                .25 +
+                Math.random() * .7,
+
+            opacity:
+                .1 +
+                Math.random() * .5
+
         });
 
     }
+
 }
 
-window.addEventListener("resize",resize);
+
+window.addEventListener(
+    "resize",
+    resize
+);
+
 
 resize();
 
 
-function drawMatrix(){
 
-    ctx.fillStyle = "rgba(0,0,0,0.18)";
-    ctx.fillRect(0,0,width,height);
+function draw(){
+
+    ctx.fillStyle =
+        "rgba(3,4,5,.20)";
+
+    ctx.fillRect(
+        0,
+        0,
+        width,
+        height
+    );
 
 
-    ctx.font = fontSize+"px Courier New";
+    ctx.font =
+        fontSize +
+        "px monospace";
 
 
     columns.forEach(col=>{
 
-        let text = chars.charAt(
-            Math.floor(Math.random()*chars.length)
-        );
+
+        const char =
+            chars[
+                Math.floor(
+                    Math.random() *
+                    chars.length
+                )
+            ];
 
 
-        ctx.fillStyle="#ff1616";
-        ctx.shadowColor="#ff4444";
-        ctx.shadowBlur=15;
+        ctx.fillStyle =
+            `rgba(
+                145,
+                25,
+                25,
+                ${col.opacity}
+            )`;
 
 
         ctx.fillText(
-            text,
+            char,
             col.x,
             col.y
         );
 
 
-        col.y += col.speed;
+        col.y +=
+            col.speed;
 
 
-        if(col.y > height){
+        if(
+            col.y >
+            height
+        ){
 
-            col.y = 0;
+            col.y =
+                -20;
 
         }
 
     });
 
 
-    requestAnimationFrame(drawMatrix);
+    requestAnimationFrame(draw);
 
 }
 
 
-drawMatrix();
+draw();
 
 
 
-window.activar = function(){
-    alert("FUNCION ACTIVAR OK");
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
 
-    const panel = document.querySelector(".panel");
-    const button = document.querySelector("button");
-    const title = document.querySelector("h1");
-    const text = document.querySelector("p");
+const buttons =
+    document.querySelectorAll(
+        ".nav button"
+    );
 
-    button.disabled = true;
-    button.innerHTML = "INICIANDO...";
 
-    title.innerHTML = "ACCESS GRANTED";
-    text.innerHTML = "INITIALIZING ALE RIOT 3991...";
+const sections =
+    document.querySelectorAll(
+        ".section"
+    );
 
-    setTimeout(()=>{
-        text.innerHTML = "LOADING MATRIX CORE...";
-    },1200);
 
-    setTimeout(()=>{
-        text.innerHTML = "CONNECTING NODE 3991...";
-    },2400);
+buttons.forEach(button=>{
 
-    setTimeout(()=>{
-        title.innerHTML = "SYSTEM ONLINE";
-        text.innerHTML = "WELCOME TO ALE RIOT MATRIX";
 
-        button.innerHTML = "ENTER";
-        button.disabled = false;
+    button.addEventListener(
+        "click",
+        ()=>{
 
-        button.onclick = abrirMatrixMenu;
 
-    },4000);
+            const target =
+                button.dataset.section;
 
-};
-    function abrirMatrixMenu(){
 
-        const panel = document.querySelector(".panel");
+            buttons.forEach(btn=>{
 
-        panel.classList.add("matrix-open");
-
-        panel.innerHTML = `
-
-            <div class="matrix-header">
-
-                <div>
-
-                    <span class="matrix-tag">
-                        ALE RIOT / 3991
-                    </span>
-
-                    <h1>
-                        WELCOME TO<br>
-                        <strong>MY WORLD</strong>
-                    </h1>
-
-                    <p>
-                        SELECT A MODULE
-                    </p>
-
-                </div>
-
-                <button
-                    class="matrix-close"
-                    id="matrixClose">
-                    ×
-                </button>
-
-            </div>
-
-
-            <nav class="matrix-nav">
-
-                <button
-                    class="matrix-nav-btn active"
-                    data-section="home">
-                    ⌂ INICIO
-                </button>
-
-                <button
-                    class="matrix-nav-btn"
-                    data-section="gallery">
-                    ▣ GALERÍA
-                </button>
-
-                <button
-                    class="matrix-nav-btn"
-                    data-section="music">
-                    ♫ MÚSICA
-                </button>
-
-                <button
-                    class="matrix-nav-btn"
-                    data-section="video">
-                    ▶ VIDEO
-                </button>
-
-                <button
-                    class="matrix-nav-btn"
-                    data-section="social">
-                    ◎ REDES
-                </button>
-
-            </nav>
-
-
-            <main class="matrix-content">
-
-
-                <!-- INICIO -->
-
-                <section
-                    class="matrix-section active"
-                    id="section-home">
-
-                    <div class="hero-card">
-
-                        <span>
-                            01 / SYSTEM
-                        </span>
-
-                        <h2>
-                            ALE RIOT <b>3991</b>
-                        </h2>
-
-                        <p>
-                            Bienvenido a mi mundo.
-                            Música, imágenes, videos y
-                            todos mis enlaces en un solo lugar.
-                        </p>
-
-                    </div>
-
-
-                    <div class="quick-grid">
-
-                        <button
-                            class="quick-card"
-                            data-go="gallery">
-
-                            <span>▣</span>
-
-                            <b>GALERÍA</b>
-
-                            <small>
-                                Fotos y momentos
-                            </small>
-
-                        </button>
-
-
-                        <button
-                            class="quick-card"
-                            data-go="music">
-
-                            <span>♫</span>
-
-                            <b>MÚSICA</b>
-
-                            <small>
-                                Spotify y playlist
-                            </small>
-
-                        </button>
-
-
-                        <button
-                            class="quick-card"
-                            data-go="video">
-
-                            <span>▶</span>
-
-                            <b>VIDEO</b>
-
-                            <small>
-                                Contenido audiovisual
-                            </small>
-
-                        </button>
-
-
-                        <button
-                            class="quick-card"
-                            data-go="social">
-
-                            <span>◎</span>
-
-                            <b>REDES</b>
-
-                            <small>
-                                Encuéntrame online
-                            </small>
-
-                        </button>
-
-                    </div>
-
-                </section>
-
-
-                <!-- GALERÍA -->
-
-                <section
-                    class="matrix-section"
-                    id="section-gallery">
-
-                    <div class="section-title">
-
-                        <span>
-                            02 / ARCHIVE
-                        </span>
-
-                        <h2>
-                            GALERÍA
-                        </h2>
-
-                    </div>
-
-
-                   <div class="gallery-grid">
-
-    <div class="gallery-item">
-        <img src="https://picsum.photos/600/400?random=1">
-        <span>FOTO 01</span>
-    </div>
-
-    <div class="gallery-item">
-        <img src="https://picsum.photos/600/400?random=2">
-        <span>FOTO 02</span>
-    </div>
-
-    <div class="gallery-item">
-        <img src="https://picsum.photos/600/400?random=3">
-        <span>FOTO 03</span>
-    </div>
-
-    <div class="gallery-item">
-        <img src="https://picsum.photos/600/400?random=4">
-        <span>FOTO 04</span>
-    </div>
-
-    <div class="gallery-item">
-        <img src="https://picsum.photos/600/400?random=5">
-        <span>FOTO 05</span>
-    </div>
-
-    <div class="gallery-item">
-        <img src="https://picsum.photos/600/400?random=6">
-        <span>FOTO 06</span>
-    </div>
-
-</div>
-
-
-                    <p class="hint">
-                        Después podemos colocar aquí tus propias fotografías.
-                    </p>
-
-                </section>
-
-
-                <!-- MÚSICA -->
-
-                <section
-                    class="matrix-section"
-                    id="section-music">
-
-                    <div class="section-title">
-
-                        <span>
-                            03 / AUDIO
-                        </span>
-
-                        <h2>
-                            MÚSICA
-                        </h2>
-
-                    </div>
-
-
-                    <div class="music-player">
-
-                        <div class="album-art">
-                            ♫
-                        </div>
-
-
-                        <div class="track-info">
-
-                            <span>
-                                NOW PLAYING
-                            </span>
-
-                            <h3>
-                                ALE RIOT — MATRIX RED
-                            </h3>
-
-                            <p>
-                                Tu reproductor de música
-                            </p>
-
-
-                            <audio
-                                id="aleAudio"
-                                controls>
-
-                            </audio>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="music-links">
-
-                        <a
-                            href="https://open.spotify.com/"
-                            target="_blank"
-                            class="music-link">
-
-                            <span>♫</span>
-
-                            <b>
-                                SPOTIFY
-                            </b>
-
-                            <small>
-                                ABRIR MI MÚSICA
-                            </small>
-
-                        </a>
-
-
-                        <a
-                            href="https://www.youtube.com/"
-                            target="_blank"
-                            class="music-link">
-
-                            <span>▶</span>
-
-                            <b>
-                                YOUTUBE
-                            </b>
-
-                            <small>
-                                ABRIR PLAYLIST
-                            </small>
-
-                        </a>
-
-                    </div>
-
-                </section>
-
-
-                <!-- VIDEO -->
-
-                <section
-                    class="matrix-section"
-                    id="section-video">
-
-                    <div class="section-title">
-
-                        <span>
-                            04 / VISUAL
-                        </span>
-
-                        <h2>
-                            VIDEO
-                        </h2>
-
-                    </div>
-
-
-                    <div class="video-box">
-
-                        <div class="video-placeholder">
-
-                            <span>
-                                ▶
-                            </span>
-
-                            <h3>
-                                YOUR VIDEO
-                            </h3>
-
-                            <p>
-                                Aquí colocaremos tu video de YouTube.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <p class="hint">
-                        Después conectaremos aquí tu video o playlist.
-                    </p>
-
-                </section>
-
-
-                <!-- REDES -->
-
-                <section
-                    class="matrix-section"
-                    id="section-social">
-
-                    <div class="section-title">
-
-                        <span>
-                            05 / NETWORK
-                        </span>
-
-                        <h2>
-                            REDES SOCIALES
-                        </h2>
-
-                    </div>
-
-
-                    <div class="social-grid">
-
-
-                        <a
-                            href="https://instagram.com/"
-                            target="_blank"
-                            class="social-card">
-
-                            <span>◎</span>
-
-                            <b>
-                                INSTAGRAM
-                            </b>
-
-                            <small>
-                                @TU_USUARIO
-                            </small>
-
-                        </a>
-
-
-                        <a
-                            href="https://www.tiktok.com/"
-                            target="_blank"
-                            class="social-card">
-
-                            <span>♪</span>
-
-                            <b>
-                                TIKTOK
-                            </b>
-
-                            <small>
-                                @TU_USUARIO
-                            </small>
-
-                        </a>
-
-
-                        <a
-                            href="https://www.youtube.com/"
-                            target="_blank"
-                            class="social-card">
-
-                            <span>▶</span>
-
-                            <b>
-                                YOUTUBE
-                            </b>
-
-                            <small>
-                                MI CANAL
-                            </small>
-
-                        </a>
-
-
-                        <a
-                            href="https://www.facebook.com/"
-                            target="_blank"
-                            class="social-card">
-
-                            <span>f</span>
-
-                            <b>
-                                FACEBOOK
-                            </b>
-
-                            <small>
-                                MI PERFIL
-                            </small>
-
-                        </a>
-
-                    </div>
-
-                </section>
-
-            </main>
-
-
-            <footer class="matrix-footer">
-
-                <span>
-                    SYSTEM ONLINE
-                </span>
-
-                <span>
-                    ● 3991
-                </span>
-
-            </footer>
-
-        `;
-
-
-        if(!document.getElementById("matrix-modern-style")){
-
-            const style = document.createElement("style");
-
-            style.id = "matrix-modern-style";
-
-            style.innerHTML = `
-
-                .panel.matrix-open{
-
-                    width:min(1000px,88vw);
-
-                    max-height:95vh;
-
-                    overflow:visible;
-
-                    padding:30px;
-
-                    box-sizing:border-box;
-
-                    text-align:left;
-
-                    background:
-                    linear-gradient(
-                        145deg,
-                        rgba(20,0,5,.94),
-                        rgba(0,0,0,.86)
-                    );
-
-                    border:
-                    1px solid rgba(255,60,60,.5);
-
-                    box-shadow:
-                    0 0 30px rgba(255,0,0,.35),
-                    inset 0 0 50px rgba(255,0,0,.08);
-
-                    backdrop-filter:blur(12px);
-
-                    animation:matrixIn .5s ease;
-
-                }
-
-
-                @keyframes matrixIn{
-
-                    from{
-
-                        opacity:0;
-
-                        transform:
-                        translate(-50%,-48%)
-                        scale(.96);
-
-                    }
-
-                    to{
-
-                        opacity:1;
-
-                        transform:
-                        translate(-50%,-50%)
-                        scale(1);
-
-                    }
-
-                }
-
-
-                .matrix-header{
-
-                    display:flex;
-
-                    justify-content:space-between;
-
-                    align-items:flex-start;
-
-                    gap:20px;
-
-                }
-
-
-                .matrix-tag,
-                .section-title span{
-
-                    color:#ff4d4d;
-
-                    font-size:11px;
-
-                    letter-spacing:3px;
-
-                    text-transform:uppercase;
-
-                }
-
-
-                .matrix-header h1{
-
-                    margin:8px 0;
-
-                    font-size:
-                    clamp(30px,5vw,54px);
-
-                    line-height:.95;
-
-                    letter-spacing:5px;
-
-                }
-
-
-                .matrix-header h1 strong{
-
-                    color:#fff;
-
-                }
-
-
-                .matrix-header p{
-
-                    margin:10px 0 0;
-
-                    font-size:12px;
-
-                    letter-spacing:3px;
-
-                }
-
-
-                .matrix-close{
-
-                    margin:0;
-
-                    padding:4px 14px;
-
-                    background:transparent;
-
-                    border:
-                    1px solid rgba(255,70,70,.5);
-
-                    box-shadow:none;
-
-                    color:#ff5555;
-
-                    font-size:28px;
-
-                }
-
-
-                .matrix-close:hover{
-
-                    background:#900;
-
-                }
-
-
-                .matrix-nav{
-
-                    display:flex;
-
-                    gap:8px;
-
-                    flex-wrap:wrap;
-
-                    margin:25px 0 20px;
-
-                    padding-bottom:15px;
-
-                    border-bottom:
-                    1px solid rgba(255,50,50,.2);
-
-                }
-
-
-                .matrix-nav-btn{
-
-                    margin:0;
-
-                    padding:10px 14px;
-
-                    background:
-                    rgba(255,0,0,.04);
-
-                    border:
-                    1px solid rgba(255,60,60,.25);
-
-                    box-shadow:none;
-
-                    color:#ffb0b0;
-
-                    font-size:11px;
-
-                    letter-spacing:1px;
-
-                }
-
-
-                .matrix-nav-btn:hover,
-                .matrix-nav-btn.active{
-
-                    background:#900;
-
-                    color:#fff;
-
-                    box-shadow:
-                    0 0 15px
-                    rgba(255,0,0,.35);
-
-                }
-
-
-                .matrix-content{
-
-                    overflow-y:auto;
-
-                    max-height:70vh;
-
-                    padding-right:5px;
-
-                }
-
-
-                .matrix-section{
-
-                    display:none;
-
-                    animation:sectionIn .35s ease;
-
-                }
-
-
-                .matrix-section.active{
-
-                    display:block;
-
-                }
-
-
-                @keyframes sectionIn{
-
-                    from{
-
-                        opacity:0;
-
-                        transform:translateY(8px);
-
-                    }
-
-                    to{
-
-                        opacity:1;
-
-                        transform:translateY(0);
-
-                    }
-
-                }
-
-
-                .hero-card{
-
-                    padding:28px;
-
-                    border:
-                    1px solid rgba(255,50,50,.25);
-
-                    background:
-                    linear-gradient(
-                        120deg,
-                        rgba(255,0,0,.12),
-                        rgba(0,0,0,.2)
-                    );
-
-                }
-
-
-                .hero-card span{
-
-                    color:#ff4d4d;
-
-                    font-size:11px;
-
-                    letter-spacing:3px;
-
-                }
-
-
-                .hero-card h2{
-
-                    font-size:34px;
-
-                    margin:12px 0;
-
-                    color:#fff;
-
-                }
-
-
-                .hero-card h2 b{
-
-                    color:#ff3333;
-
-                }
-
-
-                .hero-card p{
-
-                    max-width:650px;
-
-                    line-height:1.6;
-
-                }
-
-
-                .quick-grid,
-               .gallery-grid,
-.social-grid,
-.music-links{
-    display:grid;
-
-    grid-template-columns:
-    repeat(2,1fr);
-
-    gap:12px;
-
-    margin-top:14px;
-
-    height:auto;
-}
-
-
-                .quick-card{
-
-                    padding:20px;
-
-                    text-align:left;
-
-                    background:
-                    rgba(255,0,0,.04);
-
-                    border:
-                    1px solid rgba(255,60,60,.2);
-
-                    box-shadow:none;
-
-                }
-
-
-                .quick-card:hover{
-
-                    background:
-                    rgba(255,0,0,.13);
-
-                    transform:
-                    translateY(-2px);
-
-                }
-
-
-                .quick-card span{
-
-                    display:block;
-
-                    font-size:26px;
-
-                    color:#ff4040;
-
-                    margin-bottom:10px;
-
-                }
-
-
-                .quick-card b,
-                .social-card b,
-                .music-link b{
-
-                    display:block;
-
-                    color:#fff;
-
-                    letter-spacing:2px;
-
-                }
-
-
-                .quick-card small,
-                .social-card small,
-                .music-link small{
-
-                    color:#c98f8f;
-
-                    display:block;
-
-                    margin-top:6px;
-
-                }
-
-
-                .section-title{
-
-                    margin-bottom:18px;
-
-                }
-
-
-                .section-title h2{
-
-                    color:#fff;
-
-                    font-size:30px;
-
-                    letter-spacing:4px;
-
-                    margin:7px 0;
-
-                }
-
-
-              .gallery-item{
-
-    position:relative;
-
-    height:320px;
-
-    overflow:hidden;
-
-    border:
-    1px solid rgba(255,60,60,.35);
-
-    background:#050000;
-
-    box-shadow:
-    0 0 20px rgba(255,0,0,.15);
-
-}
-
-
-.gallery-item img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-    opacity:.65;
-
-    filter:
-    contrast(1.2)
-    saturate(.8)
-    sepia(.3);
-
-    transition:.4s;
-
-}
-
-
-.gallery-item:hover img{
-
-    transform:scale(1.12);
-
-    opacity:1;
-
-    filter:
-    contrast(1.3)
-    saturate(1);
-
-}
-
-
-.gallery-item span{
-
-    position:absolute;
-
-    bottom:12px;
-
-    left:12px;
-
-    color:white;
-
-    font-size:11px;
-
-    letter-spacing:3px;
-
-    text-shadow:
-    0 0 10px red;
-
-}
-
-
-
-                .music-player{
-
-                    display:flex;
-
-                    gap:20px;
-
-                    align-items:center;
-
-                    padding:20px;
-
-                    border:
-                    1px solid rgba(255,60,60,.25);
-
-                    background:
-                    rgba(255,0,0,.05);
-
-                }
-
-
-                .album-art{
-
-                    width:100px;
-
-                    height:100px;
-
-                    display:grid;
-
-                    place-items:center;
-
-                    flex:none;
-
-                    font-size:40px;
-
-                    color:#fff;
-
-                    background:
-                    linear-gradient(
-                        135deg,
-                        #ff2020,
-                        #250000
-                    );
-
-                    box-shadow:
-                    0 0 30px
-                    rgba(255,0,0,.4);
-
-                }
-
-
-                .track-info{
-
-                    flex:1;
-
-                }
-
-
-                .track-info span{
-
-                    font-size:10px;
-
-                    letter-spacing:3px;
-
-                    color:#ff5555;
-
-                }
-
-
-                .track-info h3{
-
-                    color:#fff;
-
-                    margin:8px 0;
-
-                }
-
-
-                .track-info p{
-
-                    margin:5px 0 12px;
-
-                }
-
-
-                audio{
-
-                    width:100%;
-
-                    height:35px;
-
-                }
-
-
-                .music-link,
-                .social-card{
-
-                    padding:22px;
-
-                    border:
-                    1px solid rgba(255,60,60,.25);
-
-                    background:
-                    rgba(255,0,0,.04);
-
-                    transition:.2s;
-
-                    text-decoration:none;
-
-                }
-
-
-                .music-link:hover,
-                .social-card:hover{
-
-                    transform:
-                    translateY(-3px);
-
-                    background:
-                    rgba(255,0,0,.12);
-
-                    box-shadow:
-                    0 0 20px
-                    rgba(255,0,0,.2);
-
-                }
-
-
-                .music-link span,
-                .social-card span{
-
-                    font-size:28px;
-
-                    color:#ff4040;
-
-                    display:block;
-
-                    margin-bottom:12px;
-
-                }
-
-
-                .video-box{
-
-                    width:100%;
-
-                    aspect-ratio:16/9;
-
-                    border:
-                    1px solid rgba(255,60,60,.3);
-
-                    background:#030000;
-
-                    display:grid;
-
-                    place-items:center;
-
-                }
-
-
-                .video-placeholder{
-
-                    text-align:center;
-
-                }
-
-
-                .video-placeholder span{
-
-                    font-size:50px;
-
-                    color:#ff3030;
-
-                }
-
-
-                .video-placeholder h3{
-
-                    color:#fff;
-
-                    letter-spacing:3px;
-
-                }
-
-
-                .video-placeholder p,
-                .hint{
-
-                    font-size:12px;
-
-                    color:#b87878;
-
-                    line-height:1.5;
-
-                }
-
-
-                .matrix-footer{
-
-                    display:flex;
-
-                    justify-content:space-between;
-
-                    margin-top:18px;
-
-                    padding-top:12px;
-
-                    border-top:
-                    1px solid rgba(255,50,50,.2);
-
-                    color:#ff5555;
-
-                    font-size:10px;
-
-                    letter-spacing:2px;
-
-                }
-
-
-                @media(max-width:650px){
-
-                    .panel.matrix-open{
-
-                        width:94vw;
-
-                        padding:20px;
-
-                    }
-
-
-                    .quick-grid,
-                    .gallery-grid,
-                    .social-grid,
-                    .music-links{
-
-                        grid-template-columns:1fr;
-
-                    }
-
-
-                    .music-player{
-
-                        flex-direction:column;
-
-                        align-items:stretch;
-
-                    }
-
-
-                    .album-art{
-
-                        width:100%;
-
-                    }
-
-
-                    .matrix-content{
-
-                        max-height:55vh;
-
-                    }
-
-                }
-
-            `;
-
-            document.head.appendChild(style);
-}
-
-
-        const navButtons =
-            panel.querySelectorAll(".matrix-nav-btn");
-
-        const sections =
-            panel.querySelectorAll(".matrix-section");
-
-
-        function mostrarSeccion(nombre){
-
-            navButtons.forEach(btn=>{
-
-                btn.classList.toggle(
-                    "active",
-                    btn.dataset.section === nombre
+                btn.classList.remove(
+                    "active"
                 );
 
             });
+
+
+            button.classList.add(
+                "active"
+            );
 
 
             sections.forEach(section=>{
 
-                section.classList.toggle(
-                    "active",
-                    section.id ===
-                    "section-" + nombre
+                section.classList.remove(
+                    "active"
                 );
 
             });
+
+
+            document
+                .getElementById(
+                    "section-" +
+                    target
+                )
+                .classList.add(
+                    "active"
+                );
+
 
         }
+    );
 
 
-        navButtons.forEach(btn=>{
-
-            btn.addEventListener("click",()=>{
-
-                mostrarSeccion(
-                    btn.dataset.section
-                );
-
-            });
-
-        });
-
-
-        panel.querySelectorAll(".quick-card")
-        .forEach(card=>{
-
-            card.addEventListener("click",()=>{
-
-                mostrarSeccion(
-                    card.dataset.go
-                );
-
-            });
-
-        });
-
-
-panel.querySelector("#matrixClose")
-.addEventListener("click",()=>{
-    location.reload();
 });
 
-}
+
 </script>
+
+
 </body>
 </html>
