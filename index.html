@@ -81,4 +81,279 @@ body:after{
 }
 .brand{display:flex;align-items:center;gap:16px}
 .brand-mark{width:28px;height:28px;border:1px solid rgba(255,255,255,.35);display:grid;place-items:center;font-family:"Cormorant Garamond",serif;font-size:18px}
-.brand-name{font-size
+.brand-name{font-size:10px;letter-spacing:4px}
+.brand-id{font-size:8px;color:#777;letter-spacing:2px;margin-top:4px}
+.top-nav{display:flex;gap:28px}
+.top-nav button{font-size:8px;letter-spacing:3px;color:#85858a;transition:.3s;position:relative}
+.top-nav button:after{content:"";position:absolute;left:0;right:100%;bottom:-10px;height:1px;background:var(--red);transition:.35s}
+.top-nav button:hover,.top-nav button.active{color:#eee}
+.top-nav button.active:after{right:0}
+
+.audio{
+  position:absolute;right:5vw;bottom:30px;z-index:25;display:flex;align-items:center;gap:11px
+}
+.audio button{width:34px;height:34px;border:1px solid var(--line);font-size:10px;transition:.3s}
+.audio button:hover{border-color:#aaa}
+.audio-bars{display:flex;align-items:flex-end;gap:2px;height:16px}
+.audio-bars i{display:block;width:2px;height:5px;background:#aaa;animation:eq .8s ease-in-out infinite alternate}
+.audio-bars i:nth-child(2){height:11px;animation-delay:.1s}.audio-bars i:nth-child(3){height:7px;animation-delay:.25s}.audio-bars i:nth-child(4){height:13px;animation-delay:.18s}
+.audio.paused i{animation-play-state:paused;height:3px}
+@keyframes eq{to{transform:scaleY(.35)}}
+.audio-label{font-size:7px;letter-spacing:3px;color:#777}
+
+/* SECTIONS */
+.viewport{position:absolute;inset:76px 0 0;overflow:hidden}
+.section{position:absolute;inset:0;padding:7vh 9vw;opacity:0;visibility:hidden;transform:translateY(30px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.75,.2,1),visibility .8s}
+.section.active{opacity:1;visibility:visible;transform:none}
+
+/* HERO */
+.hero{display:flex;align-items:center;height:100%;position:relative}
+.hero-copy{width:min(700px,75vw)}
+.kicker{font-size:9px;letter-spacing:6px;color:#8f9298;margin-bottom:22px}
+.hero h1{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:clamp(70px,12vw,170px);line-height:.68;letter-spacing:.12em;margin:0}
+.hero h1 .last{display:block;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.65);margin-left:8vw}
+.hero-sub{font-family:"Cormorant Garamond",serif;font-size:18px;letter-spacing:.28em;color:#b6b5b3;margin:45px 0 0}
+.hero-line{width:150px;height:1px;background:linear-gradient(90deg,#aaa,transparent);margin-top:25px}
+.hero-copy p{max-width:500px;color:#7d7e83;font-size:11px;line-height:1.9;margin-top:20px}
+.scroll-hint{position:absolute;left:9vw;bottom:5vh;font-size:7px;letter-spacing:4px;color:#666;display:flex;align-items:center;gap:12px}
+.scroll-hint:before{content:"";width:45px;height:1px;background:#555}
+
+/* side monogram */
+.hero-deco{position:absolute;right:7vw;top:50%;transform:translateY(-50%);width:28vw;height:28vw;max-width:390px;max-height:390px;border:1px solid rgba(255,255,255,.08);border-radius:50%;display:grid;place-items:center}
+.hero-deco:before,.hero-deco:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.06);border-radius:50%}
+.hero-deco:before{inset:8%}.hero-deco:after{inset:18%}
+.hero-deco b{font-family:"Cormorant Garamond",serif;font-size:9vw;font-weight:400;color:rgba(255,255,255,.07);letter-spacing:.08em}
+
+/* OTHER PAGES */
+.page-head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:28px}
+.page-head h2{font-family:"Cormorant Garamond",serif;font-size:52px;font-weight:400;letter-spacing:.14em;margin:0}
+.page-head span{font-size:8px;letter-spacing:4px;color:#777}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.card{min-height:170px;padding:24px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.025);position:relative;overflow:hidden;transition:.35s}
+.card:hover{transform:translateY(-5px);background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.2)}
+.card:after{content:"";position:absolute;width:100px;height:100px;border-radius:50%;right:-50px;bottom:-50px;background:rgba(130,20,25,.16);filter:blur(10px)}
+.card small{font-size:7px;letter-spacing:3px;color:#777}
+.card h3{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:28px;letter-spacing:.12em;margin:35px 0 10px}
+.card p{font-size:10px;line-height:1.7;color:#777;max-width:260px}
+
+/* GALLERY */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.photo{height:190px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,.08);background:#111}
+.photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(.85) contrast(1.08) brightness(.75);transition:.7s}
+.photo:hover img{transform:scale(1.08);filter:grayscale(.15) contrast(1.08) brightness(.9)}
+.photo span{position:absolute;left:12px;bottom:10px;font-size:7px;letter-spacing:3px;text-shadow:0 2px 8px #000}
+
+/* MUSIC */
+.music-box{display:grid;grid-template-columns:190px 1fr;gap:35px;align-items:center;max-width:850px}
+.cover{height:190px;border:1px solid rgba(255,255,255,.13);display:grid;place-items:center;background:radial-gradient(circle at 50% 35%,#5d1115,#15151a 52%,#050506);box-shadow:0 25px 60px rgba(0,0,0,.5)}
+.cover strong{font-family:"Cormorant Garamond",serif;font-size:38px;font-weight:400;letter-spacing:.15em}
+.track small{font-size:7px;letter-spacing:4px;color:#8e9299}
+.track h3{font-family:"Cormorant Garamond",serif;font-size:32px;font-weight:400;letter-spacing:.12em;margin:13px 0}
+.track p{font-size:10px;color:#777;line-height:1.7}
+.track audio{width:100%;margin-top:20px}
+
+/* NETWORK */
+.network{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:800px}
+.social{padding:26px;border:1px solid rgba(255,255,255,.09);transition:.3s;display:flex;justify-content:space-between;align-items:center}
+.social:hover{background:rgba(255,255,255,.04);transform:translateX(5px);border-color:rgba(255,255,255,.2)}
+.social b{font-family:"Cormorant Garamond",serif;font-size:25px;font-weight:400;letter-spacing:.1em}
+.social span{font-size:8px;color:#666;letter-spacing:2px}
+
+/* CURSOR */
+.cursor-dot,.cursor-ring{position:fixed;z-index:100;pointer-events:none;top:0;left:0;transform:translate(-50%,-50%);mix-blend-mode:screen}
+.cursor-dot{width:4px;height:4px;border-radius:50%;background:#fff}
+.cursor-ring{width:28px;height:28px;border:1px solid rgba(255,255,255,.55);border-radius:50%;transition:width .25s,height .25s,border-color .25s,background .25s}
+.cursor-ring.hover{width:55px;height:55px;border-color:rgba(198,58,64,.9);background:rgba(143,31,37,.08)}
+@media(pointer:coarse){.cursor-dot,.cursor-ring{display:none}}
+
+@media(max-width:800px){
+  .top{height:64px;padding:0 5vw}.viewport{inset:64px 0 0}
+  .top-nav{gap:12px}.top-nav button{font-size:7px;letter-spacing:2px}
+  .brand-id{display:none}
+  .section{padding:6vh 7vw}
+  .hero-deco{display:none}
+  .hero h1{font-size:18vw}.hero h1 .last{margin-left:5vw}
+  .cards,.gallery{grid-template-columns:1fr 1fr}
+  .music-box{grid-template-columns:1fr}.cover{height:150px}
+}
+@media(max-width:520px){
+  .top-nav button:nth-child(3),.top-nav button:nth-child(4){display:none}
+  .page-head h2{font-size:38px}
+  .cards,.gallery,.network{grid-template-columns:1fr}
+  .photo{height:210px}
+  .audio-label{display:none}
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<div class="cloud one"></div><div class="cloud two"></div><div class="cloud three"></div>
+
+<div id="entry">
+  <div class="entry-inner">
+    <div class="entry-kicker">PRIVATE DIGITAL SPACE / 3991</div>
+    <h1 class="entry-title">ALE <span>RIOT</span></h1>
+    <button class="enter" id="enter">ENTER EXPERIENCE</button>
+    <div class="entry-note">SOUND ON · FULLSCREEN RECOMMENDED</div>
+  </div>
+</div>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<div class="app" id="app">
+
+  <header class="top">
+    <div class="brand">
+      <div class="brand-mark">A</div>
+      <div>
+        <div class="brand-name">ALE RIOT</div>
+        <div class="brand-id">3991 / DIGITAL IDENTITY</div>
+      </div>
+    </div>
+
+    <nav class="top-nav">
+      <button class="active" data-go="home">01 HOME</button>
+      <button data-go="archive">02 ARCHIVE</button>
+      <button data-go="music">03 AUDIO</button>
+      <button data-go="network">04 NETWORK</button>
+    </nav>
+  </header>
+
+  <main class="viewport">
+
+    <section class="section active" id="home">
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="kicker">WELCOME TO MY SPACE</div>
+          <h1>ALE <span class="last">RIOT</span></h1>
+          <div class="hero-sub">PRIVATE / DIGITAL / PERSONAL</div>
+          <div class="hero-line"></div>
+          <p>
+            Música, imágenes, videos y enlaces reunidos en un espacio
+            diseñado para sentirse más como una experiencia que como un perfil.
+          </p>
+        </div>
+        <div class="hero-deco"><b>AR</b></div>
+        <div class="scroll-hint">EXPLORE THE SPACE</div>
+      </div>
+    </section>
+
+    <section class="section" id="archive">
+      <div class="page-head"><h2>ARCHIVE</h2><span>02 / SELECTED MOMENTS</span></div>
+      <div class="cards">
+        <article class="card"><small>001 / MOMENTS</small><h3>MEMORIES</h3><p>Fotografías y momentos personales seleccionados.</p></article>
+        <article class="card"><small>002 / COLLECTION</small><h3>VISUALS</h3><p>Una colección visual con la estética de ALE Riot.</p></article>
+        <article class="card"><small>003 / PRIVATE</small><h3>3991</h3><p>Un pequeño archivo de detalles, ideas y recuerdos.</p></article>
+      </div>
+      <div style="height:12px"></div>
+      <div class="gallery">
+        <div class="photo"><img src="https://picsum.photos/900/600?random=71"><span>FRAME 01</span></div>
+        <div class="photo"><img src="https://picsum.photos/900/600?random=72"><span>FRAME 02</span></div>
+        <div class="photo"><img src="https://picsum.photos/900/600?random=73"><span>FRAME 03</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="music">
+      <div class="page-head"><h2>AUDIO</h2><span>03 / SOUNDTRACK</span></div>
+      <div class="music-box">
+        <div class="cover"><strong>AR</strong></div>
+        <div class="track">
+          <small>NOW PLAYING / YOUR SOUNDTRACK</small>
+          <h3>ALE RIOT — 3991</h3>
+          <p>Coloca aquí tu archivo de audio. La música comienza después de entrar al sitio para respetar las restricciones de reproducción automática del navegador.</p>
+          <audio id="player" controls preload="metadata"></audio>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="network">
+      <div class="page-head"><h2>NETWORK</h2><span>04 / FIND ME ONLINE</span></div>
+      <div class="network">
+        <a class="social" href="https://www.instagram.com/" target="_blank"><b>Instagram</b><span>@TU_USUARIO</span></a>
+        <a class="social" href="https://www.tiktok.com/" target="_blank"><b>TikTok</b><span>@TU_USUARIO</span></a>
+        <a class="social" href="https://www.youtube.com/" target="_blank"><b>YouTube</b><span>MY CHANNEL</span></a>
+        <a class="social" href="https://www.facebook.com/" target="_blank"><b>Facebook</b><span>MY PROFILE</span></a>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="audio">
+    <button id="mute">II</button>
+    <div class="audio-bars"><i></i><i></i><i></i><i></i></div>
+    <div class="audio-label">AMBIENCE</div>
+  </div>
+</div>
+
+<script>
+/* PARTICLES */
+const c=document.getElementById('particles'),ctx=c.getContext('2d');
+let W,H,pts=[];
+function resize(){
+  W=c.width=innerWidth;H=c.height=innerHeight;pts=[];
+  for(let i=0;i<70;i++)pts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.2+.2,s:Math.random()*.18+.04,a:Math.random()*.35+.05});
+}
+resize();addEventListener('resize',resize);
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  pts.forEach(p=>{
+    p.y-=p.s;if(p.y<0)p.y=H;
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(220,220,225,${p.a})`;ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+
+/* NAVIGATION */
+const nav=document.querySelectorAll('[data-go]');
+const sections=document.querySelectorAll('.section');
+function go(id){
+  sections.forEach(s=>s.classList.toggle('active',s.id===id));
+  nav.forEach(n=>n.classList.toggle('active',n.dataset.go===id));
+}
+nav.forEach(n=>n.addEventListener('click',()=>go(n.dataset.go)));
+
+/* ENTRY + AUDIO */
+const entry=document.getElementById('entry'),app=document.getElementById('app');
+const audio=document.getElementById('player'),mute=document.getElementById('mute'),bars=document.querySelector('.audio');
+document.getElementById('enter').addEventListener('click',()=>{
+  entry.classList.add('hide');app.classList.add('ready');
+  // Put your music file here:
+  // audio.src='music/ale-riot.mp3';
+  // audio.play().catch(()=>{});
+});
+mute.addEventListener('click',()=>{
+  if(audio.paused){audio.play().catch(()=>{});mute.textContent='II';bars.classList.remove('paused')}
+  else{audio.pause();mute.textContent='▶';bars.classList.add('paused')}
+});
+
+/* CUSTOM CURSOR */
+const dot=document.querySelector('.cursor-dot'),ring=document.querySelector('.cursor-ring');
+let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+function cursor(){
+  dot.style.left=mx+'px';dot.style.top=my+'px';
+  rx+=(mx-rx)*.16;ry+=(my-ry)*.16;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(cursor);
+}
+cursor();
+document.querySelectorAll('button,a').forEach(el=>{
+  el.addEventListener('mouseenter',()=>ring.classList.add('hover'));
+  el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));
+});
+
+/* subtle parallax */
+addEventListener('mousemove',e=>{
+  const x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);
+  document.querySelectorAll('.cloud').forEach((el,i)=>{
+    el.style.marginLeft=(x*(i+1)*10)+'px';
+    el.style.marginTop=(y*(i+1)*6)+'px';
+  });
+});
+</script>
+</body>
+</html>
