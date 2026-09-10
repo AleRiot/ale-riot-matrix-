@@ -4,1505 +4,1818 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ALE RIOT — 3991</title>
+<title>ALE Riot // 3991</title>
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap');
-
+/* =====================================================
+   ALE RIOT // CYBER NOIR 2.0
+   ===================================================== */
 
 *{
-    margin:0;
-    padding:0;
     box-sizing:border-box;
 }
 
-
-html{
-    scroll-behavior:smooth;
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#030405;
+    color:#e9e9e9;
+    font-family:Arial,Helvetica,sans-serif;
 }
-
 
 body{
-    background:#050505;
-    color:#f5f5f5;
-    font-family:Inter,sans-serif;
-    overflow-x:hidden;
+    background:
+        radial-gradient(
+            circle at 70% 45%,
+            rgba(100,10,20,.16),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 30% 70%,
+            rgba(20,30,45,.20),
+            transparent 40%
+        ),
+        #030405;
 }
 
-
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-
-button{
-    font-family:inherit;
-}
-
-
-/* =====================
+/* =====================================================
    FONDO
-===================== */
+   ===================================================== */
 
-body::before{
-
-    content:"";
-
+canvas{
     position:fixed;
-
     inset:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+}
 
+.noise{
+    position:fixed;
+    inset:0;
+    z-index:2;
+    pointer-events:none;
+    opacity:.025;
+
+    background-image:
+        repeating-radial-gradient(
+            circle at 0 0,
+            white 0,
+            white 1px,
+            transparent 1px,
+            transparent 4px
+        );
+}
+
+.scanlines{
+    position:fixed;
+    inset:0;
+    z-index:3;
     pointer-events:none;
 
     background:
-    radial-gradient(circle at 20% 20%,rgba(150,0,30,.15),transparent 35%),
-    radial-gradient(circle at 80% 70%,rgba(0,50,120,.15),transparent 35%);
-
-    z-index:-1;
-
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 4px,
+            rgba(255,255,255,.018) 5px
+        );
 }
 
+.vignette{
+    position:fixed;
+    inset:0;
+    z-index:4;
+    pointer-events:none;
 
-/* =====================
-   INTRO
-===================== */
+    background:
+        radial-gradient(
+            circle,
+            transparent 25%,
+            rgba(0,0,0,.35) 70%,
+            #000 120%
+        );
+}
 
+/* =====================================================
+   INTERFAZ
+   ===================================================== */
 
-#intro{
+.interface{
 
-    height:100vh;
+    position:absolute;
+
+    width:min(1180px,94vw);
+    height:min(720px,88vh);
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    z-index:10;
 
     display:flex;
-
     flex-direction:column;
 
+    background:
+        linear-gradient(
+            135deg,
+            rgba(12,15,18,.97),
+            rgba(3,5,7,.94)
+        );
+
+    border:1px solid rgba(255,255,255,.09);
+
+    box-shadow:
+        0 35px 100px rgba(0,0,0,.9),
+        0 0 100px rgba(100,0,15,.12);
+
+    backdrop-filter:blur(18px);
+
+    overflow:hidden;
+
+    animation:appear .8s ease;
+}
+
+@keyframes appear{
+
+    from{
+        opacity:0;
+        transform:
+            translate(-50%,-47%)
+            scale(.97);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+}
+
+/* =====================================================
+   BARRA SUPERIOR
+   ===================================================== */
+
+.top{
+
+    height:48px;
+
+    flex:none;
+
+    display:flex;
     align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
-
-}
-
-
-.private{
-
-    font-size:10px;
-
-    letter-spacing:7px;
-
-    color:#777;
-
-    margin-bottom:40px;
-
-}
-
-
-.logo{
-
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:clamp(90px,15vw,200px);
-
-    font-weight:300;
-
-    letter-spacing:20px;
-
-    line-height:.75;
-
-}
-
-
-.subtitle{
-
-    margin-top:45px;
-
-    color:#888;
-
-    font-size:11px;
-
-    letter-spacing:8px;
-
-}
-
-
-
-#enter{
-
-    margin-top:60px;
-
-    background:none;
-
-    color:white;
-
-    border:1px solid rgba(255,255,255,.3);
-
-    padding:16px 40px;
-
-    letter-spacing:5px;
-
-    font-size:10px;
-
-    cursor:pointer;
-
-    transition:.4s;
-
-}
-
-
-#enter:hover{
-
-    background:#900020;
-
-    border-color:#900020;
-
-}
-
-
-
-/* =====================
-   MENU OCULTO
-===================== */
-
-
-#menu{
-
-    position:fixed;
-
-    top:0;
-
-    left:0;
-
-    width:100%;
-
-    height:80px;
-
-    display:none;
-
-    align-items:center;
-
     justify-content:space-between;
 
-    padding:0 6%;
+    padding:0 22px;
 
-    background:rgba(5,5,5,.85);
+    border-bottom:
+        1px solid rgba(255,255,255,.07);
 
-    backdrop-filter:blur(15px);
+    background:rgba(0,0,0,.3);
 
-    border-bottom:1px solid rgba(255,255,255,.1);
+    font-size:9px;
+    letter-spacing:3px;
 
-    z-index:20;
-
+    color:#555;
 }
 
+.live{
 
-.menu-logo{
-
-    font-family:"Cormorant Garamond",serif;
-
-    letter-spacing:6px;
-
-    font-size:25px;
-
+    display:flex;
+    align-items:center;
+    gap:9px;
 }
 
+.live i{
 
+    width:6px;
+    height:6px;
 
-.menu-links a{
+    border-radius:50%;
 
-    margin-left:25px;
+    background:#9e1c1c;
 
-    color:#888;
+    box-shadow:0 0 12px #c21d1d;
 
-    font-size:10px;
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        opacity:1;
+    }
+
+    50%{
+        opacity:.35;
+    }
+}
+
+.code{
+    color:#414141;
+}
+
+/* =====================================================
+   CUERPO
+   ===================================================== */
+
+.body{
+
+    flex:1;
+
+    min-height:0;
+
+    display:flex;
+}
+
+/* =====================================================
+   MENÚ LATERAL
+   ===================================================== */
+
+aside{
+
+    width:210px;
+
+    flex:none;
+
+    border-right:
+        1px solid rgba(255,255,255,.07);
+
+    background:
+        rgba(0,0,0,.2);
+
+    padding:28px 16px;
+}
+
+.identity{
+
+    padding:
+        0 10px 24px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.07);
+
+    margin-bottom:25px;
+}
+
+.identity small{
+
+    display:block;
+
+    color:#721515;
+
+    font-size:8px;
 
     letter-spacing:4px;
 
-    transition:.3s;
-
+    margin-bottom:12px;
 }
 
+.identity h2{
 
-.menu-links a:hover{
+    margin:0;
 
-    color:white;
+    font-size:22px;
 
+    letter-spacing:5px;
+
+    color:#eee;
 }
 
+.identity p{
 
-/* =====================
-   SECCIONES
-===================== */
+    margin:7px 0 0;
 
+    color:#444;
 
-section{
+    font-size:8px;
 
-    min-height:100vh;
-
-    padding:120px 8%;
-
+    letter-spacing:3px;
 }
 
+.menu-title{
 
+    padding:0 10px 10px;
 
-.small-title{
+    color:#3d3d3d;
+
+    font-size:8px;
+
+    letter-spacing:4px;
+}
+
+nav{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:4px;
+}
+
+nav button{
+
+    width:100%;
+
+    margin:0;
+
+    padding:13px 11px;
+
+    text-align:left;
+
+    background:transparent;
+
+    border:1px solid transparent;
+
+    color:#626262;
+
+    cursor:pointer;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    transition:.25s;
+}
+
+nav button:hover{
+
+    color:#ddd;
+
+    background:
+        rgba(255,255,255,.025);
+}
+
+nav button.active{
+
+    color:#fff;
+
+    border-left:
+        2px solid #a51b1b;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(120,15,15,.25),
+            transparent
+        );
+}
+
+.num{
+
+    color:#4d4d4d;
+
+    margin-right:12px;
+}
+
+/* =====================================================
+   CONTENIDO
+   ===================================================== */
+
+.content{
+
+    flex:1;
+
+    min-width:0;
+    min-height:0;
+
+    overflow-y:auto;
+
+    padding:45px 52px;
+}
+
+.page{
+
+    display:none;
+
+    animation:slide .4s ease;
+}
+
+.page.active{
+    display:block;
+}
+
+@keyframes slide{
+
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =====================================================
+   PERFIL
+   ===================================================== */
+
+.profile{
+
+    height:100%;
+
+    min-height:530px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    position:relative;
+}
+
+.corner{
+
+    position:absolute;
+
+    right:0;
+    top:0;
+
+    color:#333;
+
+    font-size:8px;
+
+    letter-spacing:3px;
+}
+
+.label{
+
+    color:#8f1919;
 
     font-size:9px;
 
-    color:#777;
+    letter-spacing:5px;
 
-    letter-spacing:6px;
-
-    margin-bottom:20px;
-
+    margin-bottom:18px;
 }
 
+.name{
 
+    margin:0;
 
-h2{
+    font-size:
+        clamp(65px,9vw,115px);
 
-    font-family:"Cormorant Garamond",serif;
+    line-height:.78;
 
-    font-size:clamp(50px,8vw,100px);
+    letter-spacing:-5px;
 
-    font-weight:300;
+    text-transform:uppercase;
 
-    letter-spacing:10px;
-
+    font-weight:900;
 }
 
+.name .ale{
 
+    color:#f1f1f1;
 
-.line{
-
-    width:90px;
-
-    height:1px;
-
-    background:#950020;
-
-    margin:35px 0;
-
-}
-    <!-- =====================
-     ABOUT
-===================== -->
-
-
-<section id="about">
-
-
-<div class="small-title">
-01 / ABOUT ALE RIOT
-</div>
-
-
-<h2>
-ALE<br>
-RIOT
-</h2>
-
-
-<div class="line"></div>
-
-
-<div class="about-content">
-
-
-<div class="quote">
-
-No todos conocen mi historia.<br>
-
-Algunos conocen mi nombre.<br>
-
-Otros, apenas una versión de mí.<br>
-
-Y quizá eso sea suficiente.
-
-</div>
-
-
-
-<p>
-
-Este espacio es una pequeña parte de mi mundo:
-música, imágenes, historias, pensamientos y momentos
-que decidí guardar aquí.
-
-</p>
-
-
-
-<p>
-
-Soy Alejandro, desde la Ciudad de México.
-
-Una persona reservada, pero con una forma única
-de ver el mundo.
-
-Me gusta leer, escuchar música, ver anime,
-películas y descubrir nuevas historias.
-
-</p>
-
-
-
-<p>
-
-Soy amante de los mundos digitales,
-las plataformas de entretenimiento y esas experiencias
-que logran transportarte a otro lugar.
-
-Netflix, HBO Max, Crunchyroll y Vix forman parte
-de esos espacios donde encuentro inspiración.
-
-</p>
-
-
-
-<p>
-
-Mis colores representan parte de mi esencia:
-
-<br><br>
-
-<span style="color:#b00025">
-ROJO
-</span>
-
-— intensidad y pasión.
-
-<br>
-
-<span style="color:#1b5fa7">
-AZUL
-</span>
-
-— calma y profundidad.
-
-<br>
-
-<span style="color:#aaa">
-NEGRO
-</span>
-
-— misterio y elegancia.
-
-</p>
-
-
-
-<p class="final-text">
-
-Lo que no está escrito,
-también forma parte de la historia.
-
-</p>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-<!-- =====================
-     ARCHIVE
-===================== -->
-
-
-<section id="archive">
-
-
-<div class="small-title">
-02 / ARCHIVE
-</div>
-
-
-<h2>
-VISUAL<br>
-MEMORY
-</h2>
-
-
-<div class="line"></div>
-
-
-
-<p class="description">
-
-Una colección de momentos,
-imágenes e ideas que forman parte
-de mi universo personal.
-
-Haz clic sobre cualquier imagen
-para verla completa.
-
-</p>
-
-
-
-
-<div class="gallery">
-
-
-<div class="photo">
-<img src="img1.jpg" alt="Memory 01">
-</div>
-
-
-<div class="photo">
-<img src="img2.jpg" alt="Memory 02">
-</div>
-
-
-<div class="photo">
-<img src="img3.jpg" alt="Memory 03">
-</div>
-
-
-<div class="photo">
-<img src="img4.jpg" alt="Memory 04">
-</div>
-
-
-<div class="photo">
-<img src="img5.jpg" alt="Memory 05">
-</div>
-
-
-<div class="photo">
-<img src="img6.jpg" alt="Memory 06">
-</div>
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-<!-- =====================
-     LIGHTBOX
-===================== -->
-
-
-<div id="viewer">
-
-
-<button id="close">
-×
-</button>
-
-
-<button id="prev">
-‹
-</button>
-
-
-<img id="viewer-img">
-
-
-<button id="next">
-›
-</button>
-
-
-<div id="counter">
-01 / 06
-</div>
-
-
-</div>
-
-
-
-<style>
-
-
-.about-content{
-
-max-width:800px;
-
-color:#bdbdbd;
-
-font-size:15px;
-
-line-height:2;
-
+    display:block;
 }
 
+.name .riot{
 
+    display:block;
 
-.about-content p{
+    color:transparent;
 
-margin:35px 0;
+    -webkit-text-stroke:
+        1px rgba(230,230,230,.7);
 
+    text-shadow:
+        0 0 35px rgba(255,255,255,.03);
 }
 
+.redline{
 
+    width:115px;
+    height:2px;
 
-.quote{
+    background:#a21b1b;
 
-font-family:"Cormorant Garamond",serif;
+    margin:
+        30px 0 22px;
 
-font-size:38px;
-
-line-height:1.3;
-
-color:white;
-
-border-left:2px solid #900020;
-
-padding-left:25px;
-
-margin-bottom:45px;
-
+    box-shadow:
+        0 0 18px rgba(170,20,20,.6);
 }
-
-
-
-.final-text{
-
-font-family:"Cormorant Garamond",serif;
-
-font-size:35px;
-
-color:white;
-
-}
-
-
 
 .description{
 
-max-width:600px;
+    max-width:650px;
 
-color:#777;
+    color:#707070;
 
-line-height:2;
+    font-size:13px;
 
-margin:30px 0 60px;
-
+    line-height:1.8;
 }
 
+.description b{
 
+    color:#cfcfcf;
+}
+
+.stats{
+
+    display:flex;
+
+    gap:35px;
+
+    margin-top:34px;
+}
+
+.stat{
+
+    padding-left:13px;
+
+    border-left:
+        1px solid #761515;
+}
+
+.stat span{
+
+    display:block;
+
+    color:#3e3e3e;
+
+    font-size:8px;
+
+    letter-spacing:3px;
+
+    margin-bottom:7px;
+}
+
+.stat strong{
+
+    color:#aaa;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+}
+
+/* =====================================================
+   TÍTULOS
+   ===================================================== */
+
+.heading{
+
+    margin-bottom:28px;
+}
+
+.heading small{
+
+    color:#8f1919;
+
+    font-size:8px;
+
+    letter-spacing:5px;
+}
+
+.heading h2{
+
+    margin:8px 0 0;
+
+    color:#eee;
+
+    font-size:34px;
+
+    letter-spacing:5px;
+}
+
+/* =====================================================
+   ARCHIVO
+   ===================================================== */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:12px;
+}
+
+.card{
+
+    min-height:155px;
+
+    padding:25px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.008)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.075);
+
+    transition:.3s;
+}
+
+.card:hover{
+
+    transform:translateY(-4px);
+
+    border-color:
+        rgba(155,25,25,.45);
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.35);
+}
+
+.card small{
+
+    color:#741717;
+
+    font-size:8px;
+
+    letter-spacing:3px;
+}
+
+.card h3{
+
+    margin:
+        18px 0 8px;
+
+    color:#eee;
+
+    font-size:15px;
+
+    letter-spacing:2px;
+}
+
+.card p{
+
+    color:#5e5e5e;
+
+    font-size:11px;
+
+    line-height:1.6;
+
+    margin:0;
+}
+
+/* =====================================================
+   FOTOS
+   ===================================================== */
 
 .gallery{
 
-display:grid;
+    display:grid;
 
-grid-template-columns:repeat(3,1fr);
+    grid-template-columns:
+        repeat(3,1fr);
 
-gap:20px;
-
+    gap:10px;
 }
-
-
 
 .photo{
 
-overflow:hidden;
+    height:190px;
 
-border:1px solid rgba(255,255,255,.12);
+    position:relative;
 
-cursor:pointer;
+    overflow:hidden;
 
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    background:#070809;
 }
-
-
 
 .photo img{
 
-width:100%;
+    width:100%;
+    height:100%;
 
-height:350px;
+    object-fit:cover;
 
-object-fit:cover;
+    filter:
+        grayscale(.9)
+        contrast(1.2);
 
-transition:.6s;
+    opacity:.62;
 
+    transition:.5s;
 }
-
-
 
 .photo:hover img{
 
-transform:scale(1.08);
+    transform:scale(1.08);
 
-filter:brightness(.65);
+    filter:
+        grayscale(.1)
+        contrast(1.15);
 
+    opacity:1;
 }
 
+.photo label{
 
+    position:absolute;
 
-#viewer{
+    left:12px;
+    bottom:10px;
 
-position:fixed;
+    color:white;
 
-inset:0;
+    font-size:8px;
 
-display:none;
+    letter-spacing:3px;
 
-align-items:center;
-
-justify-content:center;
-
-background:rgba(0,0,0,.95);
-
-z-index:100;
-
+    text-shadow:
+        0 2px 10px black;
 }
 
+/* =====================================================
+   AUDIO
+   ===================================================== */
 
+.player{
 
-#viewer-img{
+    display:flex;
 
-max-width:90%;
+    gap:25px;
 
-max-height:85%;
+    align-items:center;
 
+    padding:28px;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(100,10,15,.14),
+            rgba(0,0,0,.25)
+        );
 }
 
+.cover{
 
+    width:125px;
+    height:125px;
 
-#close,
-#prev,
-#next{
+    flex:none;
 
-position:absolute;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-background:none;
+    background:
+        linear-gradient(
+            135deg,
+            #17191b,
+            #450909
+        );
 
-border:1px solid rgba(255,255,255,.3);
+    border:
+        1px solid rgba(255,255,255,.12);
 
-color:white;
-
-font-size:35px;
-
-width:50px;
-
-height:50px;
-
-cursor:pointer;
-
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.5);
 }
 
+.cover span{
 
+    font-size:27px;
 
-#close{
+    font-weight:bold;
 
-top:30px;
+    letter-spacing:4px;
 
-right:40px;
-
+    color:#eee;
 }
 
-
-
-#prev{
-
-left:40px;
-
+.track{
+    flex:1;
 }
 
+.track small{
 
+    color:#8f1919;
 
-#next{
+    font-size:8px;
 
-right:40px;
-
+    letter-spacing:4px;
 }
 
+.track h3{
 
+    margin:10px 0;
 
-#counter{
+    color:#eee;
 
-position:absolute;
-
-bottom:30px;
-
-font-size:10px;
-
-letter-spacing:5px;
-
-color:#aaa;
-
+    letter-spacing:2px;
 }
 
+.track p{
 
+    color:#5b5b5b;
 
-@media(max-width:800px){
-
-.gallery{
-
-grid-template-columns:1fr;
-
+    font-size:11px;
 }
 
-.photo img{
-
-height:300px;
-
+audio{
+    width:100%;
+    margin-top:10px;
 }
 
+/* =====================================================
+   REDES
+   ===================================================== */
+
+.network{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:12px;
 }
 
-</style>
-<!-- =====================
-     AUDIO
-===================== -->
+.network a{
 
+    text-decoration:none;
 
-<section id="audio">
+    padding:28px;
 
+    border:
+        1px solid rgba(255,255,255,.08);
 
-<div class="small-title">
-03 / AUDIO
-</div>
+    background:
+        rgba(255,255,255,.025);
 
-
-<h2>
-SOUND<br>
-TRACK
-</h2>
-
-
-<div class="line"></div>
-
-
-
-<div class="audio-card">
-
-
-<div class="audio-title">
-
-ALE RIOT SOUNDTRACK
-
-</div>
-
-
-<p>
-
-La música también forma parte de mi historia.
-
-Un sonido puede guardar recuerdos,
-momentos y emociones que una imagen
-no siempre puede explicar.
-
-</p>
-
-
-<button id="music-button">
-
-▶ PLAY SOUNDTRACK
-
-</button>
-
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-<!-- =====================
-     NETWORK
-===================== -->
-
-
-<section id="network">
-
-
-<div class="small-title">
-04 / NETWORK
-</div>
-
-
-<h2>
-FIND<br>
-ME
-</h2>
-
-
-<div class="line"></div>
-
-
-
-<div class="socials">
-
-
-<a href="https://www.instagram.com/ale.riot.27/" target="_blank">
-
-INSTAGRAM
-
-<br>
-
-<span>
-@ale.riot.27
-</span>
-
-</a>
-
-
-
-<a href="https://www.youtube.com/@AleRiot" target="_blank">
-
-YOUTUBE
-
-<br>
-
-<span>
-AleRiot
-</span>
-
-</a>
-
-
-
-<a href="https://www.threads.net/@ale.riot.27" target="_blank">
-
-THREADS
-
-<br>
-
-<span>
-@ale.riot.27
-</span>
-
-</a>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-<!-- =====================
-     FOOTER
-===================== -->
-
-
-<footer>
-
-
-<div>
-ALE RIOT
-</div>
-
-
-<div>
-3991 / PRIVATE DIGITAL SPACE
-</div>
-
-
-<div>
-MEXICO CITY
-</div>
-
-
-</footer>
-
-
-
-
-
-<!-- =====================
-     AUDIO FILE
-===================== -->
-
-
-<audio id="background-music" loop>
-
-<source src="cancion.mp3" type="audio/mpeg">
-
-</audio>
-
-
-
-
-
-<style>
-
-
-.audio-card{
-
-max-width:600px;
-
-border:1px solid rgba(255,255,255,.15);
-
-padding:50px;
-
-background:rgba(255,255,255,.02);
-
+    transition:.25s;
 }
 
+.network a:hover{
 
+    transform:translateY(-4px);
 
-.audio-title{
+    background:
+        rgba(120,10,15,.12);
 
-font-family:"Cormorant Garamond",serif;
-
-font-size:50px;
-
-letter-spacing:5px;
-
-margin-bottom:30px;
-
+    border-color:
+        rgba(155,25,25,.4);
 }
 
+.network .icon{
 
+    color:#941919;
 
-.audio-card p{
+    font-size:25px;
 
-color:#999;
-
-line-height:2;
-
+    margin-bottom:18px;
 }
 
+.network b{
 
+    display:block;
 
-#music-button{
+    color:#eee;
 
-margin-top:40px;
+    letter-spacing:2px;
 
-background:none;
-
-border:1px solid rgba(255,255,255,.4);
-
-color:white;
-
-padding:16px 35px;
-
-letter-spacing:4px;
-
-cursor:pointer;
-
-transition:.3s;
-
+    font-size:12px;
 }
 
+.network span{
 
+    display:block;
 
-#music-button:hover{
+    color:#505050;
 
-background:#900020;
+    margin-top:7px;
 
-border-color:#900020;
-
+    font-size:9px;
 }
 
-
-
-.socials{
-
-max-width:700px;
-
-}
-
-
-
-.socials a{
-
-display:block;
-
-padding:30px 0;
-
-border-bottom:1px solid rgba(255,255,255,.15);
-
-font-family:"Cormorant Garamond",serif;
-
-font-size:35px;
-
-letter-spacing:5px;
-
-transition:.3s;
-
-}
-
-
-
-.socials a:hover{
-
-padding-left:25px;
-
-color:#b00025;
-
-}
-
-
-
-.socials span{
-
-font-family:Inter,sans-serif;
-
-font-size:11px;
-
-color:#777;
-
-letter-spacing:3px;
-
-}
-
-
+/* =====================================================
+   FOOTER
+   ===================================================== */
 
 footer{
 
-padding:40px 8%;
+    height:38px;
 
-border-top:1px solid rgba(255,255,255,.1);
+    flex:none;
 
-display:flex;
+    display:flex;
 
-justify-content:space-between;
+    justify-content:space-between;
 
-color:#666;
+    align-items:center;
 
-font-size:9px;
+    padding:0 22px;
 
-letter-spacing:4px;
+    border-top:
+        1px solid rgba(255,255,255,.07);
 
+    color:#3d3d3d;
+
+    font-size:8px;
+
+    letter-spacing:3px;
 }
 
-
-
-@media(max-width:800px){
-
-.audio-card{
-
-padding:30px;
-
+footer strong{
+    color:#741616;
 }
 
+/* =====================================================
+   MÓVIL
+   ===================================================== */
 
-.audio-title{
+@media(max-width:760px){
 
-font-size:38px;
+    .interface{
 
+        width:96vw;
+        height:93vh;
+    }
+
+    aside{
+
+        width:64px;
+
+        padding:20px 7px;
+    }
+
+    .identity small,
+    .identity p,
+    .menu-title{
+
+        display:none;
+    }
+
+    .identity{
+
+        padding:
+            0 0 20px;
+
+        text-align:center;
+    }
+
+    .identity h2{
+
+        font-size:0;
+    }
+
+    .identity h2::after{
+
+        content:"A";
+
+        font-size:20px;
+    }
+
+    nav button{
+
+        text-align:center;
+
+        font-size:0;
+
+        padding:15px 4px;
+    }
+
+    .num{
+
+        margin:0;
+
+        font-size:10px;
+    }
+
+    .content{
+
+        padding:28px 25px;
+    }
+
+    .name{
+
+        font-size:
+            clamp(55px,16vw,90px);
+    }
+
+    .cards,
+    .network{
+
+        grid-template-columns:1fr;
+    }
+
+    .gallery{
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .player{
+
+        flex-direction:column;
+
+        align-items:stretch;
+    }
+
+    .cover{
+
+        width:100%;
+        height:120px;
+    }
 }
 
+@media(max-width:480px){
 
-.socials a{
+    .top{
 
-font-size:28px;
+        padding:0 12px;
+    }
 
-}
+    .content{
 
+        padding:22px 18px;
+    }
 
-footer{
+    .gallery{
 
-flex-direction:column;
+        grid-template-columns:1fr;
+    }
 
-gap:20px;
+    .stats{
 
-}
+        gap:18px;
+        flex-wrap:wrap;
+    }
 
+    .heading h2{
 
+        font-size:25px;
+    }
 }
 
 </style>
+</head>
+
+
+<body>
+
+
+<!-- FONDO -->
+
+<canvas id="matrix"></canvas>
+
+<div class="noise"></div>
+<div class="scanlines"></div>
+<div class="vignette"></div>
+
+
+<!-- INTERFAZ -->
+
+<div class="interface">
+
+
+    <header class="top">
+
+        <div class="live">
+
+            <i></i>
+
+            SYSTEM ONLINE
+
+        </div>
+
+        <div class="code">
+
+            ALE RIOT // 3991
+
+        </div>
+
+    </header>
+
+
+    <div class="body">
+
+
+        <!-- MENÚ -->
+
+        <aside>
+
+            <div class="identity">
+
+                <small>
+                    DIGITAL IDENTITY
+                </small>
+
+                <h2>
+                    ALE
+                </h2>
+
+                <p>
+                    RIOT // 3991
+                </p>
+
+            </div>
+
+
+            <div class="menu-title">
+                NAVIGATION
+            </div>
+
+
+            <nav>
+
+                <button
+                    class="active"
+                    data-page="home">
+
+                    <span class="num">01</span>
+                    PROFILE
+
+                </button>
+
+
+                <button
+                    data-page="archive">
+
+                    <span class="num">02</span>
+                    ARCHIVE
+
+                </button>
+
+
+                <button
+                    data-page="audio">
+
+                    <span class="num">03</span>
+                    AUDIO
+
+                </button>
+
+
+                <button
+                    data-page="visual">
+
+                    <span class="num">04</span>
+                    VISUALS
+
+                </button>
+
+
+                <button
+                    data-page="network">
+
+                    <span class="num">05</span>
+                    NETWORK
+
+                </button>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- CONTENIDO -->
+
+        <main class="content">
+
+
+            <!-- PERFIL -->
+
+            <section
+                id="page-home"
+                class="page active">
+
+                <div class="profile">
+
+                    <div class="corner">
+                        NODE // 3991
+                    </div>
+
+                    <div class="label">
+                        // DIGITAL IDENTITY
+                    </div>
+
+
+                    <h1 class="name">
+
+                        <span class="ale">
+                            ALE
+                        </span>
+
+                        <span class="riot">
+                            Riot
+                        </span>
+
+                    </h1>
+
+
+                    <div class="redline"></div>
+
+
+                    <p class="description">
+
+                        Un espacio personal de
+                        <b>música</b>,
+                        <b>fotografía</b>,
+                        <b>video</b> y
+                        conexiones digitales.
+
+                    </p>
+
+
+                    <div class="stats">
+
+                        <div class="stat">
+
+                            <span>STATUS</span>
+
+                            <strong>
+                                ONLINE
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat">
+
+                            <span>ID</span>
+
+                            <strong>
+                                3991
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat">
+
+                            <span>MODE</span>
+
+                            <strong>
+                                RIOT
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ARCHIVO -->
+
+            <section
+                id="page-archive"
+                class="page">
+
+                <div class="heading">
+
+                    <small>
+                        02 / ARCHIVE
+                    </small>
+
+                    <h2>
+                        ARCHIVE
+                    </h2>
+
+                </div>
+
+
+                <div class="cards">
+
+                    <div class="card">
+
+                        <small>
+                            FILE 001
+                        </small>
+
+                        <h3>
+                            MOMENTS
+                        </h3>
+
+                        <p>
+                            Fotografías y recuerdos
+                            seleccionados.
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <small>
+                            FILE 002
+                        </small>
+
+                        <h3>
+                            COLLECTION
+                        </h3>
+
+                        <p>
+                            Imágenes que forman
+                            parte de mi identidad.
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <small>
+                            FILE 003
+                        </small>
+
+                        <h3>
+                            PERSONAL
+                        </h3>
+
+                        <p>
+                            Una parte más privada
+                            del archivo.
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <small>
+                            FILE 3991
+                        </small>
+
+                        <h3>
+                            RIOT
+                        </h3>
+
+                        <p>
+                            Digital identity //
+                            private node.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- AUDIO -->
+
+            <section
+                id="page-audio"
+                class="page">
+
+                <div class="heading">
+
+                    <small>
+                        03 / AUDIO
+                    </small>
+
+                    <h2>
+                        AUDIO
+                    </h2>
+
+                </div>
+
+
+                <div class="player">
+
+                    <div class="cover">
+
+                        <span>
+                            AR
+                        </span>
+
+                    </div>
+
+
+                    <div class="track">
+
+                        <small>
+                            NOW PLAYING
+                        </small>
+
+                        <h3>
+                            ALE RIOT // 3991
+                        </h3>
+
+                        <p>
+                            Conecta aquí tu música
+                            o playlist.
+                        </p>
+
+                        <audio controls></audio>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- VISUALS -->
+
+            <section
+                id="page-visual"
+                class="page">
+
+                <div class="heading">
+
+                    <small>
+                        04 / VISUALS
+                    </small>
+
+                    <h2>
+                        VISUALS
+                    </h2>
+
+                </div>
+
+
+                <div class="gallery">
+
+                    <div class="photo">
+                        <img src="https://picsum.photos/700/500?random=31">
+                        <label>FRAME 01</label>
+                    </div>
+
+                    <div class="photo">
+                        <img src="https://picsum.photos/700/500?random=32">
+                        <label>FRAME 02</label>
+                    </div>
+
+                    <div class="photo">
+                        <img src="https://picsum.photos/700/500?random=33">
+                        <label>FRAME 03</label>
+                    </div>
+
+                    <div class="photo">
+                        <img src="https://picsum.photos/700/500?random=34">
+                        <label>FRAME 04</label>
+                    </div>
+
+                    <div class="photo">
+                        <img src="https://picsum.photos/700/500?random=35">
+                        <label>FRAME 05</label>
+                    </div>
+
+                    <div class="photo">
+                        <img src="https://picsum.photos/700/500?random=36">
+                        <label>FRAME 06</label>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- NETWORK -->
+
+            <section
+                id="page-network"
+                class="page">
+
+                <div class="heading">
+
+                    <small>
+                        05 / NETWORK
+                    </small>
+
+                    <h2>
+                        NETWORK
+                    </h2>
+
+                </div>
+
+
+                <div class="network">
+
+
+                    <a
+                        href="https://www.instagram.com/"
+                        target="_blank">
+
+                        <div class="icon">
+                            ◎
+                        </div>
+
+                        <b>
+                            INSTAGRAM
+                        </b>
+
+                        <span>
+                            @TU_USUARIO
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="https://www.tiktok.com/"
+                        target="_blank">
+
+                        <div class="icon">
+                            ♪
+                        </div>
+
+                        <b>
+                            TIKTOK
+                        </b>
+
+                        <span>
+                            @TU_USUARIO
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="https://www.youtube.com/"
+                        target="_blank">
+
+                        <div class="icon">
+                            ▶
+                        </div>
+
+                        <b>
+                            YOUTUBE
+                        </b>
+
+                        <span>
+                            MI CANAL
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="https://www.facebook.com/"
+                        target="_blank">
+
+                        <div class="icon">
+                            F
+                        </div>
+
+                        <b>
+                            FACEBOOK
+                        </b>
+
+                        <span>
+                            MI PERFIL
+                        </span>
+
+                    </a>
+
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+    <footer>
+
+        <span>
+            ALE RIOT // DIGITAL IDENTITY
+        </span>
+
+        <strong>
+            ● 3991
+        </strong>
+
+    </footer>
+
+
+</div>
+
+
+
 <script>
 
+/* =====================================================
+   FONDO DIGITAL
+   ===================================================== */
 
-/* =====================
-   ENTRADA / MENU / MUSICA
-===================== */
+const canvas =
+    document.getElementById("matrix");
 
+const ctx =
+    canvas.getContext("2d");
 
-const enterButton = document.getElementById("enter");
+let width;
+let height;
 
-const menu = document.getElementById("menu");
+let particles = [];
 
-const music = document.getElementById("background-music");
-
-const musicButton = document.getElementById("music-button");
-
-
-
-enterButton.addEventListener("click",()=>{
-
-
-    // Mostrar menú
-
-    menu.style.display="flex";
+const chars =
+    "01<>/+-×ALE3991";
 
 
-    // Intentar iniciar música
+function resize(){
 
-    music.volume = 0.35;
+    width =
+        canvas.width =
+        window.innerWidth;
 
-    music.play().catch(()=>{
+    height =
+        canvas.height =
+        window.innerHeight;
 
-        console.log("El navegador requiere interacción adicional");
+    particles=[];
 
-    });
+    const amount =
+        Math.floor(
+            width / 18
+        );
 
+    for(
+        let i=0;
+        i<amount;
+        i++
+    ){
 
+        particles.push({
 
-    // Ir al contenido
+            x:
+                Math.random()*width,
 
-    document.getElementById("about")
-    .scrollIntoView({
-        behavior:"smooth"
-    });
+            y:
+                Math.random()*height,
 
+            speed:
+                .2+
+                Math.random()*.7,
 
-});
+            opacity:
+                .05+
+                Math.random()*.35,
 
+            size:
+                9+
+                Math.random()*5
 
-
-
-
-/* =====================
-   CONTROL DE MUSICA
-===================== */
-
-
-let playing=false;
-
-
-musicButton.addEventListener("click",()=>{
-
-
-    if(!playing){
-
-
-        music.volume=0.35;
-
-        music.play();
-
-
-        musicButton.innerHTML="Ⅱ PAUSE SOUNDTRACK";
-
-
-        playing=true;
-
-
-    }else{
-
-
-        music.pause();
-
-
-        musicButton.innerHTML="▶ PLAY SOUNDTRACK";
-
-
-        playing=false;
-
+        });
 
     }
 
+}
+
+
+window.addEventListener(
+    "resize",
+    resize
+);
+
+resize();
+
+
+function draw(){
+
+    ctx.fillStyle=
+        "rgba(3,4,5,.18)";
+
+    ctx.fillRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    particles.forEach(p=>{
+
+        ctx.font=
+            p.size+
+            "px monospace";
+
+        ctx.fillStyle=
+            `rgba(
+                130,
+                20,
+                25,
+                ${p.opacity}
+            )`;
+
+        const char=
+            chars[
+                Math.floor(
+                    Math.random()*
+                    chars.length
+                )
+            ];
+
+        ctx.fillText(
+            char,
+            p.x,
+            p.y
+        );
+
+
+        p.y += p.speed;
+
+
+        if(
+            p.y >
+            height+20
+        ){
+
+            p.y=-20;
+            p.x=Math.random()*width;
+
+        }
+
+    });
+
+
+    requestAnimationFrame(draw);
+
+}
+
+draw();
+
+
+/* =====================================================
+   NAVEGACIÓN
+   ===================================================== */
+
+const navButtons=
+    document.querySelectorAll(
+        "nav button"
+    );
+
+const pages=
+    document.querySelectorAll(
+        ".page"
+    );
+
+
+navButtons.forEach(button=>{
+
+    button.addEventListener(
+        "click",
+        ()=>{
+
+            const target=
+                button.dataset.page;
+
+
+            navButtons.forEach(btn=>{
+
+                btn.classList.remove(
+                    "active"
+                );
+
+            });
+
+
+            button.classList.add(
+                "active"
+            );
+
+
+            pages.forEach(page=>{
+
+                page.classList.remove(
+                    "active"
+                );
+
+            });
+
+
+            document
+                .getElementById(
+                    "page-"+target
+                )
+                .classList.add(
+                    "active"
+                );
+
+        }
+    );
 
 });
-
-
-
-
-
-
-/* =====================
-   VISOR DE IMAGENES
-===================== */
-
-
-const images =
-[
-"img1.jpg",
-"img2.jpg",
-"img3.jpg",
-"img4.jpg",
-"img5.jpg",
-"img6.jpg"
-];
-
-
-
-let currentImage=0;
-
-
-
-const viewer =
-document.getElementById("viewer");
-
-
-const viewerImage =
-document.getElementById("viewer-img");
-
-
-
-const photos =
-document.querySelectorAll(".photo img");
-
-
-
-photos.forEach((photo,index)=>{
-
-
-photo.addEventListener("click",()=>{
-
-
-    currentImage=index;
-
-
-    openViewer();
-
-
-});
-
-
-});
-
-
-
-
-
-function openViewer(){
-
-
-    viewerImage.src =
-    images[currentImage];
-
-
-    viewer.style.display="flex";
-
-
-    updateCounter();
-
-
-}
-
-
-
-
-
-
-function closeViewer(){
-
-
-    viewer.style.display="none";
-
-
-}
-
-
-
-
-
-document.getElementById("close")
-.onclick=closeViewer;
-
-
-
-
-
-
-/* SIGUIENTE FOTO */
-
-
-document.getElementById("next")
-.onclick=()=>{
-
-
-currentImage++;
-
-
-if(currentImage>=images.length){
-
-currentImage=0;
-
-}
-
-
-openViewer();
-
-
-};
-
-
-
-
-
-
-
-/* FOTO ANTERIOR */
-
-
-document.getElementById("prev")
-.onclick=()=>{
-
-
-currentImage--;
-
-
-if(currentImage<0){
-
-currentImage=images.length-1;
-
-}
-
-
-openViewer();
-
-
-};
-
-
-
-
-
-
-
-function updateCounter(){
-
-
-document.getElementById("counter")
-.innerHTML =
-
-String(currentImage+1)
-.padStart(2,"0")
-
-+
-
-" / "
-
-+
-
-String(images.length)
-.padStart(2,"0");
-
-
-}
-
-
-
-
-
-
-
-/* CERRAR CON ESC */
-
-
-document.addEventListener("keydown",(e)=>{
-
-
-if(e.key==="Escape"){
-
-closeViewer();
-
-}
-
-
-
-if(e.key==="ArrowRight"){
-
-currentImage++;
-
-if(currentImage>=images.length){
-
-currentImage=0;
-
-}
-
-openViewer();
-
-}
-
-
-
-if(e.key==="ArrowLeft"){
-
-currentImage--;
-
-if(currentImage<0){
-
-currentImage=images.length-1;
-
-}
-
-openViewer();
-
-}
-
-
-
-});
-
-
-
-
-
-/* =====================
-   SWIPE MOVIL
-===================== */
-
-
-let startX=0;
-
-
-viewer.addEventListener("touchstart",(e)=>{
-
-
-startX=e.touches[0].clientX;
-
-
-});
-
-
-
-viewer.addEventListener("touchend",(e)=>{
-
-
-let endX=e.changedTouches[0].clientX;
-
-
-
-if(startX-endX>50){
-
-
-document.getElementById("next").click();
-
-
-}
-
-
-
-if(endX-startX>50){
-
-
-document.getElementById("prev").click();
-
-
-}
-
-
-
-});
-
-
 
 </script>
 
-
 </body>
-
 </html>
