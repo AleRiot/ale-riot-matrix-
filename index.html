@@ -1,569 +1,1671 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ALE Riot — 3991</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-:root{
-  --bg:#06070a;
-  --ink:#f2f0eb;
-  --muted:#98989b;
-  --line:rgba(255,255,255,.14);
-  --red:#8f1f25;
-  --red2:#c63a40;
-}
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;background:var(--bg);color:var(--ink);font-family:Inter,Arial,sans-serif;overflow:hidden}
-button,a{font:inherit;color:inherit}
-button{border:0;background:none;cursor:pointer}
-a{text-decoration:none}
+    <title>ALE RIOT — 3991</title>
 
-/* ATMOSPHERE */
-body:before{
-  content:"";position:fixed;inset:-15%;z-index:0;
-  background:
-    radial-gradient(ellipse at 50% 40%,rgba(180,190,205,.18),transparent 30%),
-    radial-gradient(ellipse at 15% 70%,rgba(80,85,100,.15),transparent 32%),
-    radial-gradient(ellipse at 85% 25%,rgba(110,115,135,.10),transparent 30%),
-    linear-gradient(180deg,#0c1017 0%,#080a0f 45%,#020305 100%);
-  filter:blur(2px);
-  animation:sky 14s ease-in-out infinite alternate;
-}
-body:after{
-  content:"";position:fixed;inset:0;z-index:3;pointer-events:none;
-  background:
-    radial-gradient(circle at center,transparent 35%,rgba(0,0,0,.62) 100%),
-    linear-gradient(90deg,rgba(0,0,0,.2),transparent 20%,transparent 80%,rgba(0,0,0,.2));
-}
-@keyframes sky{from{transform:scale(1)}to{transform:scale(1.08) translate3d(0,-1%,0)}}
-#particles{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.55}
+    <meta name="description" content="ALE RIOT — Private Digital Space">
 
-.cloud{position:fixed;z-index:1;pointer-events:none;border-radius:50%;filter:blur(35px);opacity:.22}
-.cloud.one{width:55vw;height:18vw;left:-8vw;top:16vh;background:#a8adb9;transform:rotate(-8deg);animation:cloud1 16s ease-in-out infinite alternate}
-.cloud.two{width:45vw;height:14vw;right:-6vw;top:9vh;background:#737987;transform:rotate(9deg);animation:cloud2 19s ease-in-out infinite alternate}
-.cloud.three{width:65vw;height:20vw;left:18vw;bottom:5vh;background:#626876;opacity:.12;animation:cloud3 22s ease-in-out infinite alternate}
-@keyframes cloud1{to{transform:translate(8vw,2vh) rotate(-4deg)}}
-@keyframes cloud2{to{transform:translate(-7vw,4vh) rotate(13deg)}}
-@keyframes cloud3{to{transform:translate(0,-4vh) scale(1.1)}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-/* ENTRY */
-#entry{
-  position:fixed;inset:0;z-index:50;display:grid;place-items:center;
-  background:rgba(3,4,6,.82);backdrop-filter:blur(12px);
-  transition:opacity 1.1s ease,visibility 1.1s;
-}
-#entry.hide{opacity:0;visibility:hidden;pointer-events:none}
-.entry-inner{text-align:center;animation:entryIn 1.4s ease both}
-@keyframes entryIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-.entry-kicker{font-size:9px;letter-spacing:6px;color:#777;margin-bottom:24px}
-.entry-title{font-family:"Cormorant Garamond",serif;font-size:clamp(52px,9vw,110px);font-weight:500;letter-spacing:.18em;margin:0 0 22px}
-.entry-title span{display:block;font-size:.46em;letter-spacing:.65em;color:#aaa;margin-top:7px}
-.enter{
-  position:relative;padding:13px 28px;border:1px solid var(--line);font-size:9px;letter-spacing:4px;color:#cfcfd1;
-  transition:.35s;overflow:hidden
-}
-.enter:before{content:"";position:absolute;inset:0;background:var(--red);transform:translateX(-105%);transition:.4s;z-index:-1}
-.enter:hover{border-color:rgba(255,255,255,.35);letter-spacing:5px}
-.enter:hover:before{transform:translateX(0)}
-.entry-note{margin-top:14px;font-size:8px;letter-spacing:2px;color:#5e5f63}
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-/* APP */
-.app{position:relative;z-index:10;width:100%;height:100%;opacity:0;transform:scale(1.025);transition:opacity 1.2s ease,transform 1.4s ease}
-.app.ready{opacity:1;transform:scale(1)}
+    <style>
 
-.top{
-  position:absolute;left:0;right:0;top:0;height:76px;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;
-  border-bottom:1px solid rgba(255,255,255,.09);z-index:20
-}
-.brand{display:flex;align-items:center;gap:16px}
-.brand-mark{width:28px;height:28px;border:1px solid rgba(255,255,255,.35);display:grid;place-items:center;font-family:"Cormorant Garamond",serif;font-size:18px}
-.brand-name{font-size:10px;letter-spacing:4px}
-.brand-id{font-size:8px;color:#777;letter-spacing:2px;margin-top:4px}
-.top-nav{display:flex;gap:28px}
-.top-nav button{font-size:8px;letter-spacing:3px;color:#85858a;transition:.3s;position:relative}
-.top-nav button:after{content:"";position:absolute;left:0;right:100%;bottom:-10px;height:1px;background:var(--red);transition:.35s}
-.top-nav button:hover,.top-nav button.active{color:#eee}
-.top-nav button.active:after{right:0}
+        /* =========================================================
+           RESET
+        ========================================================= */
 
-.audio{
-  position:absolute;right:5vw;bottom:30px;z-index:25;display:flex;align-items:center;gap:11px
-}
-.audio button{width:34px;height:34px;border:1px solid var(--line);font-size:10px;transition:.3s}
-.audio button:hover{border-color:#aaa}
-.audio-bars{display:flex;align-items:flex-end;gap:2px;height:16px}
-.audio-bars i{display:block;width:2px;height:5px;background:#aaa;animation:eq .8s ease-in-out infinite alternate}
-.audio-bars i:nth-child(2){height:11px;animation-delay:.1s}
-.audio-bars i:nth-child(3){height:7px;animation-delay:.25s}
-.audio-bars i:nth-child(4){height:13px;animation-delay:.18s}
-.audio.paused i{animation-play-state:paused;height:3px}
-@keyframes eq{to{transform:scaleY(.35)}}
-.audio-label{font-size:7px;letter-spacing:3px;color:#777}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* SECTIONS */
-.viewport{
-  position:absolute;inset:76px 0 0;
-  overflow:hidden;
-  touch-action:pan-y;
-}
-.section{
-  position:absolute;inset:0;
-  padding:7vh 9vw;
-  opacity:0;visibility:hidden;
-  transform:translateY(50px) scale(.985);
-  transition:opacity .75s ease,transform .85s cubic-bezier(.2,.75,.2,1),visibility .75s;
-  overflow-y:auto;
-  scrollbar-width:none;
-}
-.section::-webkit-scrollbar{display:none}
-.section.active{opacity:1;visibility:visible;transform:none}
+        html {
+            scroll-behavior: smooth;
+        }
 
-/* HERO */
-.hero{display:flex;align-items:center;height:100%;min-height:500px;position:relative}
-.hero-copy{width:min(700px,75vw)}
-.kicker{font-size:9px;letter-spacing:6px;color:#8f9298;margin-bottom:22px}
-.hero h1{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:clamp(70px,12vw,170px);line-height:.68;letter-spacing:.12em;margin:0}
-.hero h1 .last{display:block;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.65);margin-left:8vw}
-.hero-sub{font-family:"Cormorant Garamond",serif;font-size:18px;letter-spacing:.28em;color:#b6b5b3;margin:45px 0 0}
-.hero-line{width:150px;height:1px;background:linear-gradient(90deg,#aaa,transparent);margin-top:25px}
-.hero-copy p{max-width:500px;color:#7d7e83;font-size:11px;line-height:1.9;margin-top:20px}
-.scroll-hint{position:absolute;left:0;bottom:5vh;font-size:7px;letter-spacing:4px;color:#666;display:flex;align-items:center;gap:12px}
-.scroll-hint:before{content:"";width:45px;height:1px;background:#555}
-.hero-deco{position:absolute;right:7vw;top:50%;transform:translateY(-50%);width:28vw;height:28vw;max-width:390px;max-height:390px;border:1px solid rgba(255,255,255,.08);border-radius:50%;display:grid;place-items:center}
-.hero-deco:before,.hero-deco:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.06);border-radius:50%}
-.hero-deco:before{inset:8%}.hero-deco:after{inset:18%}
-.hero-deco b{font-family:"Cormorant Garamond",serif;font-size:9vw;font-weight:400;color:rgba(255,255,255,.07);letter-spacing:.08em}
+        body {
+            background: #050505;
+            color: #eeeeee;
+            font-family: "Inter", sans-serif;
+            overflow-x: hidden;
+        }
 
-/* OTHER PAGES */
-.page-head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:28px}
-.page-head h2{font-family:"Cormorant Garamond",serif;font-size:52px;font-weight:400;letter-spacing:.14em;margin:0}
-.page-head span{font-size:8px;letter-spacing:4px;color:#777}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.card{min-height:170px;padding:24px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.025);position:relative;overflow:hidden;transition:.35s}
-.card:hover{transform:translateY(-5px);background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.2)}
-.card:after{content:"";position:absolute;width:100px;height:100px;border-radius:50%;right:-50px;bottom:-50px;background:rgba(130,20,25,.16);filter:blur(10px)}
-.card small{font-size:7px;letter-spacing:3px;color:#777}
-.card h3{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:28px;letter-spacing:.12em;margin:35px 0 10px}
-.card p{font-size:10px;line-height:1.7;color:#777;max-width:260px}
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-/* GALLERY */
-.gallery-wrap{position:relative}
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:10px;
-}
-.photo{
-  height:190px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,.08);
-  background:#111;cursor:zoom-in;
-}
-.photo img{
-  width:100%;height:100%;object-fit:cover;
-  filter:grayscale(.85) contrast(1.08) brightness(.75);
-  transition:.7s
-}
-.photo:hover img{transform:scale(1.08);filter:grayscale(.15) contrast(1.08) brightness(.9)}
-.photo span{position:absolute;left:12px;bottom:10px;font-size:7px;letter-spacing:3px;text-shadow:0 2px 8px #000}
-.gallery-note{text-align:center;font-size:7px;letter-spacing:3px;color:#666;margin-top:14px}
+        button {
+            font-family: inherit;
+        }
 
-/* LIGHTBOX */
-#lightbox{
-  position:fixed;inset:0;z-index:200;
-  display:flex;align-items:center;justify-content:center;
-  padding:50px;
-  background:rgba(0,0,0,.88);
-  backdrop-filter:blur(10px);
-  opacity:0;visibility:hidden;pointer-events:none;
-  transition:.35s;
-}
-#lightbox.open{opacity:1;visibility:visible;pointer-events:auto}
-.lightbox-img{
-  max-width:min(1100px,88vw);max-height:82vh;
-  object-fit:contain;
-  border:1px solid rgba(255,255,255,.18);
-  box-shadow:0 30px 100px rgba(0,0,0,.8);
-}
-.lb-close,.lb-prev,.lb-next{
-  position:absolute;width:42px;height:42px;border:1px solid rgba(255,255,255,.25);
-  color:#ddd;background:rgba(0,0,0,.25);transition:.3s;z-index:2
-}
-.lb-close{right:30px;top:25px;font-size:20px}
-.lb-prev{left:30px;top:50%;transform:translateY(-50%);font-size:20px}
-.lb-next{right:30px;top:50%;transform:translateY(-50%);font-size:20px}
-.lb-close:hover,.lb-prev:hover,.lb-next:hover{border-color:#fff;background:rgba(143,31,37,.35)}
-.lb-caption{position:absolute;bottom:25px;left:0;right:0;text-align:center;font-size:8px;letter-spacing:4px;color:#aaa}
+        ::selection {
+            background: #a40020;
+            color: white;
+        }
 
-/* MUSIC */
-.music-box{display:grid;grid-template-columns:190px 1fr;gap:35px;align-items:center;max-width:850px}
-.cover{height:190px;border:1px solid rgba(255,255,255,.13);display:grid;place-items:center;background:radial-gradient(circle at 50% 35%,#5d1115,#15151a 52%,#050506);box-shadow:0 25px 60px rgba(0,0,0,.5)}
-.cover strong{font-family:"Cormorant Garamond",serif;font-size:38px;font-weight:400;letter-spacing:.15em}
-.track small{font-size:7px;letter-spacing:4px;color:#8e9299}
-.track h3{font-family:"Cormorant Garamond",serif;font-size:32px;font-weight:400;letter-spacing:.12em;margin:13px 0}
-.track p{font-size:10px;color:#777;line-height:1.7}
-.track audio{width:100%;margin-top:20px}
 
-/* NETWORK */
-.network{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:800px}
-.social{padding:26px;border:1px solid rgba(255,255,255,.09);transition:.3s;display:flex;justify-content:space-between;align-items:center}
-.social:hover{background:rgba(255,255,255,.04);transform:translateX(5px);border-color:rgba(255,255,255,.2)}
-.social b{font-family:"Cormorant Garamond",serif;font-size:25px;font-weight:400;letter-spacing:.1em}
-.social span{font-size:8px;color:#666;letter-spacing:2px}
+        /* =========================================================
+           BACKGROUND
+        ========================================================= */
 
-/* SECTION INDICATOR */
-.section-indicator{
-  position:absolute;right:5vw;top:50%;transform:translateY(-50%);
-  z-index:24;display:flex;flex-direction:column;gap:9px
-}
-.section-indicator button{
-  width:5px;height:5px;border-radius:50%;padding:0;background:#555;transition:.3s
-}
-.section-indicator button.active{height:22px;border-radius:4px;background:#ddd}
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.035;
 
-/* CURSOR */
-.cursor-dot,.cursor-ring{position:fixed;z-index:300;pointer-events:none;top:0;left:0;transform:translate(-50%,-50%);mix-blend-mode:screen}
-.cursor-dot{width:4px;height:4px;border-radius:50%;background:#fff}
-.cursor-ring{width:28px;height:28px;border:1px solid rgba(255,255,255,.55);border-radius:50%;transition:width .25s,height .25s,border-color .25s,background .25s}
-.cursor-ring.hover{width:55px;height:55px;border-color:rgba(198,58,64,.9);background:rgba(143,31,37,.08)}
-@media(pointer:coarse){.cursor-dot,.cursor-ring{display:none}}
+            background-image:
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+        }
 
-@media(max-width:800px){
-  .top{height:64px;padding:0 5vw}.viewport{inset:64px 0 0}
-  .top-nav{gap:12px}.top-nav button{font-size:7px;letter-spacing:2px}
-  .brand-id{display:none}
-  .section{padding:6vh 7vw}
-  .hero-deco{display:none}
-  .hero h1{font-size:18vw}.hero h1 .last{margin-left:5vw}
-  .cards,.gallery{grid-template-columns:1fr 1fr}
-  .music-box{grid-template-columns:1fr}.cover{height:150px}
-  .section-indicator{display:none}
-}
-@media(max-width:520px){
-  .top-nav button:nth-child(3),.top-nav button:nth-child(4){display:none}
-  .page-head h2{font-size:38px}
-  .cards,.gallery,.network{grid-template-columns:1fr}
-  .photo{height:210px}
-  .audio-label{display:none}
-  #lightbox{padding:20px}
-  .lightbox-img{max-width:94vw;max-height:75vh}
-  .lb-prev{left:10px}.lb-next{right:10px}.lb-close{right:12px}
-}
-</style>
+        .ambient {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            filter: blur(100px);
+            opacity: 0.12;
+        }
+
+        .ambient.red {
+            background: #8d001c;
+            top: -250px;
+            left: -250px;
+        }
+
+        .ambient.blue {
+            background: #082c69;
+            right: -250px;
+            bottom: 10%;
+        }
+
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 75px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 0 5vw;
+
+            z-index: 500;
+
+            background: rgba(5,5,5,0.72);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .nav-logo {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 25px;
+            letter-spacing: 7px;
+            font-weight: 500;
+        }
+
+        .nav-number {
+            color: #8b8b8b;
+            font-size: 9px;
+            letter-spacing: 4px;
+            margin-left: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            position: relative;
+            color: #999;
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -7px;
+            width: 0;
+            height: 1px;
+            background: #b00026;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+
+        /* =========================================================
+           GENERAL
+        ========================================================= */
+
+        section {
+            position: relative;
+            min-height: 100vh;
+            padding: 130px 8vw;
+        }
+
+        .section-number {
+            color: #666;
+            font-size: 9px;
+            letter-spacing: 5px;
+            margin-bottom: 14px;
+        }
+
+        .section-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(50px, 8vw, 105px);
+            line-height: 0.9;
+            font-weight: 400;
+            letter-spacing: 3px;
+        }
+
+        .section-line {
+            width: 70px;
+            height: 1px;
+            background: #a00022;
+            margin: 30px 0 50px;
+        }
+
+
+        /* =========================================================
+           HOME
+        ========================================================= */
+
+        #home {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            overflow: hidden;
+        }
+
+        .home-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1.8s ease forwards;
+        }
+
+        .private {
+            color: #858585;
+            font-size: 9px;
+            letter-spacing: 8px;
+            margin-bottom: 38px;
+            text-transform: uppercase;
+        }
+
+        .home-name {
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(80px, 17vw, 220px);
+            line-height: 0.7;
+            font-weight: 400;
+            letter-spacing: 14px;
+        }
+
+        .home-subtitle {
+            margin-top: 45px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+
+            color: #999;
+            font-size: 10px;
+            letter-spacing: 7px;
+            text-transform: uppercase;
+        }
+
+        .home-subtitle span:nth-child(2) {
+            color: #9d001f;
+        }
+
+        .enter {
+            margin-top: 65px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 16px 35px;
+
+            border: 1px solid rgba(255,255,255,0.25);
+
+            font-size: 9px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+
+            transition: 0.4s ease;
+        }
+
+        .enter:hover {
+            background: #9c001f;
+            border-color: #9c001f;
+            box-shadow: 0 0 35px rgba(156,0,31,0.35);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            color: #555;
+            font-size: 8px;
+            letter-spacing: 4px;
+        }
+
+        .scroll-indicator::after {
+            content: "";
+            display: block;
+
+            width: 1px;
+            height: 35px;
+
+            margin: 12px auto 0;
+
+            background: linear-gradient(#9d001f, transparent);
+        }
+
+
+        /* =========================================================
+           ABOUT
+        ========================================================= */
+
+        #about {
+            background:
+                radial-gradient(circle at 80% 20%, rgba(110,0,25,0.08), transparent 35%);
+        }
+
+        .about-layout {
+            display: grid;
+            grid-template-columns: 0.8fr 1.5fr;
+            gap: 10vw;
+            max-width: 1300px;
+            margin: auto;
+        }
+
+        .about-label {
+            color: #777;
+            font-size: 9px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 15px;
+        }
+
+        .about-text {
+            color: #bdbdbd;
+            font-size: 15px;
+            line-height: 2.1;
+            font-weight: 300;
+        }
+
+        .about-text strong {
+            color: white;
+            font-weight: 400;
+        }
+
+        .quote {
+            border-left: 1px solid #94001f;
+            padding-left: 25px;
+            margin-bottom: 35px;
+
+            color: white;
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(26px, 3vw, 40px);
+            line-height: 1.25;
+        }
+
+        .about-paragraph {
+            margin-bottom: 25px;
+        }
+
+        .colors {
+            display: flex;
+            gap: 30px;
+            margin-top: 45px;
+        }
+
+        .color {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: #777;
+            font-size: 8px;
+            letter-spacing: 3px;
+        }
+
+        .color-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .red-dot {
+            background: #a00024;
+        }
+
+        .blue-dot {
+            background: #124a9b;
+        }
+
+        .black-dot {
+            background: #050505;
+        }
+
+
+        /* =========================================================
+           ARCHIVE / GALLERY
+        ========================================================= */
+
+        #archive {
+            background: #030303;
+        }
+
+        .archive-header {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .archive-description {
+            max-width: 600px;
+            color: #777;
+            font-size: 12px;
+            line-height: 1.9;
+            margin-bottom: 60px;
+        }
+
+        .gallery {
+            max-width: 1300px;
+            margin: auto;
+
+            columns: 3 280px;
+            column-gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            display: block;
+
+            width: 100%;
+            margin-bottom: 20px;
+
+            break-inside: avoid;
+
+            cursor: pointer;
+            overflow: hidden;
+
+            background: #111;
+        }
+
+        .gallery-item img {
+            display: block;
+            width: 100%;
+            height: auto;
+
+            transition:
+                transform 0.7s cubic-bezier(.2,.7,.2,1),
+                filter 0.7s ease;
+        }
+
+        .gallery-item::after {
+            content: "OPEN / VIEW";
+
+            position: absolute;
+            inset: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(0,0,0,0.55);
+
+            color: white;
+            font-size: 8px;
+            letter-spacing: 4px;
+
+            opacity: 0;
+
+            transition: 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.04);
+            filter: brightness(0.65);
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+
+        /* =========================================================
+           LIGHTBOX
+        ========================================================= */
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            z-index: 2000;
+
+            background: rgba(0,0,0,0.94);
+
+            padding: 50px;
+        }
+
+        .lightbox.active {
+            display: flex;
+            animation: lightboxIn 0.3s ease;
+        }
+
+        .lightbox-image {
+            max-width: 90vw;
+            max-height: 88vh;
+
+            object-fit: contain;
+
+            box-shadow: 0 20px 100px rgba(0,0,0,0.8);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+
+            width: 45px;
+            height: 45px;
+
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.5);
+
+            color: white;
+            font-size: 25px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .lightbox-close:hover {
+            background: #9d001f;
+            border-color: #9d001f;
+        }
+
+        .lightbox-prev,
+        .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: 55px;
+            height: 55px;
+
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.5);
+
+            color: white;
+            font-size: 25px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .lightbox-prev {
+            left: 30px;
+        }
+
+        .lightbox-next {
+            right: 30px;
+        }
+
+        .lightbox-prev:hover,
+        .lightbox-next:hover {
+            background: #9d001f;
+            border-color: #9d001f;
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            color: #777;
+            font-size: 9px;
+            letter-spacing: 4px;
+        }
+
+
+        /* =========================================================
+           AUDIO
+        ========================================================= */
+
+        #audio {
+            display: flex;
+            align-items: center;
+        }
+
+        .audio-layout {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .audio-intro p {
+            color: #888;
+            font-size: 13px;
+            line-height: 2;
+            max-width: 430px;
+        }
+
+        .audio-label {
+            color: #777;
+            font-size: 9px;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+        }
+
+        .audio-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(55px, 8vw, 100px);
+            line-height: 0.9;
+            font-weight: 400;
+        }
+
+        .spotify-box {
+            width: 100%;
+
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.025);
+
+            padding: 12px;
+
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+        }
+
+        .spotify-box iframe {
+            display: block;
+            width: 100%;
+            min-height: 380px;
+            border: 0;
+            border-radius: 10px;
+        }
+
+
+        /* =========================================================
+           NETWORK
+        ========================================================= */
+
+        #network {
+            min-height: 85vh;
+
+            display: flex;
+            align-items: center;
+        }
+
+        .network-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .network-list {
+            border-top: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .network-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 25px 10px;
+
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+
+            transition: 0.4s ease;
+        }
+
+        .network-item:hover {
+            padding-left: 25px;
+            padding-right: 25px;
+
+            background: rgba(145,0,30,0.08);
+        }
+
+        .network-platform {
+            color: #666;
+            font-size: 8px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .network-name {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 25px;
+        }
+
+        .network-arrow {
+            color: #8f001e;
+            font-size: 18px;
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            padding: 45px 8vw;
+
+            border-top: 1px solid rgba(255,255,255,0.07);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            color: #555;
+            font-size: 8px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .footer-name {
+            color: #888;
+        }
+
+
+        /* =========================================================
+           ANIMATIONS
+        ========================================================= */
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes lightboxIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 800px) {
+
+            nav {
+                height: 65px;
+                padding: 0 20px;
+            }
+
+            .nav-logo {
+                font-size: 20px;
+                letter-spacing: 5px;
+            }
+
+            .nav-number {
+                display: none;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 7px;
+                letter-spacing: 1.5px;
+            }
+
+            section {
+                padding: 110px 25px;
+            }
+
+            .home-name {
+                font-size: 23vw;
+                letter-spacing: 7px;
+            }
+
+            .private {
+                font-size: 7px;
+                letter-spacing: 5px;
+            }
+
+            .home-subtitle {
+                gap: 10px;
+                font-size: 7px;
+                letter-spacing: 3px;
+            }
+
+            .about-layout {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .about-text {
+                font-size: 13px;
+                line-height: 1.9;
+            }
+
+            .colors {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .gallery {
+                columns: 2 140px;
+                column-gap: 10px;
+            }
+
+            .gallery-item {
+                margin-bottom: 10px;
+            }
+
+            .lightbox {
+                padding: 20px;
+            }
+
+            .lightbox-image {
+                max-width: 94vw;
+                max-height: 80vh;
+            }
+
+            .lightbox-prev,
+            .lightbox-next {
+                width: 42px;
+                height: 42px;
+                font-size: 18px;
+            }
+
+            .lightbox-prev {
+                left: 10px;
+            }
+
+            .lightbox-next {
+                right: 10px;
+            }
+
+            .lightbox-close {
+                top: 15px;
+                right: 15px;
+            }
+
+            .audio-layout {
+                grid-template-columns: 1fr;
+                gap: 45px;
+            }
+
+            .spotify-box iframe {
+                min-height: 450px;
+            }
+
+            .network-item {
+                padding: 20px 5px;
+            }
+
+            .network-name {
+                font-size: 20px;
+            }
+
+            footer {
+                padding: 35px 25px;
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+
+    </style>
 </head>
+
+
 <body>
 
-<canvas id="particles"></canvas>
-<div class="cloud one"></div><div class="cloud two"></div><div class="cloud three"></div>
+    <!-- BACKGROUND -->
+    <div class="ambient red"></div>
+    <div class="ambient blue"></div>
 
-<div id="entry">
-  <div class="entry-inner">
-    <div class="entry-kicker">PRIVATE DIGITAL SPACE / 3991</div>
-    <h1 class="entry-title">ALE <span>RIOT</span></h1>
-    <button class="enter" id="enter">ENTER EXPERIENCE</button>
-    <div class="entry-note">SOUND ON · FULLSCREEN RECOMMENDED</div>
-  </div>
-</div>
 
-<div class="cursor-dot"></div>
-<div class="cursor-ring"></div>
+    <!-- =========================================================
+         NAVIGATION
+    ========================================================= -->
 
-<div class="app" id="app">
-  <header class="top">
-    <div class="brand">
-      <div class="brand-mark">A</div>
-      <div>
-        <div class="brand-name">ALE RIOT</div>
-        <div class="brand-id">3991 / DIGITAL IDENTITY</div>
-      </div>
+    <nav>
+
+        <a href="#home" class="nav-logo">
+            ALE RIOT
+            <span class="nav-number">3991</span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#archive">Archive</a></li>
+            <li><a href="#audio">Audio</a></li>
+            <li><a href="#network">Network</a></li>
+        </ul>
+
+    </nav>
+
+
+    <!-- =========================================================
+         HOME
+    ========================================================= -->
+
+    <section id="home">
+
+        <div class="home-content">
+
+            <div class="private">
+                PRIVATE DIGITAL SPACE / 3991
+            </div>
+
+            <h1 class="home-name">
+                ALE
+            </h1>
+
+            <h2 class="home-name" style="font-size: clamp(45px, 8vw, 100px); margin-top: 35px;">
+                RIOT
+            </h2>
+
+            <div class="home-subtitle">
+                <span>PRIVATE</span>
+                <span>•</span>
+                <span>DIGITAL</span>
+                <span>•</span>
+                <span>PERSONAL</span>
+            </div>
+
+            <a href="#about" class="enter">
+                ENTER EXPERIENCE
+            </a>
+
+        </div>
+
+        <div class="scroll-indicator">
+            SCROLL
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         ABOUT
+    ========================================================= -->
+
+    <section id="about">
+
+        <div class="about-layout">
+
+            <div>
+
+                <div class="section-number">
+                    01 / ABOUT
+                </div>
+
+                <h2 class="section-title">
+                    ALE<br>RIOT
+                </h2>
+
+                <div class="section-line"></div>
+
+                <div class="about-label">
+                    3991 / DIGITAL IDENTITY
+                </div>
+
+            </div>
+
+
+            <div class="about-text">
+
+                <div class="quote">
+                    No todos conocen mi historia.<br>
+                    Algunos conocen mi nombre.<br>
+                    Otros, apenas una versión de mí.<br>
+                    Y quizá eso sea suficiente.
+                </div>
+
+
+                <p class="about-paragraph">
+                    Este espacio es una pequeña parte de mi mundo:
+                    <strong>música, imágenes, historias, pensamientos y momentos</strong>
+                    que decidí guardar aquí.
+                </p>
+
+
+                <p class="about-paragraph">
+                    Un lugar donde mis gustos, mis ideas y aquello que me inspira
+                    encuentran su propio espacio.
+                </p>
+
+
+                <p class="about-paragraph">
+                    Entre libros, sonidos, películas, anime y mundos digitales
+                    encuentro pequeñas formas de expresar quién soy sin tener
+                    que mostrarlo todo.
+                </p>
+
+
+                <p class="about-paragraph">
+                    Soy <strong>Alejandro</strong>, desde la
+                    <strong>Ciudad de México</strong>.
+                    Una persona reservada, pero con una forma única de ver el mundo;
+                    alguien que disfruta los pequeños detalles, las buenas historias
+                    y los momentos que dejan una marca.
+                </p>
+
+
+                <p class="about-paragraph">
+                    Me gusta leer, escuchar música, ver anime y películas,
+                    descubrir nuevas historias y disfrutar de mi propio tiempo.
+                    También encuentro parte de mi entretenimiento en plataformas
+                    digitales como Netflix, HBO Max, Crunchyroll y Vix.
+                </p>
+
+
+                <div class="colors">
+
+                    <div class="color">
+                        <div class="color-dot red-dot"></div>
+                        RED
+                    </div>
+
+                    <div class="color">
+                        <div class="color-dot blue-dot"></div>
+                        BLUE
+                    </div>
+
+                    <div class="color">
+                        <div class="color-dot black-dot"></div>
+                        BLACK
+                    </div>
+
+                </div>
+
+
+                <p style="
+                    margin-top:60px;
+                    color:#777;
+                    font-family:'Cormorant Garamond',serif;
+                    font-size:28px;
+                    line-height:1.3;
+                ">
+                    Lo que no está escrito,<br>
+                    también forma parte de la historia.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         ARCHIVE
+    ========================================================= -->
+
+    <section id="archive">
+
+        <div class="archive-header">
+
+            <div class="section-number">
+                02 / ARCHIVE
+            </div>
+
+            <h2 class="section-title">
+                VISUAL<br>MEMORY
+            </h2>
+
+            <div class="section-line"></div>
+
+            <p class="archive-description">
+                Una colección de imágenes que forman parte de este espacio.
+                Algunas cuentan una historia. Otras simplemente pertenecen
+                aquí.
+                Haz clic sobre cualquiera para verla completa.
+            </p>
+
+        </div>
+
+
+        <div class="gallery">
+
+            <!-- IMAGEN 01 -->
+            <div class="gallery-item" data-index="0">
+                <img
+                    src="images/01.jpg"
+                    alt="ALE RIOT archive 01"
+                    loading="lazy"
+                >
+            </div>
+
+
+            <!-- IMAGEN 02 -->
+            <div class="gallery-item" data-index="1">
+                <img
+                    src="images/02.jpg"
+                    alt="ALE RIOT archive 02"
+                    loading="lazy"
+                >
+            </div>
+
+
+            <!-- IMAGEN 03 -->
+            <div class="gallery-item" data-index="2">
+                <img
+                    src="images/03.jpg"
+                    alt="ALE RIOT archive 03"
+                    loading="lazy"
+                >
+            </div>
+
+
+            <!-- IMAGEN 04 -->
+            <div class="gallery-item" data-index="3">
+                <img
+                    src="images/04.jpg"
+                    alt="ALE RIOT archive 04"
+                    loading="lazy"
+                >
+            </div>
+
+
+            <!-- IMAGEN 05 -->
+            <div class="gallery-item" data-index="4">
+                <img
+                    src="images/05.jpg"
+                    alt="ALE RIOT archive 05"
+                    loading="lazy"
+                >
+            </div>
+
+
+            <!-- IMAGEN 06 -->
+            <div class="gallery-item" data-index="5">
+                <img
+                    src="images/06.jpg"
+                    alt="ALE RIOT archive 06"
+                    loading="lazy"
+                >
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         LIGHTBOX
+    ========================================================= -->
+
+    <div class="lightbox" id="lightbox">
+
+        <button class="lightbox-close" id="lightboxClose">
+            ×
+        </button>
+
+        <button class="lightbox-prev" id="lightboxPrev">
+            ‹
+        </button>
+
+        <img
+            class="lightbox-image"
+            id="lightboxImage"
+            src=""
+            alt="Imagen ampliada"
+        >
+
+        <button class="lightbox-next" id="lightboxNext">
+            ›
+        </button>
+
+        <div class="lightbox-counter" id="lightboxCounter">
+            01 / 06
+        </div>
+
     </div>
 
-    <nav class="top-nav">
-      <button class="active" data-go="home">01 HOME</button>
-      <button data-go="archive">02 ARCHIVE</button>
-      <button data-go="music">03 AUDIO</button>
-      <button data-go="network">04 NETWORK</button>
-    </nav>
-  </header>
 
-  <div class="section-indicator" aria-label="Navegación de secciones">
-    <button class="active" data-go="home" aria-label="Home"></button>
-    <button data-go="archive" aria-label="Archive"></button>
-    <button data-go="music" aria-label="Audio"></button>
-    <button data-go="network" aria-label="Network"></button>
-  </div>
 
-  <main class="viewport">
+    <!-- =========================================================
+         AUDIO
+    ========================================================= -->
 
-    <section class="section active" id="home">
-      <div class="hero">
-        <div class="hero-copy">
-          <div class="kicker">WELCOME TO MY SPACE</div>
-          <h1>ALE <span class="last">RIOT</span></h1>
-          <div class="hero-sub">PRIVATE / DIGITAL / PERSONAL</div>
-          <div class="hero-line"></div>
-          <p>Música, imágenes, videos y enlaces reunidos en un espacio diseñado para sentirse más como una experiencia que como un perfil.</p>
+    <section id="audio">
+
+        <div class="audio-layout">
+
+            <div class="audio-intro">
+
+                <div class="section-number">
+                    03 / AUDIO
+                </div>
+
+                <div class="audio-label">
+                    ALE RIOT SOUNDTRACK
+                </div>
+
+                <h2 class="audio-title">
+                    WHAT<br>AM I<br>LISTENING?
+                </h2>
+
+                <div class="section-line"></div>
+
+                <p>
+                    La música también forma parte de mi espacio.
+                    Esta playlist reúne algunos de los sonidos que
+                    acompañan mi mundo.
+                </p>
+
+            </div>
+
+
+            <div class="spotify-box">
+
+                <iframe
+                    src="https://open.spotify.com/embed/playlist/5IH8zTAcwg1OZoGgYba9ML?utm_source=generator&theme=0"
+                    allowfullscreen=""
+                    allow="
+                        autoplay;
+                        clipboard-write;
+                        encrypted-media;
+                        fullscreen;
+                        picture-in-picture
+                    "
+                    loading="lazy">
+                </iframe>
+
+            </div>
+
         </div>
-        <div class="hero-deco"><b>AR</b></div>
-        <div class="scroll-hint">SCROLL / SWIPE TO EXPLORE</div>
-      </div>
+
     </section>
 
-    <section class="section" id="archive">
-      <div class="page-head"><h2>ARCHIVE</h2><span>02 / SELECTED MOMENTS</span></div>
 
-      <div class="cards">
-        <article class="card"><small>001 / MOMENTS</small><h3>MEMORIES</h3><p>Fotografías y momentos personales seleccionados.</p></article>
-        <article class="card"><small>002 / COLLECTION</small><h3>VISUALS</h3><p>Una colección visual con la estética de ALE Riot.</p></article>
-        <article class="card"><small>003 / PRIVATE</small><h3>3991</h3><p>Un pequeño archivo de detalles, ideas y recuerdos.</p></article>
-      </div>
 
-      <div style="height:18px"></div>
+    <!-- =========================================================
+         NETWORK
+    ========================================================= -->
 
-      <div class="gallery-wrap">
-        <div class="gallery">
-          <button class="photo" data-image="https://picsum.photos/1400/900?random=71" data-caption="FRAME 01">
-            <img src="https://picsum.photos/900/600?random=71" alt="Frame 01">
-            <span>FRAME 01 · OPEN</span>
-          </button>
-          <button class="photo" data-image="https://picsum.photos/1400/900?random=72" data-caption="FRAME 02">
-            <img src="https://picsum.photos/900/600?random=72" alt="Frame 02">
-            <span>FRAME 02 · OPEN</span>
-          </button>
-          <button class="photo" data-image="https://picsum.photos/1400/900?random=73" data-caption="FRAME 03">
-            <img src="https://picsum.photos/900/600?random=73" alt="Frame 03">
-            <span>FRAME 03 · OPEN</span>
-          </button>
-          <button class="photo" data-image="https://picsum.photos/1400/900?random=74" data-caption="FRAME 04">
-            <img src="https://picsum.photos/900/600?random=74" alt="Frame 04">
-            <span>FRAME 04 · OPEN</span>
-          </button>
-          <button class="photo" data-image="https://picsum.photos/1400/900?random=75" data-caption="FRAME 05">
-            <img src="https://picsum.photos/900/600?random=75" alt="Frame 05">
-            <span>FRAME 05 · OPEN</span>
-          </button>
-          <button class="photo" data-image="https://picsum.photos/1400/900?random=76" data-caption="FRAME 06">
-            <img src="https://picsum.photos/900/600?random=76" alt="Frame 06">
-            <span>FRAME 06 · OPEN</span>
-          </button>
+    <section id="network">
+
+        <div class="network-container">
+
+            <div class="section-number">
+                04 / NETWORK
+            </div>
+
+            <h2 class="section-title">
+                FIND<br>ME
+            </h2>
+
+            <div class="section-line"></div>
+
+
+            <div class="network-list">
+
+
+                <!-- YOUTUBE -->
+
+                <a
+                    class="network-item"
+                    href="https://www.youtube.com/@AleRiot"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <div>
+
+                        <div class="network-platform">
+                            Video / YouTube
+                        </div>
+
+                        <div class="network-name">
+                            AleRiot
+                        </div>
+
+                    </div>
+
+                    <div class="network-arrow">
+                        ↗
+                    </div>
+
+                </a>
+
+
+
+                <!-- INSTAGRAM -->
+
+                <a
+                    class="network-item"
+                    href="https://www.instagram.com/ale.riot.27/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <div>
+
+                        <div class="network-platform">
+                            Photography / Instagram
+                        </div>
+
+                        <div class="network-name">
+                            @ale.riot.27
+                        </div>
+
+                    </div>
+
+                    <div class="network-arrow">
+                        ↗
+                    </div>
+
+                </a>
+
+
+
+                <!-- THREADS -->
+
+                <a
+                    class="network-item"
+                    href="https://www.threads.net/@ale.riot.27"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <div>
+
+                        <div class="network-platform">
+                            Thoughts / Threads
+                        </div>
+
+                        <div class="network-name">
+                            @ale.riot.27
+                        </div>
+
+                    </div>
+
+                    <div class="network-arrow">
+                        ↗
+                    </div>
+
+                </a>
+
+
+
+                <!-- WHATSAPP -->
+
+                <a
+                    class="network-item"
+                    href="https://wa.me/5215621165265"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <div>
+
+                        <div class="network-platform">
+                            Private Contact / WhatsApp
+                        </div>
+
+                        <div class="network-name">
+                            Contact
+                        </div>
+
+                    </div>
+
+                    <div class="network-arrow">
+                        ↗
+                    </div>
+
+                </a>
+
+            </div>
+
         </div>
-        <div class="gallery-note">CLICK A FRAME TO OPEN · USE ← → TO MOVE BETWEEN IMAGES · ESC TO CLOSE</div>
-      </div>
+
     </section>
 
-    <section class="section" id="music">
-      <div class="page-head"><h2>AUDIO</h2><span>03 / SOUNDTRACK</span></div>
-      <div class="music-box">
-        <div class="cover"><strong>AR</strong></div>
-        <div class="track">
-          <small>NOW PLAYING / YOUR SOUNDTRACK</small>
-          <h3>ALE RIOT — 3991</h3>
-          <p>Coloca aquí tu archivo de audio. La música comienza después de entrar al sitio para respetar las restricciones de reproducción automática del navegador.</p>
-          <audio id="player" controls preload="metadata"></audio>
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================= -->
+
+    <footer>
+
+        <div class="footer-name">
+            ALE RIOT
         </div>
-      </div>
-    </section>
 
-    <section class="section" id="network">
-      <div class="page-head"><h2>NETWORK</h2><span>04 / FIND ME ONLINE</span></div>
-      <div class="network">
-        <a class="social" href="https://www.instagram.com/" target="_blank" rel="noopener"><b>Instagram</b><span>@TU_USUARIO</span></a>
-        <a class="social" href="https://www.tiktok.com/" target="_blank" rel="noopener"><b>TikTok</b><span>@TU_USUARIO</span></a>
-        <a class="social" href="https://www.youtube.com/" target="_blank" rel="noopener"><b>YouTube</b><span>MY CHANNEL</span></a>
-        <a class="social" href="https://www.facebook.com/" target="_blank" rel="noopener"><b>Facebook</b><span>MY PROFILE</span></a>
-      </div>
-    </section>
+        <div>
+            3991 / PRIVATE DIGITAL SPACE
+        </div>
 
-  </main>
+        <div>
+            MEXICO CITY
+        </div>
 
-  <div class="audio">
-    <button id="mute">II</button>
-    <div class="audio-bars"><i></i><i></i><i></i><i></i></div>
-    <div class="audio-label">AMBIENCE</div>
-  </div>
-</div>
+    </footer>
 
-<!-- VISOR DE IMÁGENES -->
-<div id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de imágenes">
-  <button class="lb-close" id="lbClose" aria-label="Cerrar">×</button>
-  <button class="lb-prev" id="lbPrev" aria-label="Imagen anterior">‹</button>
-  <img class="lightbox-img" id="lightboxImg" src="" alt="">
-  <button class="lb-next" id="lbNext" aria-label="Imagen siguiente">›</button>
-  <div class="lb-caption" id="lbCaption"></div>
-</div>
 
-<script>
-/* PARTICLES */
-const c=document.getElementById('particles'),ctx=c.getContext('2d');
-let W,H,pts=[];
-function resize(){
-  W=c.width=innerWidth;H=c.height=innerHeight;pts=[];
-  for(let i=0;i<70;i++)pts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.2+.2,s:Math.random()*.18+.04,a:Math.random()*.35+.05});
-}
-resize();addEventListener('resize',resize);
-function draw(){
-  ctx.clearRect(0,0,W,H);
-  pts.forEach(p=>{
-    p.y-=p.s;if(p.y<0)p.y=H;
-    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(220,220,225,${p.a})`;ctx.fill();
-  });
-  requestAnimationFrame(draw);
-}
-draw();
 
-/* NAVEGACIÓN ENTRE SECCIONES */
-const nav=document.querySelectorAll('[data-go]');
-const sections=[...document.querySelectorAll('.section')];
-let current=0;
-let changing=false;
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================= -->
 
-function setSection(index){
-  index=Math.max(0,Math.min(sections.length-1,index));
-  if(index===current && sections[index].classList.contains('active')) return;
+    <script>
 
-  current=index;
-  sections.forEach((s,i)=>s.classList.toggle('active',i===current));
-  nav.forEach(n=>n.classList.toggle('active',n.dataset.go===sections[current].id));
-  document.querySelectorAll('.section-indicator button').forEach((b,i)=>b.classList.toggle('active',i===current));
+        /* =========================================================
+           GALLERY / LIGHTBOX
+        ========================================================= */
 
-  // Reinicia el desplazamiento interno de la sección al cambiar.
-  sections[current].scrollTop=0;
-}
+        const galleryItems = document.querySelectorAll(".gallery-item");
 
-function go(id){
-  const index=sections.findIndex(s=>s.id===id);
-  if(index>=0)setSection(index);
-}
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImage = document.getElementById("lightboxImage");
 
-nav.forEach(n=>n.addEventListener('click',()=>go(n.dataset.go)));
+        const lightboxClose = document.getElementById("lightboxClose");
+        const lightboxPrev = document.getElementById("lightboxPrev");
+        const lightboxNext = document.getElementById("lightboxNext");
 
-/* RUEDA DEL RATÓN: CAMBIA DE SECCIÓN */
-const viewport=document.querySelector('.viewport');
-viewport.addEventListener('wheel',e=>{
-  if(document.getElementById('lightbox').classList.contains('open')) return;
-  if(changing)return;
+        const lightboxCounter = document.getElementById("lightboxCounter");
 
-  // Si una sección tiene contenido que realmente necesita scroll interno,
-  // primero permite llegar a sus extremos.
-  const active=sections[current];
-  const canScroll=active.scrollHeight>active.clientHeight+5;
-  const atTop=active.scrollTop<=2;
-  const atBottom=active.scrollTop+active.clientHeight>=active.scrollHeight-2;
 
-  if(canScroll && ((e.deltaY>0 && !atBottom)||(e.deltaY<0 && !atTop))) return;
+        let currentIndex = 0;
 
-  e.preventDefault();
-  changing=true;
-  setSection(current+(e.deltaY>0?1:-1));
-  setTimeout(()=>changing=false,850);
-},{passive:false});
 
-/* TECLADO */
-addEventListener('keydown',e=>{
-  if(document.getElementById('lightbox').classList.contains('open')) return;
-  if(['ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();setSection(current+1)}
-  if(['ArrowUp','PageUp'].includes(e.key)){e.preventDefault();setSection(current-1)}
-});
+        function openLightbox(index) {
 
-/* SWIPE EN TELÉFONO */
-let touchStartY=0;
-viewport.addEventListener('touchstart',e=>{touchStartY=e.changedTouches[0].clientY},{passive:true});
-viewport.addEventListener('touchend',e=>{
-  const dy=e.changedTouches[0].clientY-touchStartY;
-  if(Math.abs(dy)<45)return;
-  setSection(current+(dy<0?1:-1));
-},{passive:true});
+            currentIndex = index;
 
-/* ENTRADA + AUDIO */
-const entry=document.getElementById('entry'),app=document.getElementById('app');
-const audio=document.getElementById('player'),mute=document.getElementById('mute'),bars=document.querySelector('.audio');
+            const image =
+                galleryItems[currentIndex].querySelector("img");
 
-document.getElementById('enter').addEventListener('click',()=>{
-  entry.classList.add('hide');
-  app.classList.add('ready');
-  // Para poner tu música, descomenta y cambia esta línea:
-  // audio.src='music/ale-riot.mp3';
-  // audio.play().catch(()=>{});
-});
+            lightboxImage.src = image.src;
+            lightboxImage.alt = image.alt;
 
-mute.addEventListener('click',()=>{
-  if(audio.paused){
-    audio.play().catch(()=>{});
-    mute.textContent='II';
-    bars.classList.remove('paused');
-  }else{
-    audio.pause();
-    mute.textContent='▶';
-    bars.classList.add('paused');
-  }
-});
+            updateCounter();
 
-/* VISOR / LIGHTBOX DE IMÁGENES */
-const photos=[...document.querySelectorAll('.photo')];
-const lightbox=document.getElementById('lightbox');
-const lightboxImg=document.getElementById('lightboxImg');
-const lbCaption=document.getElementById('lbCaption');
-let photoIndex=0;
+            lightbox.classList.add("active");
 
-function openPhoto(index){
-  photoIndex=(index+photos.length)%photos.length;
-  const item=photos[photoIndex];
-  lightboxImg.src=item.dataset.image;
-  lightboxImg.alt=item.dataset.caption;
-  lbCaption.textContent=item.dataset.caption;
-  lightbox.classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closePhoto(){
-  lightbox.classList.remove('open');
-  lightboxImg.src='';
-  document.body.style.overflow='hidden';
-}
-function nextPhoto(){openPhoto(photoIndex+1)}
-function prevPhoto(){openPhoto(photoIndex-1)}
+            document.body.style.overflow = "hidden";
+        }
 
-photos.forEach((photo,i)=>photo.addEventListener('click',()=>openPhoto(i)));
-document.getElementById('lbClose').addEventListener('click',closePhoto);
-document.getElementById('lbNext').addEventListener('click',nextPhoto);
-document.getElementById('lbPrev').addEventListener('click',prevPhoto);
 
-lightbox.addEventListener('click',e=>{
-  if(e.target===lightbox)closePhoto();
-});
+        function closeLightbox() {
 
-addEventListener('keydown',e=>{
-  if(!lightbox.classList.contains('open'))return;
-  if(e.key==='Escape')closePhoto();
-  if(e.key==='ArrowRight')nextPhoto();
-  if(e.key==='ArrowLeft')prevPhoto();
-});
+            lightbox.classList.remove("active");
 
-/* CURSOR */
-const dot=document.querySelector('.cursor-dot'),ring=document.querySelector('.cursor-ring');
-let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
-addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
-function cursor(){
-  dot.style.left=mx+'px';dot.style.top=my+'px';
-  rx+=(mx-rx)*.16;ry+=(my-ry)*.16;
-  ring.style.left=rx+'px';ring.style.top=ry+'px';
-  requestAnimationFrame(cursor);
-}
-cursor();
+            document.body.style.overflow = "";
 
-document.querySelectorAll('button,a').forEach(el=>{
-  el.addEventListener('mouseenter',()=>ring.classList.add('hover'));
-  el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));
-});
+            setTimeout(() => {
 
-/* PARALLAX */
-addEventListener('mousemove',e=>{
-  const x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);
-  document.querySelectorAll('.cloud').forEach((el,i)=>{
-    el.style.marginLeft=(x*(i+1)*10)+'px';
-    el.style.marginTop=(y*(i+1)*6)+'px';
-  });
-});
-</script>
+                if (!lightbox.classList.contains("active")) {
+                    lightboxImage.src = "";
+                }
+
+            }, 300);
+        }
+
+
+        function nextImage() {
+
+            currentIndex++;
+
+            if (currentIndex >= galleryItems.length) {
+                currentIndex = 0;
+            }
+
+            openLightbox(currentIndex);
+        }
+
+
+        function previousImage() {
+
+            currentIndex--;
+
+            if (currentIndex < 0) {
+                currentIndex = galleryItems.length - 1;
+            }
+
+            openLightbox(currentIndex);
+        }
+
+
+        function updateCounter() {
+
+            const current =
+                String(currentIndex + 1).padStart(2, "0");
+
+            const total =
+                String(galleryItems.length).padStart(2, "0");
+
+            lightboxCounter.textContent =
+                `${current} / ${total}`;
+        }
+
+
+        galleryItems.forEach((item, index) => {
+
+            item.addEventListener("click", () => {
+                openLightbox(index);
+            });
+
+        });
+
+
+        lightboxClose.addEventListener("click", closeLightbox);
+
+        lightboxNext.addEventListener("click", nextImage);
+
+        lightboxPrev.addEventListener("click", previousImage);
+
+
+        /* Cerrar haciendo clic fuera de la imagen */
+
+        lightbox.addEventListener("click", (event) => {
+
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+
+        });
+
+
+        /* Teclado */
+
+        document.addEventListener("keydown", (event) => {
+
+            if (!lightbox.classList.contains("active")) {
+                return;
+            }
+
+            if (event.key === "Escape") {
+                closeLightbox();
+            }
+
+            if (event.key === "ArrowRight") {
+                nextImage();
+            }
+
+            if (event.key === "ArrowLeft") {
+                previousImage();
+            }
+
+        });
+
+
+        /* =========================================================
+           TOUCH / SWIPE EN CELULAR
+        ========================================================= */
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+
+        lightbox.addEventListener("touchstart", (event) => {
+
+            touchStartX = event.changedTouches[0].screenX;
+
+        });
+
+
+        lightbox.addEventListener("touchend", (event) => {
+
+            touchEndX = event.changedTouches[0].screenX;
+
+            handleSwipe();
+
+        });
+
+
+        function handleSwipe() {
+
+            const distance = touchEndX - touchStartX;
+
+            if (Math.abs(distance) < 50) {
+                return;
+            }
+
+            if (distance < 0) {
+                nextImage();
+            } else {
+                previousImage();
+            }
+
+        }
+
+
+        /* =========================================================
+           ESCONDER NAV AL HACER SCROLL
+        ========================================================= */
+
+        let lastScroll = 0;
+
+        window.addEventListener("scroll", () => {
+
+            const currentScroll = window.pageYOffset;
+
+            const nav = document.querySelector("nav");
+
+            if (currentScroll > lastScroll && currentScroll > 100) {
+
+                nav.style.transform = "translateY(-100%)";
+
+            } else {
+
+                nav.style.transform = "translateY(0)";
+
+            }
+
+            lastScroll = currentScroll;
+
+        });
+
+
+        /* =========================================================
+           FADE-IN DE SECCIONES
+        ========================================================= */
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+
+                entries.forEach((entry) => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.08
+            }
+        );
+
+
+        document.querySelectorAll("section").forEach((section) => {
+
+            if (section.id !== "home") {
+
+                section.style.opacity = "0";
+                section.style.transform = "translateY(20px)";
+                section.style.transition =
+                    "opacity 1s ease, transform 1s ease";
+
+                observer.observe(section);
+
+            }
+
+        });
+
+
+    </script>
+
 </body>
 </html>
