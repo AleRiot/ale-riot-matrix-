@@ -712,6 +712,242 @@ body.experience-started #intro{
 })();
 </script>
 
+
+<style id="ale-liquid-3d-gallery">
+/* Experiencia líquida + 3D */
+#gallery img,
+.gallery img,
+.memories-gallery img{
+  position:relative;
+  overflow:hidden;
+  transform-style:preserve-3d;
+  transition:
+    transform .35s ease,
+    filter .5s ease,
+    clip-path .8s ease;
+  clip-path:inset(0 round 18px);
+}
+
+#gallery img.reveal,
+.gallery img.reveal,
+.memories-gallery img.reveal{
+  animation:aleCurtainReveal 1.2s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes aleCurtainReveal{
+  from{
+    clip-path:inset(50% 0 50% 0 round 25px);
+    opacity:0;
+    transform:scale(.92) rotateY(15deg);
+  }
+  to{
+    clip-path:inset(0 round 18px);
+    opacity:1;
+    transform:scale(1) rotateY(0);
+  }
+}
+
+/* Efecto ondas/luz */
+#gallery img:hover,
+.gallery img:hover,
+.memories-gallery img:hover{
+  filter:saturate(1.08) brightness(1.05);
+}
+
+/* Contenedor con profundidad */
+#gallery,
+.gallery,
+.memories-gallery{
+  transform-style:preserve-3d;
+}
+
+/* Respeto para táctil */
+@media (hover:hover){
+  #gallery img,
+  .gallery img,
+  .memories-gallery img{
+    cursor:pointer;
+  }
+}
+</style>
+
+<script id="ale-liquid-motion">
+(function(){
+ document.addEventListener("mousemove",function(e){
+   document.querySelectorAll("#gallery img,.gallery img,.memories-gallery img").forEach(function(img){
+     const r=img.getBoundingClientRect();
+     const x=(e.clientX-(r.left+r.width/2))/r.width;
+     const y=(e.clientY-(r.top+r.height/2))/r.height;
+     if(Math.abs(x)<1.5 && Math.abs(y)<1.5){
+       img.style.transform=
+       "perspective(900px) rotateY("+(x*8)+"deg) rotateX("+(-y*8)+"deg) translateZ(15px)";
+     }
+   });
+ });
+
+ document.querySelectorAll("#gallery img,.gallery img,.memories-gallery img")
+ .forEach(function(img){img.classList.add("reveal");});
+})();
+</script>
+
+
+<style id="ale-premium-gallery">
+/* Experiencia premium responsive */
+#gallery,
+.gallery,
+.memories-gallery{
+  perspective:1400px;
+  transform-style:preserve-3d;
+}
+
+#gallery img,
+.gallery img,
+.memories-gallery img{
+  position:relative;
+  transform-style:preserve-3d;
+  transition:
+    transform .7s cubic-bezier(.2,.8,.2,1),
+    filter .6s ease,
+    opacity .8s ease;
+  animation:alePremiumReveal 1.2s ease both;
+  will-change:transform;
+}
+
+@keyframes alePremiumReveal{
+  from{
+    opacity:0;
+    clip-path:inset(0 50% 0 50%);
+    transform:scale(.85) rotateY(20deg);
+  }
+  to{
+    opacity:1;
+    clip-path:inset(0 0 0 0);
+    transform:scale(1) rotateY(0);
+  }
+}
+
+/* efecto flotante */
+@media (hover:hover){
+  #gallery img:hover,
+  .gallery img:hover,
+  .memories-gallery img:hover{
+    filter:brightness(1.08) contrast(1.04);
+  }
+}
+
+/* soporte táctil */
+.gallery,
+.memories-gallery{
+  touch-action:pan-y;
+  -webkit-overflow-scrolling:touch;
+}
+
+/* movimiento suave en móvil */
+@media(max-width:768px){
+  #gallery img,
+  .gallery img,
+  .memories-gallery img{
+    animation-duration:.9s;
+  }
+}
+</style>
+
+<script id="ale-premium-interaction">
+(function(){
+ let startX=0;
+
+ document.addEventListener("touchstart",function(e){
+   if(e.touches[0]){
+    startX=e.touches[0].clientX;
+   }
+ },{passive:true});
+
+ document.addEventListener("touchend",function(e){
+   if(!e.changedTouches[0]) return;
+   let diff=e.changedTouches[0].clientX-startX;
+   if(Math.abs(diff)>60){
+     document.body.classList.add("gallery-swipe");
+   }
+ },{passive:true});
+
+ document.addEventListener("mousemove",function(e){
+   document.querySelectorAll("#gallery img,.gallery img,.memories-gallery img")
+   .forEach(function(img){
+     let r=img.getBoundingClientRect();
+     let x=(e.clientX-(r.left+r.width/2))/r.width;
+     let y=(e.clientY-(r.top+r.height/2))/r.height;
+     if(Math.abs(x)<1 && Math.abs(y)<1){
+       img.style.transform=
+       "perspective(1000px) rotateY("+(x*6)+"deg) rotateX("+(-y*6)+"deg) translateZ(10px)";
+     }
+   });
+ });
+})();
+</script>
+
+
+<style id="ale-gallery-real-target-v2">
+/* Aplicación directa sobre imágenes reales de la experiencia */
+img[src*="data:image"],
+.gallery img,
+#gallery img,
+[class*="gallery"] img,
+[class*="memory"] img,
+[class*="photo"] img{
+  transform-origin:center center;
+  backface-visibility:hidden;
+  transition:
+    transform .65s cubic-bezier(.2,.8,.2,1),
+    filter .5s ease,
+    opacity .7s ease,
+    clip-path .8s ease;
+  clip-path:inset(0 round 20px);
+}
+
+/* Revelado tipo cortina */
+[class*="gallery"] img,
+[class*="memory"] img,
+[class*="photo"] img{
+  animation:aleRevealBookV2 1s ease both;
+}
+
+@keyframes aleRevealBookV2{
+  0%{
+    opacity:0;
+    clip-path:inset(0 50% 0 50%);
+    transform:perspective(900px) rotateY(18deg) scale(.9);
+  }
+  100%{
+    opacity:1;
+    clip-path:inset(0 round 20px);
+    transform:perspective(900px) rotateY(0) scale(1);
+  }
+}
+</style>
+
+<script id="ale-gallery-real-motion-v2">
+(function(){
+  const selector='[class*="gallery"] img,[class*="memory"] img,[class*="photo"] img';
+
+  function enable3D(){
+    document.querySelectorAll(selector).forEach(img=>{
+      img.addEventListener('mousemove',e=>{
+        const r=img.getBoundingClientRect();
+        const x=(e.clientX-r.left)/r.width-.5;
+        const y=(e.clientY-r.top)/r.height-.5;
+        img.style.transform=
+          `perspective(900px) rotateY(${x*10}deg) rotateX(${-y*10}deg) translateZ(18px)`;
+      });
+      img.addEventListener('mouseleave',()=>{
+        img.style.transform='';
+      });
+    });
+  }
+
+  window.addEventListener('load',enable3D);
+})();
+</script>
+
 </head>
 <body>
 <div id="intro">
