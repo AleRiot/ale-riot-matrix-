@@ -1851,5 +1851,53 @@ document.addEventListener("DOMContentLoaded",function(){
 
 });
 </script>
+
+
+
+
+<script id="ale-auto-menu-15s-completo">
+(function(){
+  let timer = null;
+  let index = 0;
+  const menus = ["gallery","audio","history","ale"];
+
+  function showMenu(id){
+    const target = document.getElementById(id);
+    if(!target) return;
+
+    document.querySelectorAll(".page").forEach(function(p){
+      p.classList.remove("active");
+    });
+
+    target.classList.add("active");
+  }
+
+  function nextMenu(){
+    index = (index + 1) % menus.length;
+    showMenu(menus[index]);
+    restart();
+  }
+
+  function restart(){
+    clearTimeout(timer);
+    timer = setTimeout(nextMenu,15000);
+  }
+
+  function activity(){
+    restart();
+  }
+
+  ["click","touchstart","mousemove","keydown","scroll"].forEach(function(evt){
+    document.addEventListener(evt,activity,{passive:true});
+  });
+
+  window.addEventListener("load",function(){
+    index = 0;
+    showMenu("gallery");
+    restart();
+  });
+})();
+</script>
+
 </body>
 </html>
