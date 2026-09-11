@@ -559,6 +559,59 @@ body{
 }
 </style>
 
+
+<style id="ale-entry-gallery-fix">
+/* Mantener la experiencia estable y priorizar galería */
+#gallery{
+  opacity:1!important;
+}
+
+/* Mejor presentación de imágenes sin alterar estructura */
+#gallery img,
+.gallery img,
+.memories-gallery img{
+  transition:transform .45s ease, filter .45s ease, box-shadow .45s ease;
+  transform-origin:center;
+  will-change:transform;
+}
+
+#gallery img:hover,
+.gallery img:hover,
+.memories-gallery img:hover{
+  transform:scale(1.04) translateY(-4px);
+  filter:brightness(1.06);
+}
+
+/* Evita que una capa de introducción tape la primera vista */
+body.experience-started #intro{
+  display:none!important;
+}
+</style>
+
+<script id="ale-entry-gallery-script">
+(function(){
+  function openGalleryFirst(){
+    var gallery=document.getElementById('gallery');
+    if(gallery){
+      gallery.classList.add('active');
+      gallery.style.display='';
+    }
+    document.body.classList.add('experience-started');
+  }
+
+  window.addEventListener('load',function(){
+    var btns=document.querySelectorAll('button,a');
+    btns.forEach(function(btn){
+      if((btn.textContent||'').toLowerCase().includes('enter')){
+        btn.addEventListener('click',function(){
+          setTimeout(openGalleryFirst,50);
+        });
+      }
+    });
+  });
+})();
+</script>
+
 </head>
 <body>
 <div id="intro">
