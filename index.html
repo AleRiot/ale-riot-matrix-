@@ -421,6 +421,134 @@
 }
 </style>
 
+
+<style id="ale-v42-scrollbar-clean">
+/* V42 — elimina visualmente la barra de desplazamiento del navegador
+   sin quitar el desplazamiento de la página. */
+html{
+  scrollbar-width:none!important;
+  -ms-overflow-style:none!important;
+}
+html::-webkit-scrollbar{
+  width:0!important;
+  height:0!important;
+  display:none!important;
+}
+body,
+#app{
+  scrollbar-width:none!important;
+  -ms-overflow-style:none!important;
+}
+body::-webkit-scrollbar,
+#app::-webkit-scrollbar{
+  width:0!important;
+  height:0!important;
+  display:none!important;
+}
+
+/* Mantener únicamente los desplazamientos internos que sí son parte del diseño,
+   como el carrusel horizontal de SOUND ROOM. */
+.sr35-carousel{
+  scrollbar-width:none!important;
+}
+.sr35-carousel::-webkit-scrollbar{
+  display:none!important;
+  width:0!important;
+  height:0!important;
+}
+
+/* El botón MENÚ conserva su posición, pero deja de parecer pegado a una barra. */
+@media (min-width:701px){
+  #ale-clean-tab{
+    right:10px!important;
+  }
+}
+</style>
+
+
+<style id="ale-v43-menu-elegant">
+/* V43 — MENÚ elegante: compacto, horizontal y cinematográfico */
+#ale-clean-tab{
+  top:28px!important;
+  right:22px!important;
+  left:auto!important;
+  transform:none!important;
+  width:auto!important;
+  min-width:116px!important;
+  min-height:42px!important;
+  height:42px!important;
+  padding:0 18px!important;
+  border:1px solid rgba(255,255,255,.20)!important;
+  border-radius:999px!important;
+  background:rgba(7,8,12,.52)!important;
+  color:rgba(255,255,255,.92)!important;
+  backdrop-filter:blur(18px) saturate(120%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(120%)!important;
+  box-shadow:0 10px 30px rgba(0,0,0,.25),
+             inset 0 1px 0 rgba(255,255,255,.08)!important;
+  writing-mode:horizontal-tb!important;
+  letter-spacing:.22em!important;
+  font-size:10px!important;
+  font-weight:700!important;
+  line-height:42px!important;
+  text-align:center!important;
+  z-index:2147482999!important;
+  transition:background .3s ease,border-color .3s ease,
+             box-shadow .3s ease,transform .3s ease!important;
+}
+#ale-clean-tab::before{
+  content:"☰"!important;
+  display:inline-block!important;
+  margin-right:9px!important;
+  font-size:11px!important;
+  line-height:1!important;
+  opacity:.72!important;
+  transform:translateY(-.5px)!important;
+}
+#ale-clean-tab::after{
+  content:none!important;
+  display:none!important;
+}
+#ale-clean-tab:hover,
+#ale-clean-tab:focus-visible{
+  transform:translateY(-2px)!important;
+  background:rgba(18,19,26,.76)!important;
+  border-color:rgba(255,255,255,.34)!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.34),
+             0 0 0 1px rgba(255,255,255,.04),
+             inset 0 1px 0 rgba(255,255,255,.10)!important;
+}
+#ale-clean-tab[aria-expanded="true"]{
+  transform:translateY(-2px)!important;
+}
+
+/* Cuando el panel está abierto, el botón no estorba visualmente */
+#ale-clean-tab.is-open,
+#ale-clean-tab[aria-expanded="true"]{
+  opacity:.0!important;
+  pointer-events:none!important;
+}
+
+/* En pantallas pequeñas, un poco más compacto */
+@media (max-width:700px){
+  #ale-clean-tab{
+    top:18px!important;
+    right:14px!important;
+    min-width:100px!important;
+    height:38px!important;
+    min-height:38px!important;
+    padding:0 15px!important;
+    line-height:38px!important;
+    font-size:9px!important;
+    letter-spacing:.18em!important;
+  }
+  #ale-clean-tab::before{
+    margin-right:7px!important;
+    font-size:10px!important;
+  }
+}
+</style>
+
 </head>
 <body>
 <div id="intro">
