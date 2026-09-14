@@ -227,6 +227,200 @@
 })();
 </script>
 
+
+<style id="ale-v39-desktop-final">
+/* V39 — desktop space + history proportions */
+@media (min-width:901px){
+  /* Replace the vertical right-edge MENÚ tab with a compact top-right button.
+     The menu remains an overlay, so it does not consume page width. */
+  #ale-clean-tab{
+    right:28px!important;
+    top:24px!important;
+    transform:none!important;
+    width:auto!important;
+    min-width:86px!important;
+    min-height:40px!important;
+    height:40px!important;
+    padding:0 15px!important;
+    border:1px solid rgba(255,255,255,.14)!important;
+    border-radius:12px!important;
+    writing-mode:horizontal-tb!important;
+    letter-spacing:.18em!important;
+    font-size:9px!important;
+    text-align:center!important;
+    box-shadow:0 12px 34px rgba(0,0,0,.28)!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+  }
+  #ale-clean-tab:hover{transform:translateY(-1px)!important;}
+  #ale-clean-tab[aria-expanded="true"]{transform:translateY(-1px)!important;}
+
+  /* MI HISTORIA: card height follows the actual dialogue instead of a tall fixed panel. */
+  body.ale-history-mode #history>.history-card{
+    min-height:0!important;
+    height:auto!important;
+    margin-top:10px!important;
+    margin-bottom:54px!important;
+    padding:12px!important;
+  }
+  body.ale-history-mode #history .ale-history-stage{
+    min-height:0!important;
+    height:auto!important;
+    padding:22px 24px 20px!important;
+  }
+  body.ale-history-mode #history .ale-history-meta{
+    margin-bottom:10px!important;
+    padding-bottom:10px!important;
+  }
+  body.ale-history-mode #history .ale-history-progress{
+    margin-bottom:14px!important;
+  }
+  body.ale-history-mode #history .ale-history-content{
+    min-height:0!important;
+    height:auto!important;
+    padding:12px 8px 8px!important;
+    display:block!important;
+  }
+  body.ale-history-mode #history .ale-history-step{
+    max-width:64ch!important;
+    margin:0 auto!important;
+    font-size:clamp(15px,1.05vw,18px)!important;
+    line-height:1.62!important;
+  }
+  body.ale-history-mode #history .ale-history-dots{
+    margin-top:14px!important;
+  }
+  body.ale-history-mode #history .ale-history-nav{
+    margin-top:12px!important;
+  }
+  body.ale-history-mode #history .ale-history-nav button{
+    min-height:40px!important;
+  }
+  /* The birthday block stays compact and aligned with the shorter history card. */
+  body.ale-history-mode #history>.birthday-counter{
+    min-height:0!important;
+    height:auto!important;
+    margin-top:10px!important;
+    padding:22px 18px!important;
+  }
+}
+
+/* Keep the compact desktop history treatment from affecting phones. */
+@media (min-width:901px) and (max-width:1100px){
+  body.ale-history-mode #history{
+    grid-template-columns:minmax(230px,280px) minmax(0,1fr)!important;
+    column-gap:28px!important;
+  }
+}
+</style>
+
+
+<style id="ale-v40-gallery-polish">
+/* V40 — GALERÍA: efecto cinematográfico de desvanecimiento */
+#gallery .ale-archive-item{
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  cursor:pointer!important;
+  transform:translateZ(0)!important;
+  transition:transform .55s cubic-bezier(.2,.7,.2,1),
+             box-shadow .55s ease,
+             border-color .55s ease!important;
+}
+#gallery .ale-archive-item::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:2!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(to top,rgba(0,0,0,.48),transparent 42%),
+    linear-gradient(to bottom,rgba(255,255,255,.06),transparent 30%)!important;
+  opacity:.72!important;
+  transition:opacity .55s ease!important;
+}
+#gallery .ale-archive-item::before{
+  content:"VIEW • ALE RIOT 3991"!important;
+  position:absolute!important;
+  left:50%!important;
+  bottom:18px!important;
+  z-index:4!important;
+  transform:translate(-50%,12px)!important;
+  padding:7px 13px!important;
+  border:1px solid rgba(255,255,255,.28)!important;
+  border-radius:999px!important;
+  background:rgba(0,0,0,.32)!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+  color:rgba(255,255,255,.9)!important;
+  font:600 9px/1.1 Arial,sans-serif!important;
+  letter-spacing:2px!important;
+  white-space:nowrap!important;
+  opacity:0!important;
+  transition:opacity .45s ease,transform .45s ease!important;
+  pointer-events:none!important;
+}
+#gallery .ale-archive-item img{
+  display:block!important;
+  transform:scale(1.001)!important;
+  filter:saturate(.94) contrast(1.02)!important;
+  transition:transform .9s cubic-bezier(.16,.7,.2,1),
+             filter .65s ease,
+             opacity .65s ease!important;
+  backface-visibility:hidden!important;
+}
+#gallery .ale-archive-item:hover,
+#gallery .ale-archive-item:focus-visible{
+  transform:translateY(-5px) scale(1.012)!important;
+  box-shadow:0 18px 42px rgba(0,0,0,.38),
+             0 0 0 1px rgba(255,255,255,.10)!important;
+  border-color:rgba(255,255,255,.22)!important;
+}
+#gallery .ale-archive-item:hover img,
+#gallery .ale-archive-item:focus-visible img{
+  transform:scale(1.075)!important;
+  filter:saturate(1.08) contrast(1.04) brightness(1.03)!important;
+}
+#gallery .ale-archive-item:hover::after,
+#gallery .ale-archive-item:focus-visible::after{
+  opacity:.34!important;
+}
+#gallery .ale-archive-item:hover::before,
+#gallery .ale-archive-item:focus-visible::before{
+  opacity:1!important;
+  transform:translate(-50%,0)!important;
+}
+
+/* Entrada suave cuando aparece la galería */
+#gallery.active .ale-archive-item{
+  animation:aleGalleryFadeIn .7s ease both;
+}
+#gallery.active .ale-archive-item:nth-child(2){animation-delay:.06s}
+#gallery.active .ale-archive-item:nth-child(3){animation-delay:.12s}
+#gallery.active .ale-archive-item:nth-child(4){animation-delay:.18s}
+#gallery.active .ale-archive-item:nth-child(5){animation-delay:.24s}
+#gallery.active .ale-archive-item:nth-child(6){animation-delay:.30s}
+#gallery.active .ale-archive-item:nth-child(7){animation-delay:.36s}
+#gallery.active .ale-archive-item:nth-child(8){animation-delay:.42s}
+
+@keyframes aleGalleryFadeIn{
+  from{opacity:0;transform:translateY(14px) scale(.985);filter:blur(5px)}
+  to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+}
+
+/* Respeta usuarios que prefieren menos movimiento */
+@media (prefers-reduced-motion:reduce){
+  #gallery .ale-archive-item,
+  #gallery .ale-archive-item img,
+  #gallery .ale-archive-item::after,
+  #gallery .ale-archive-item::before{
+    transition:none!important;
+    animation:none!important;
+  }
+}
+</style>
+
 </head>
 <body>
 <div id="intro">
