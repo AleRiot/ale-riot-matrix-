@@ -1180,6 +1180,45 @@ html, body{
 <button id="enter">ENTER EXPERIENCE</button>
 </div>
 </div>
+<!-- V66: bienvenida independiente después de ENTER EXPERIENCE -->
+<section id="ale-welcome" aria-hidden="true">
+  <div class="ale-welcome-bg" aria-hidden="true">
+    <svg viewBox="0 0 900 620" role="img" aria-label="Composición sutil de lujo, reloj y monedas">
+      <defs>
+        <linearGradient id="luxMetal" x1="0" x2="1"><stop offset="0" stop-color="#8f6d31"/><stop offset=".5" stop-color="#f0d58a"/><stop offset="1" stop-color="#765520"/></linearGradient>
+        <radialGradient id="luxGlow"><stop offset="0" stop-color="#d9a64b" stop-opacity=".26"/><stop offset="1" stop-color="#d9a64b" stop-opacity="0"/></radialGradient>
+      </defs>
+      <ellipse cx="660" cy="310" rx="310" ry="220" fill="url(#luxGlow)"/>
+      <circle cx="645" cy="280" r="130" fill="none" stroke="url(#luxMetal)" stroke-width="9" opacity=".30"/>
+      <circle cx="645" cy="280" r="108" fill="none" stroke="#fff" stroke-opacity=".13" stroke-width="2"/>
+      <path d="M625 146h40v45h-40zm0 223h40v45h-40z" fill="#b68b3d" opacity=".24"/>
+      <path d="M645 280l52-42M645 280l-4 70" stroke="#f1d994" stroke-width="5" opacity=".30" stroke-linecap="round"/>
+      <circle cx="645" cy="280" r="7" fill="#e8c56c" opacity=".38"/>
+      <ellipse cx="740" cy="445" rx="72" ry="22" fill="url(#luxMetal)" opacity=".25" transform="rotate(-12 740 445)"/>
+      <ellipse cx="790" cy="475" rx="62" ry="19" fill="url(#luxMetal)" opacity=".18" transform="rotate(-12 790 475)"/>
+      <text x="740" y="451" fill="#fff" fill-opacity=".25" font-size="24" text-anchor="middle">$</text>
+      <text x="790" y="481" fill="#fff" fill-opacity=".18" font-size="20" text-anchor="middle">$</text>
+      <rect x="135" y="180" width="170" height="105" rx="12" fill="#111318" stroke="#d6b86c" stroke-opacity=".18"/>
+      <rect x="152" y="198" width="55" height="12" rx="4" fill="#d6b86c" opacity=".12"/>
+      <rect x="152" y="225" width="120" height="7" rx="3" fill="#fff" opacity=".07"/>
+      <rect x="152" y="243" width="84" height="7" rx="3" fill="#fff" opacity=".05"/>
+    </svg>
+  </div>
+  <div class="ale-welcome-card">
+    <div class="ale-welcome-mark"></div>
+    <div class="ale-welcome-kicker">ALE RIOT · 3991 / PRIVATE SPACE</div>
+    <h1>Bienvenido a<br><span>mi espacio.</span></h1>
+    <div class="ale-welcome-rule"></div>
+    <p class="ale-welcome-message">Un lugar para descubrir una parte de mí, sin prisas y sin explicaciones innecesarias.</p>
+    <p class="ale-welcome-note">Historias · música · recuerdos · detalles</p>
+    <div class="ale-welcome-actions">
+      <button type="button" id="ale-welcome-enter">EXPLORAR ESPACIO <b>→</b></button>
+      <button type="button" id="ale-welcome-skip">CONOCERME <b>01</b></button>
+    </div>
+    <div class="ale-welcome-footer">WELCOME TO THE EXPERIENCE</div>
+  </div>
+</section>
+
 <div class="app" id="app">
 <nav aria-label="Navegación principal" class="menu clean-menu" id="ale-clean-menu"><button data-nav="home" type="button">⌂ INICIO</button><button data-nav="gallery" type="button">GALERÍA</button><button data-nav="ale" type="button">ALE RIOT</button><button data-nav="audio" type="button">AUDIO</button><button data-nav="history" type="button">MI HISTORIA</button></nav><button aria-controls="ale-clean-menu" aria-expanded="false" aria-label="Abrir menú" id="ale-clean-tab" type="button">MENÚ</button>
 <section class="page" id="history">
@@ -1348,7 +1387,7 @@ Gracias por entrar a mi espacio. <strong>Bienvenidos.</strong>
       document.body.classList.add('experience-started');
       hidePortal();
       pages().forEach(p=>{p.classList.remove('active');p.setAttribute('aria-hidden','true');});
-      const gallery=$('#gallery'); if(gallery){gallery.classList.add('active');gallery.setAttribute('aria-hidden','false');}
+      const gallery=$('#gallery'); if(gallery){gallery.classList.remove('active');gallery.setAttribute('aria-hidden','true');}
       closeMenu();
       window.scrollTo(0,0);    });
   }
@@ -2503,6 +2542,237 @@ img{
   }
 })();
 </script>
+
+<style id="ale-v66-welcome-css">
+#ale-welcome{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;overflow:hidden;visibility:hidden;opacity:0;pointer-events:none;background:radial-gradient(circle at 70% 45%,rgba(173,124,45,.10),transparent 28%),radial-gradient(circle at 35% 65%,rgba(190,20,55,.07),transparent 30%),#050507;transition:opacity .55s ease,visibility .55s ease}
+#ale-welcome.is-visible{visibility:visible;opacity:1;pointer-events:auto}
+#ale-welcome.is-leaving{opacity:0}
+.ale-welcome-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.62;filter:blur(.15px);pointer-events:none}
+.ale-welcome-bg svg{width:min(900px,100vw);height:auto;transform:translateX(18%) scale(1.02);opacity:.62}
+.ale-welcome-card{position:relative;z-index:2;width:min(610px,90vw);padding:48px 42px 34px;text-align:center;border:1px solid rgba(255,255,255,.12);border-radius:28px;background:linear-gradient(145deg,rgba(8,9,13,.88),rgba(16,13,13,.72));box-shadow:0 35px 110px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.055);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.ale-welcome-mark{width:8px;height:8px;margin:0 auto 19px;border-radius:50%;background:#d7194b;box-shadow:0 0 0 6px rgba(215,25,75,.07),0 0 25px rgba(215,25,75,.48)}
+.ale-welcome-kicker{font:600 8px/1 Arial,sans-serif;letter-spacing:.42em;color:rgba(255,255,255,.34);margin-bottom:22px}
+.ale-welcome-card h1{margin:0;color:#fff;font-size:clamp(42px,7vw,70px);line-height:.95;letter-spacing:.035em;font-weight:500;text-shadow:0 20px 55px rgba(0,0,0,.55)}
+.ale-welcome-card h1 span{font-weight:300;color:rgba(255,255,255,.62)}
+.ale-welcome-rule{width:250px;max-width:55vw;height:1px;margin:25px auto 23px;background:linear-gradient(90deg,transparent,rgba(215,25,75,.75),rgba(255,255,255,.45),rgba(215,25,75,.75),transparent)}
+.ale-welcome-message{max-width:470px;margin:0 auto;color:rgba(255,255,255,.70);font-size:15px;line-height:1.8}
+.ale-welcome-note{margin:18px 0 25px;color:rgba(255,255,255,.28);font-size:7px;letter-spacing:.28em;text-transform:uppercase}
+.ale-welcome-actions{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}
+.ale-welcome-actions button{min-height:44px;padding:0 20px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.035);color:#fff;cursor:pointer;font:600 8px/1 Arial,sans-serif;letter-spacing:.20em;transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.ale-welcome-actions #ale-welcome-enter{border-color:rgba(215,25,75,.42);background:linear-gradient(180deg,rgba(215,25,75,.14),rgba(215,25,75,.035));box-shadow:0 12px 35px rgba(0,0,0,.25)}
+.ale-welcome-actions button:hover,.ale-welcome-actions button:focus-visible{transform:translateY(-2px);border-color:rgba(215,25,75,.58);background:rgba(215,25,75,.09)}
+.ale-welcome-actions b{font-size:14px;font-weight:300;margin-left:10px}
+.ale-welcome-footer{margin-top:25px;color:rgba(255,255,255,.17);font:600 6px/1 Arial,sans-serif;letter-spacing:.34em}
+#ale-welcome.is-visible .ale-welcome-card{animation:aleWelcomeIn .65s cubic-bezier(.2,.7,.2,1) both}
+@keyframes aleWelcomeIn{from{opacity:0;transform:translateY(15px) scale(.985)}to{opacity:1;transform:none}}
+@media(max-width:700px){.ale-welcome-bg svg{width:150vw;transform:translateX(23%) scale(1.1);opacity:.40}.ale-welcome-card{width:92vw;padding:34px 20px 27px;border-radius:23px}.ale-welcome-kicker{font-size:6px;letter-spacing:.28em}.ale-welcome-card h1{font-size:clamp(39px,12vw,59px)}.ale-welcome-message{font-size:13px;line-height:1.72;max-width:330px}.ale-welcome-note{font-size:6px;letter-spacing:.18em}.ale-welcome-actions button{min-height:42px;padding:0 15px;font-size:7px}.ale-welcome-footer{font-size:5px;letter-spacing:.24em}}
+</style>
+<script id="ale-v68-welcome-js">
+(function(){
+  function init(){
+    var intro=document.getElementById('intro');
+    var enter=document.getElementById('enter');
+    var welcome=document.getElementById('ale-welcome');
+    var explore=document.getElementById('ale-welcome-enter');
+    var know=document.getElementById('ale-welcome-skip');
+    var app=document.getElementById('app');
+    if(!intro||!enter||!welcome||!explore||!know||!app)return;
+    if(welcome.__v68)return;
+    welcome.__v68=true;
+
+    function openWelcome(){
+      welcome.classList.remove('is-leaving');
+      welcome.classList.add('is-visible');
+      welcome.setAttribute('aria-hidden','false');
+    }
+
+    function finish(target){
+      welcome.classList.add('is-leaving');
+      setTimeout(function(){
+        welcome.classList.remove('is-visible','is-leaving');
+        welcome.setAttribute('aria-hidden','true');
+        app.classList.add('show');
+        document.body.classList.add('experience-started');
+
+        if(target==='history'){
+          if(typeof window.entrarPortal==='function'){
+            window.entrarPortal('history');
+          }else{
+            document.querySelectorAll('#app > .page').forEach(function(p){
+              p.classList.remove('active');
+              p.setAttribute('aria-hidden','true');
+            });
+            var h=document.getElementById('history');
+            if(h){
+              h.classList.add('active');
+              h.setAttribute('aria-hidden','false');
+            }
+            document.body.classList.add('ale-history-mode');
+            window.scrollTo(0,0);
+          }
+        }else{
+          if(typeof window.abrirPortalInicio==='function'){
+            window.abrirPortalInicio();
+          }
+        }
+      },430);
+    }
+
+    /* ENTER EXPERIENCE -> carta */
+    enter.addEventListener('click',function(){
+      setTimeout(openWelcome,120);
+    },true);
+
+    /* Acción 1: explorar -> INICIO */
+    explore.addEventListener('click',function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      finish('home');
+    });
+
+    /* Acción 2: conocerme -> MI HISTORIA */
+    know.addEventListener('click',function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      finish('history');
+    });
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',init,{once:true});
+  }else{
+    init();
+  }
+})();
+</script>
+
+
+<style id="ale-v67-presentation-buttons">
+.ale-presentation-actions{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:10px!important;
+  flex-wrap:wrap!important;
+  margin-top:0!important;
+}
+.ale-presentation-actions #ale-presentation-enter,
+.ale-presentation-actions #ale-presentation-intro{
+  margin:0!important;
+}
+.ale-presentation-actions #ale-presentation-intro{
+  min-width:145px!important;
+  min-height:46px!important;
+  padding:0 20px!important;
+  border:1px solid rgba(255,255,255,.13)!important;
+  border-radius:999px!important;
+  color:rgba(255,255,255,.72)!important;
+  background:rgba(255,255,255,.035)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
+  cursor:pointer!important;
+  font:600 8px/1 Arial,sans-serif!important;
+  letter-spacing:.22em!important;
+  transition:transform .25s ease,border-color .25s ease,background .25s ease,color .25s ease!important;
+}
+.ale-presentation-actions #ale-presentation-intro b{
+  font-size:8px!important;
+  font-weight:500!important;
+  color:rgba(215,25,75,.75)!important;
+  transition:transform .25s ease!important;
+}
+.ale-presentation-actions #ale-presentation-intro:hover,
+.ale-presentation-actions #ale-presentation-intro:focus-visible{
+  transform:translateY(-2px)!important;
+  border-color:rgba(215,25,75,.45)!important;
+  background:rgba(215,25,75,.07)!important;
+  color:#fff!important;
+}
+.ale-presentation-actions #ale-presentation-intro:hover b,
+.ale-presentation-actions #ale-presentation-intro:focus-visible b{
+  transform:translateX(2px)!important;
+}
+@media(max-width:700px){
+  .ale-presentation-actions{
+    width:100%!important;
+    max-width:330px!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+  .ale-presentation-actions #ale-presentation-enter{
+    min-width:100%!important;
+  }
+  .ale-presentation-actions #ale-presentation-intro{
+    min-width:100%!important;
+    min-height:42px!important;
+  }
+}
+</style>
+
+
+
+
+<style id="ale-v68-history-clean">
+/* V68 — MI HISTORIA: texto limpio, una sola columna */
+#history.page.active .ale-history-content{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:auto!important;
+  min-height:0!important;
+  overflow:visible!important;
+}
+#history.page.active .ale-history-step{
+  display:none!important;
+  width:100%!important;
+  max-width:760px!important;
+  min-width:0!important;
+  min-height:0!important;
+  margin:0 auto!important;
+  padding:8px 4px!important;
+  box-sizing:border-box!important;
+  white-space:normal!important;
+  word-break:normal!important;
+  overflow-wrap:normal!important;
+  text-align:left!important;
+  line-height:1.72!important;
+}
+#history.page.active .ale-history-step.is-active{
+  display:block!important;
+}
+#history.page.active .ale-history-step strong{
+  white-space:normal!important;
+}
+#history.page.active .ale-history-dots{
+  clear:both!important;
+}
+#history.page.active .ale-history-nav{
+  clear:both!important;
+}
+@media(max-width:700px){
+  #history.page.active .ale-history-step{
+    max-width:100%!important;
+    padding:8px 2px!important;
+    font-size:16px!important;
+    line-height:1.62!important;
+  }
+  #history.page.active .ale-history-content{
+    padding-left:0!important;
+    padding-right:0!important;
+  }
+}
+
+/* Carta: el segundo botón tiene identidad propia */
+#ale-welcome-skip{
+  position:relative!important;
+}
+#ale-welcome-skip b{
+  margin-left:9px!important;
+  font-size:8px!important;
+  font-weight:500!important;
+  color:rgba(215,25,75,.78)!important;
+}
+</style>
 
 </body>
 </html>
