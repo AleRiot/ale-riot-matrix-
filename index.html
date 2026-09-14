@@ -1368,7 +1368,7 @@ Gracias por entrar a mi espacio. <strong>Bienvenidos.</strong>
   document.addEventListener('click',function(e){
     const prev=e.target.closest('#history [data-history-prev]'), next=e.target.closest('#history [data-history-next]'), dot=e.target.closest('#history .ale-history-dots button');
     if(prev){e.preventDefault();e.stopPropagation();if(historyIndex>0)renderHistory(historyIndex-1);}
-    else if(next){e.preventDefault();e.stopPropagation();const n=$$('.ale-history-step',$('#history')).length;if(historyIndex<n-1)renderHistory(historyIndex+1);}
+    else if(next){e.preventDefault();e.stopPropagation();const n=$$('.ale-history-step',$('#history')).length;if(historyIndex<n-1)renderHistory(historyIndex+1);else if(typeof window.__aleHistoryFinalize==='function')window.__aleHistoryFinalize();}
     else if(dot){e.preventDefault();e.stopPropagation();const dots=$$('.ale-history-dots button',$('#history'));const i=dots.indexOf(dot);if(i>=0)renderHistory(i);}
   },true);
   window.go=showPage;
@@ -2209,6 +2209,300 @@ img{
   overscroll-behavior:contain!important;
 }
 </style>
+
+
+<style id="ale-v63-interaction">
+/* =========================================================
+   V63 — INTERACCIÓN: MI HISTORIA + ALE RIOT
+   ========================================================= */
+
+/* MI HISTORIA: la navegación se siente como una secuencia */
+#history.page.active .ale-history-step{
+  min-height:92px!important;
+  display:none!important;
+  align-items:center!important;
+}
+#history.page.active .ale-history-step.is-active{
+  display:flex!important;
+}
+#history.page.active .ale-history-nav button[data-history-next]{
+  position:relative!important;
+  overflow:hidden!important;
+}
+#history.page.active .ale-history-nav button[data-history-next]::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.10),transparent)!important;
+  transform:translateX(-120%)!important;
+  transition:transform .5s ease!important;
+}
+#history.page.active .ale-history-nav button[data-history-next]:hover::after{
+  transform:translateX(120%)!important;
+}
+
+/* Mensaje de cierre */
+#ale-history-complete{
+  position:fixed!important;
+  inset:0!important;
+  z-index:1000000!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:24px!important;
+  background:rgba(3,3,5,.78)!important;
+  backdrop-filter:blur(12px)!important;
+  -webkit-backdrop-filter:blur(12px)!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  transition:opacity .35s ease,visibility .35s ease!important;
+}
+#ale-history-complete.is-visible{
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
+#ale-history-complete .complete-box{
+  width:min(420px,92vw)!important;
+  padding:38px 26px 30px!important;
+  text-align:center!important;
+  border:1px solid rgba(255,255,255,.13)!important;
+  border-radius:24px!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(215,25,75,.055))!important;
+  box-shadow:0 30px 90px rgba(0,0,0,.6),0 0 45px rgba(215,25,75,.07)!important;
+  transform:translateY(12px) scale(.98)!important;
+  transition:transform .4s cubic-bezier(.2,.7,.2,1)!important;
+}
+#ale-history-complete.is-visible .complete-box{
+  transform:none!important;
+}
+#ale-history-complete .complete-mark{
+  width:9px!important;height:9px!important;margin:0 auto 20px!important;
+  border-radius:50%!important;background:#d7194b!important;
+  box-shadow:0 0 25px rgba(215,25,75,.55)!important;
+}
+#ale-history-complete .complete-kicker{
+  font-size:8px!important;letter-spacing:.38em!important;
+  color:rgba(255,255,255,.38)!important;margin-bottom:14px!important;
+}
+#ale-history-complete h2{
+  margin:0!important;font-size:clamp(27px,7vw,40px)!important;
+  letter-spacing:.08em!important;color:#fff!important;
+}
+#ale-history-complete p{
+  margin:15px auto 24px!important;max-width:300px!important;
+  color:rgba(255,255,255,.58)!important;line-height:1.7!important;
+  font-size:13px!important;
+}
+#ale-history-complete button{
+  min-height:42px!important;padding:0 23px!important;
+  border:1px solid rgba(215,25,75,.4)!important;
+  border-radius:999px!important;
+  background:rgba(215,25,75,.10)!important;
+  color:#fff!important;font-size:8px!important;
+  letter-spacing:.22em!important;
+}
+
+/* ALE RIOT: convertir las tres piezas en puntos de entrada */
+#ale.page.active .ale-profile-grid article{
+  cursor:pointer!important;
+  position:relative!important;
+  overflow:hidden!important;
+  transition:transform .28s ease,border-color .28s ease,background .28s ease,box-shadow .28s ease!important;
+}
+#ale.page.active .ale-profile-grid article::after{
+  content:"ABRIR →"!important;
+  position:absolute!important;
+  right:15px!important;
+  bottom:13px!important;
+  font:600 7px/1 Arial,sans-serif!important;
+  letter-spacing:.18em!important;
+  color:rgba(255,255,255,.25)!important;
+  transition:color .25s ease,transform .25s ease!important;
+}
+#ale.page.active .ale-profile-grid article:hover,
+#ale.page.active .ale-profile-grid article:focus-within{
+  transform:translateY(-5px)!important;
+  border-color:rgba(215,25,75,.35)!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(215,25,75,.055))!important;
+  box-shadow:0 18px 45px rgba(0,0,0,.3)!important;
+}
+#ale.page.active .ale-profile-grid article:hover::after{
+  color:rgba(215,25,75,.8)!important;
+  transform:translateX(3px)!important;
+}
+#ale.page.active .ale-profile-tags span{
+  cursor:pointer!important;
+  transition:transform .22s ease,border-color .22s ease,color .22s ease,background .22s ease!important;
+}
+#ale.page.active .ale-profile-tags span:hover{
+  transform:translateY(-2px)!important;
+  border-color:rgba(215,25,75,.42)!important;
+  color:#fff!important;
+  background:rgba(215,25,75,.08)!important;
+}
+
+/* pequeño indicador de que ALE RIOT es interactivo */
+#ale.page.active .ale-profile-lead::after{
+  content:"  •  EXPLORE"!important;
+  color:rgba(215,25,75,.7)!important;
+  font-size:.58em!important;
+  letter-spacing:.18em!important;
+  vertical-align:middle!important;
+}
+</style>
+
+<script id="ale-v63-interaction-js">
+(function(){
+  function init(){
+    var history=document.getElementById('history');
+    var ale=document.getElementById('ale');
+
+    /* ---------- CIERRE DE MI HISTORIA ---------- */
+    if(history && !document.getElementById('ale-history-complete')){
+      var overlay=document.createElement('div');
+      overlay.id='ale-history-complete';
+      overlay.innerHTML='<div class="complete-box" role="dialog" aria-modal="true" aria-label="Historia completada">'+
+        '<div class="complete-mark"></div>'+
+        '<div class="complete-kicker">ALE RIOT / 3991</div>'+
+        '<h2>HISTORIA COMPLETADA</h2>'+
+        '<p>Ya conoces una parte de este espacio. El resto de la experiencia sigue aquí.</p>'+
+        '<button type="button" id="ale-history-home">VOLVER A INICIO</button>'+
+        '</div>';
+      document.body.appendChild(overlay);
+
+      overlay.addEventListener('click',function(e){
+        if(e.target===overlay || e.target.closest('#ale-history-home')){
+          overlay.classList.remove('is-visible');
+          if(e.target.closest('#ale-history-home') && typeof window.abrirPortalInicio==='function'){
+            setTimeout(window.abrirPortalInicio,180);
+          }
+        }
+      });
+
+    }
+
+    /* ---------- ALE RIOT: tarjetas como accesos ---------- */
+    if(ale && !ale.__v63){
+      ale.__v63=true;
+      var cards=ale.querySelectorAll('.ale-profile-grid article');
+      cards.forEach(function(card,i){
+        card.setAttribute('tabindex','0');
+        card.setAttribute('role','button');
+        var target=i===0?'home':(i===1?'history':'audio');
+        card.setAttribute('aria-label',i===0?'Abrir Inicio':(i===1?'Abrir Mi Historia':'Abrir Sound Room'));
+
+        function go(){
+          if(target==='home' && typeof window.abrirPortalInicio==='function') window.abrirPortalInicio();
+          else if(typeof window.entrarPortal==='function') window.entrarPortal(target);
+        }
+        card.addEventListener('click',go);
+        card.addEventListener('keydown',function(e){
+          if(e.key==='Enter' || e.key===' '){e.preventDefault();go();}
+        });
+      });
+
+      var tags=ale.querySelectorAll('.ale-profile-tags span');
+      tags.forEach(function(tag){
+        var text=tag.textContent.trim();
+        var target=text==='MÚSICA'?'audio':(text==='RECUERDOS'?'gallery':'history');
+        tag.setAttribute('tabindex','0');
+        tag.setAttribute('role','button');
+        tag.addEventListener('click',function(){
+          if(target==='home' && typeof window.abrirPortalInicio==='function') window.abrirPortalInicio();
+          else if(typeof window.entrarPortal==='function') window.entrarPortal(target);
+        });
+        tag.addEventListener('keydown',function(e){
+          if(e.key==='Enter' || e.key===' '){e.preventDefault();tag.click();}
+        });
+      });
+    }
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true});
+  else init();
+})();
+</script>
+
+
+<style id="ale-v64-finalize-fix">
+/* V64 — FINALIZAR: modal de cierre realmente funcional */
+#ale-history-complete{
+  z-index:2147483647!important;
+}
+#ale-history-complete .complete-box{
+  position:relative!important;
+}
+#ale-history-complete .complete-box::before{
+  content:"04 / 04"!important;
+  display:block!important;
+  margin:-4px auto 16px!important;
+  color:rgba(255,255,255,.22)!important;
+  font:600 7px/1 Arial,sans-serif!important;
+  letter-spacing:.32em!important;
+}
+#ale-history-complete .complete-box h2{
+  text-shadow:0 0 26px rgba(255,255,255,.08)!important;
+}
+#ale-history-complete button{
+  cursor:pointer!important;
+  transition:transform .2s ease,background .2s ease,border-color .2s ease!important;
+}
+#ale-history-complete button:hover,
+#ale-history-complete button:focus-visible{
+  transform:translateY(-2px)!important;
+  background:rgba(215,25,75,.18)!important;
+  border-color:rgba(215,25,75,.65)!important;
+}
+</style>
+
+<script id="ale-v65-finalize-js">
+(function(){
+  function initFinalize(){
+    var overlay=document.getElementById('ale-history-complete');
+    var history=document.getElementById('history');
+    if(!overlay || !history) return;
+
+    function openComplete(){
+      overlay.classList.add('is-visible');
+      document.body.classList.add('ale-history-complete-open');
+    }
+
+    function closeComplete(){
+      overlay.classList.remove('is-visible');
+      document.body.classList.remove('ale-history-complete-open');
+    }
+
+    /* Este es el punto llamado directamente por el controlador original
+       de Historia cuando el usuario pulsa FINALIZAR en 04/04. */
+    window.__aleHistoryFinalize=openComplete;
+
+    overlay.addEventListener('click',function(e){
+      var home=e.target.closest && e.target.closest('#ale-history-home');
+      if(e.target===overlay || home){
+        closeComplete();
+        if(home && typeof window.abrirPortalInicio==='function'){
+          setTimeout(function(){window.abrirPortalInicio();},180);
+        }
+      }
+    });
+
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape' && overlay.classList.contains('is-visible')){
+        e.preventDefault();
+        closeComplete();
+      }
+    });
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',initFinalize,{once:true});
+  }else{
+    initFinalize();
+  }
+})();
+</script>
 
 </body>
 </html>
