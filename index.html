@@ -2,6 +2,7 @@
 
 <html lang="es">
 <head>
+<script id="ale-v84-early-boot">document.documentElement.classList.add('ale-booting');</script>
 <!-- ALE RIOT 3991 V35 SINGLE-FILE TEST -->
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1.0" name="viewport"/>
@@ -2581,7 +2582,7 @@ body.experience-started #app>#audio.page.active .sr35-audio-bg-shade{
     <div class="cinematic-kicker">PRIVATE DIGITAL SPACE · 3991</div>
     <div class="cinematic-line"></div>
     <h1>ALE <span>RIOT</span></h1>
-    <p>MORE THAN A CHATSPACE</p>
+    <p>MORE THAN A XATSPACE</p>
     <button id="enter" type="button">ENTRAR A LA EXPERIENCIA <b>→</b></button>
     <div class="cinematic-scroll">DESLIZA PARA DESCUBRIR <i></i></div>
   </div>
@@ -2709,15 +2710,15 @@ Gracias por entrar a mi espacio. <strong>Bienvenidos.</strong>
   <div class="market-head">
     <div class="market-kicker">07 / MARKETPLACE</div>
     <h1>TIENDA</h1>
-    <p>Una vitrina preparada para comercializar ChatSpaces, fondos, packs y personalizaciones.</p>
+    <p>Una vitrina preparada para comercializar XATSpaces, fondos, packs y personalizaciones.</p>
   </div>
   <div class="shop-grid">
-    <article class="shop-card featured"><span class="shop-label">CHATSPACE</span><h2>Red Eclipse</h2><p>Experiencia completa con portada cinematográfica, galería, música y secciones personalizadas.</p><strong>Desde 2,500 Xats</strong><button type="button" data-buy="RED ECLIPSE · ChatSpace">VER PRODUCTO</button></article>
-    <article class="shop-card"><span class="shop-label">CHATSPACE</span><h2>Black Edition</h2><p>Espacio masculino elegante con portada animada y estética oscura.</p><strong>Desde 2,000 Xats</strong><button type="button" data-buy="BLACK EDITION · ChatSpace">VER PRODUCTO</button></article>
+    <article class="shop-card featured"><span class="shop-label">XATSPACE</span><h2>Red Eclipse</h2><p>Experiencia completa con portada cinematográfica, galería, música y secciones personalizadas.</p><strong>Desde 2,500 Xats</strong><button type="button" data-buy="RED ECLIPSE · XATSpace">VER PRODUCTO</button></article>
+    <article class="shop-card"><span class="shop-label">XATSPACE</span><h2>Black Edition</h2><p>Espacio masculino elegante con portada animada y estética oscura.</p><strong>Desde 2,000 Xats</strong><button type="button" data-buy="BLACK EDITION · XATSpace">VER PRODUCTO</button></article>
     <article class="shop-card"><span class="shop-label">WALL PACK</span><h2>Wallpaper Pack</h2><p>Fondos exclusivos para personalizar chats, perfiles y pantallas.</p><strong>Desde 1,000 Xats</strong><button type="button" data-buy="WALL PACK · Fondos">VER PRODUCTO</button></article>
     <article class="shop-card"><span class="shop-label">CUSTOM</span><h2>Custom Space</h2><p>Diseño completamente personalizado a partir de fotografías, colores, música y concepto.</p><strong>Cotización</strong><button type="button" data-buy="CUSTOM SPACE · Personalizado">SOLICITAR</button></article>
   </div>
-  <div class="shop-footer">ALE RIOT · CHATSPACE STUDIO · <span>DESIGN YOUR IDENTITY</span></div>
+  <div class="shop-footer">ALE RIOT · XATSPACE STUDIO · <span>DESIGN YOUR IDENTITY</span></div>
 </section>
 
 </div>
@@ -2730,7 +2731,7 @@ Gracias por entrar a mi espacio. <strong>Bienvenidos.</strong>
 <div class="portal-grid">
 <button class="portal-card" data-portal-target="history">📖<h3>Mi Historia</h3><p>Conoce mi recorrido.</p><span>ENTRAR →</span></button>
 <button class="portal-card" data-portal-target="gallery">🖼️<h3>Galería</h3><p>Explora momentos especiales.</p><span>ENTRAR →</span></button>
-<button class="portal-card" data-portal-target="audio">🎧<h3>Audio</h3><p>Escucha mi universo sonoro.</p><span>ENTRAR →</span></button><button class="portal-card" data-portal-target="fondos">◈<h3>Fondos</h3><p>Explora diseños para tu espacio.</p><span>VER DISEÑOS →</span></button><button class="portal-card" data-portal-target="tienda">✦<h3>Tienda</h3><p>ChatSpaces, fondos y packs.</p><span>VER TIENDA →</span></button>
+<button class="portal-card" data-portal-target="audio">🎧<h3>Audio</h3><p>Escucha mi universo sonoro.</p><span>ENTRAR →</span></button><button class="portal-card" data-portal-target="fondos">◈<h3>Fondos</h3><p>Explora diseños para tu espacio.</p><span>VER DISEÑOS →</span></button><button class="portal-card" data-portal-target="tienda">✦<h3>Tienda</h3><p>XATSpaces, fondos y packs.</p><span>VER TIENDA →</span></button>
 </div>
 </section>
 <!-- ALE RIOT V8 — MENÚ FINAL AISLADO Y NAVEGACIÓN ROBUSTA -->
@@ -4287,7 +4288,7 @@ body{overflow-x:hidden;scrollbar-width:none}
     const modal=document.createElement('div');
     modal.className='hybrid-modal';
     modal.setAttribute('aria-hidden','true');
-    modal.innerHTML='<div class="hybrid-modal-card" role="dialog" aria-modal="true"><div class="modal-kicker">ALE RIOT · CHATSPACE STUDIO</div><h2 id="hybridModalTitle">Producto</h2><p>Este espacio queda preparado para mostrar la descripción real, muestras, precio, condiciones de entrega y el medio de contacto o compra.</p><div class="hybrid-modal-actions"><button class="primary" id="hybridRequest">SOLICITAR</button><button id="hybridClose">CERRAR</button></div></div>';
+    modal.innerHTML='<div class="hybrid-modal-card" role="dialog" aria-modal="true"><div class="modal-kicker">ALE RIOT · XATSPACE STUDIO</div><h2 id="hybridModalTitle">Producto</h2><p>Este espacio queda preparado para mostrar la descripción real, muestras, precio, condiciones de entrega y el medio de contacto o compra.</p><div class="hybrid-modal-actions"><button class="primary" id="hybridRequest">SOLICITAR</button><button id="hybridClose">CERRAR</button></div></div>';
     document.body.appendChild(modal);
     function close(){modal.classList.remove('is-open');modal.setAttribute('aria-hidden','true');}
     document.addEventListener('click',function(e){
@@ -5464,7 +5465,7 @@ body.experience-started #app > #audio.page.active .sr35-audio-bg-shade{
 
 
 <!-- V79: ENTER SIN CONGELAMIENTO Y NAVEGACIÓN ESTABLE -->
-<style id="ale-v79-enter-fix">
+<style id="ale-v79-enter-fix-style">
   #enter{position:relative!important;z-index:100000!important;pointer-events:auto!important;touch-action:manipulation!important;cursor:pointer!important;}
   #intro .cinematic-content{position:relative!important;z-index:100001!important;pointer-events:auto!important;}
   #intro:not(.hide) #enter{opacity:1!important;visibility:visible!important;}
@@ -5692,7 +5693,7 @@ body.experience-started #app > #audio.page.active .sr35-audio-bg-shade{
   else init();
 })();
 </script>
-</body>
+
 
 <style id="ale-v82-card-navigation-fix">
 /* V82 — Navegación estable de las 3 tarjetas grandes de ALE RIOT.
@@ -5803,7 +5804,7 @@ body.experience-started #app > #audio.page.active .sr35-audio-bg-shade{
   else bind();
 })();
 </script>
-</html>
+
 
 
 
@@ -5854,3 +5855,251 @@ body.experience-started #app > #audio.page.active .sr35-audio-bg-shade{
   else neutralizeAleTags();
 })();
 </script>
+
+
+
+<style id="ale-v84-final-cleanup">
+/* ================================================================
+   V84 — AUDIO COMPLETO + ARRANQUE LIMPIO + TIENDA XATSPACE
+   - Sound Room compacto para que la fila inferior no quede cortada.
+   - El carrusel conserva desplazamiento horizontal, pero sus tarjetas
+     siempre tienen una caja completa visible.
+   - El menú no muestra scrollbar visible.
+   - Se elimina el parseo extraño causado por estilos/scripts después
+     de </html> en versiones anteriores.
+   ================================================================ */
+
+/* ---------- 1. ARRANQUE: UNA SOLA CAPA VISIBLE ---------- */
+html.ale-booting #app,
+html.ale-booting #portalWelcome{
+  visibility:hidden !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+}
+html.ale-booting #intro{
+  visibility:visible !important;
+  opacity:1 !important;
+  pointer-events:auto !important;
+}
+
+/* ---------- 2. MENÚ: SIN BARRA VISIBLE ---------- */
+#ale-clean-menu{
+  scrollbar-width:none !important;
+  -ms-overflow-style:none !important;
+}
+#ale-clean-menu::-webkit-scrollbar{
+  width:0 !important;
+  height:0 !important;
+  display:none !important;
+}
+
+/* ---------- 3. AUDIO: REORDENAR EL VERTICAL PARA QUE TODO ENTRE ---------- */
+body.experience-started #app > #audio.page.active > #sr35Room{
+  justify-content:flex-start !important;
+  padding-top:clamp(58px,6.5vh,76px) !important;
+  padding-bottom:max(76px,calc(env(safe-area-inset-bottom) + 76px)) !important;
+  overflow-y:auto !important;
+  scrollbar-width:none !important;
+}
+
+/* En escritorio dejamos espacio suficiente para ver COMPLETA la fila
+   inferior sin sacrificar la portada central. */
+@media (min-width:701px){
+  body.experience-started #app > #audio.page.active .sr35-stage{
+    height:clamp(220px,31vh,270px) !important;
+    min-height:220px !important;
+    margin-top:0 !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-center{
+    width:min(270px,32vw) !important;
+    height:min(270px,32vw) !important;
+    min-width:220px !important;
+    min-height:220px !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-side{
+    width:150px !important;
+    height:150px !important;
+    min-width:150px !important;
+    min-height:150px !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-carousel{
+    min-height:88px !important;
+    height:88px !important;
+    padding-top:8px !important;
+    padding-bottom:8px !important;
+    margin-top:5px !important;
+    flex:0 0 88px !important;
+    align-items:flex-start !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    scrollbar-width:none !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-mini{
+    flex:0 0 78px !important;
+    width:78px !important;
+    height:72px !important;
+    min-height:72px !important;
+    box-sizing:border-box !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-mini img{
+    width:68px !important;
+    height:52px !important;
+    object-fit:cover !important;
+  }
+}
+
+/* Móvil: compactamos el escenario y la fila de pistas para que los
+   botones PREV/PAUSE/NEXT y las miniaturas aparezcan completos. */
+@media (max-width:700px){
+  body.experience-started #app > #audio.page.active > #sr35Room{
+    padding-top:58px !important;
+    padding-left:8px !important;
+    padding-right:8px !important;
+    padding-bottom:max(86px,calc(env(safe-area-inset-bottom) + 86px)) !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-heading{
+    margin-top:8px !important;
+    margin-bottom:3px !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-heading h1{
+    font-size:clamp(28px,8vw,36px) !important;
+    margin:5px 0 2px !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-stage{
+    height:clamp(180px,25vh,215px) !important;
+    min-height:180px !important;
+    margin-top:0 !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-center{
+    width:min(174px,48vw) !important;
+    height:min(174px,48vw) !important;
+    min-width:158px !important;
+    min-height:158px !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-side{
+    width:104px !important;
+    height:104px !important;
+    min-width:104px !important;
+    min-height:104px !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-prev{left:0 !important;}
+  body.experience-started #app > #audio.page.active .sr35-next{right:0 !important;}
+  body.experience-started #app > #audio.page.active .sr35-arrow{
+    width:38px !important;
+    height:38px !important;
+    font-size:27px !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-now{
+    margin-top:0 !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-now h2{
+    font-size:23px !important;
+    margin:4px 0 0 !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-now p{
+    margin:2px 0 4px !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-progress{
+    margin:8px auto 0 !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-controls{
+    margin:8px 0 5px !important;
+    gap:8px !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-controls button{
+    padding:8px 11px !important;
+    min-height:34px !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-carousel{
+    width:100% !important;
+    min-height:78px !important;
+    height:78px !important;
+    flex:0 0 78px !important;
+    box-sizing:border-box !important;
+    margin-top:2px !important;
+    padding:4px 2px 4px !important;
+    align-items:flex-start !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    scrollbar-width:none !important;
+    scroll-padding-inline:2px !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-carousel::-webkit-scrollbar{
+    display:none !important;
+    width:0 !important;
+    height:0 !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-mini{
+    flex:0 0 70px !important;
+    width:70px !important;
+    height:68px !important;
+    min-height:68px !important;
+    box-sizing:border-box !important;
+    padding:3px !important;
+    margin:0 !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-mini img{
+    width:62px !important;
+    height:42px !important;
+    object-fit:cover !important;
+    border-radius:6px !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-mini b{
+    font-size:7px !important;
+    margin-top:3px !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-mini span{
+    font-size:6px !important;
+    margin-top:1px !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-footer{
+    width:100% !important;
+    margin:5px 0 0 !important;
+    padding-bottom:4px !important;
+    box-sizing:border-box !important;
+  }
+}
+
+@media (max-width:380px){
+  body.experience-started #app > #audio.page.active .sr35-stage{
+    height:175px !important;
+    min-height:175px !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-center{
+    width:154px !important;
+    height:154px !important;
+    min-width:154px !important;
+    min-height:154px !important;
+  }
+}
+
+/* ---------- 4. EVITAR RECORTE POR SAFE AREA ---------- */
+body.experience-started #app > #audio.page.active .sr35-footer{
+  flex:0 0 auto !important;
+}
+
+/* ---------- 5. TIENDA: TERMINOLOGÍA CORRECTA ---------- */
+#tienda .shop-grid,
+#tienda .shop-card{
+  overflow:visible !important;
+}
+</style>
+
+<script id="ale-v84-boot-and-audio-fix">
+(function(){
+  'use strict';
+  /* La clase se activa en <head> para evitar cualquier capa intermedia
+     durante el parseo y se retira cuando el DOM ya está listo. */
+  function finishBoot(){
+    document.documentElement.classList.remove('ale-booting');
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',finishBoot,{once:true});
+  }else{
+    finishBoot();
+  }
+})();
+</script>
+
+</body>
+</html>
