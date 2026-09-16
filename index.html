@@ -1945,6 +1945,25 @@ body.portal-active #portalWelcome{
 
     var v=document.getElementById('aleInteriorBg');
     if(v){v.muted=true;v.loop=true;v.playsInline=true;try{v.play();}catch(x){}}
+
+    /* V77: ENTER también inicia la primera pista del Sound Room.
+       Este controlador se llama aquí porque este listener usa
+       stopImmediatePropagation y bloquea los listeners históricos. */
+    try{
+      if(typeof window.__aleV35Start==='function'){
+        window.__aleV35Start();
+      }else{
+        var firstAudio=document.getElementById('sr35Audio');
+        if(firstAudio){
+          firstAudio.src='music/01_chihiro.mp3';
+          firstAudio.volume=.35;
+          firstAudio.load();
+          var ap=firstAudio.play();
+          if(ap&&ap.catch)ap.catch(function(){});
+        }
+      }
+    }catch(x){}
+
     window.scrollTo(0,0);
   }
   /* Se registra desde el inicio del documento para ganar a todos los
@@ -4817,6 +4836,426 @@ body.experience-started #app > #audio.page.active > #sr35Room > :not(#sr35AudioB
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true});
   else init();
+})();
+</script>
+
+<style id="ale-v77-final-stability">
+/* ================================================================
+   V77 — NAVEGACIÓN + AUDIO + MÓVIL/PC
+   Objetivo: una sola página activa, menú siempre recuperable,
+   primera pista al pulsar ENTER y Sound Room completamente accesible.
+   ================================================================ */
+
+/* ---------- 1. CERO CAPAS LEGACY AL ARRANQUE ---------- */
+#ale-welcome,
+#ale-welcome.is-visible,
+#ale-welcome.is-leaving{
+  display:none !important;
+  visibility:hidden !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+}
+
+html,body{
+  width:100% !important;
+  max-width:none !important;
+  min-width:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  overflow-x:hidden !important;
+  overscroll-behavior-x:none !important;
+}
+
+/* ---------- 2. EL MENÚ ES LA SALIDA DE TODAS LAS SECCIONES ---------- */
+/* En HOME permanece oculto por diseño. En cualquier página interna,
+   siempre queda visible, fijo y por encima de cualquier fondo/video. */
+body.experience-started:not(.portal-active):not(.inicio-open) #ale-clean-tab{
+  display:flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  pointer-events:auto !important;
+  z-index:2147483000 !important;
+}
+body.experience-started:not(.portal-active):not(.inicio-open) #ale-clean-menu{
+  z-index:2147482999 !important;
+}
+
+/* Evita que reglas legacy de .section-view-active escondan el menú. */
+body.experience-started:not(.portal-active):not(.inicio-open) .section-view-active #ale-clean-tab,
+body.experience-started:not(.portal-active):not(.inicio-open) .section-view-active #ale-clean-menu{
+  opacity:1 !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+}
+
+/* Posición estable en PC y móvil. */
+#ale-clean-tab{
+  box-sizing:border-box !important;
+  right:clamp(14px,2.2vw,30px) !important;
+  top:clamp(72px,8vh,96px) !important;
+  left:auto !important;
+  transform:none !important;
+}
+#ale-clean-tab[aria-expanded="true"]{
+  transform:none !important;
+}
+
+@media(max-width:700px){
+  #ale-clean-tab{
+    right:12px !important;
+    top:max(68px,env(safe-area-inset-top) + 58px) !important;
+  }
+  #ale-clean-menu{
+    right:12px !important;
+    max-width:calc(100vw - 24px) !important;
+  }
+}
+
+/* ---------- 3. NUNCA DOS PÁGINAS ACTIVAS ---------- */
+body.experience-started #app > .page{
+  box-sizing:border-box !important;
+}
+body.experience-started:not(.portal-active) #app > .page.active ~ .page.active{
+  /* El controlador JS normaliza el estado; esta regla evita que una
+     segunda página pinte visualmente encima mientras cambia el estado. */
+  display:none !important;
+}
+
+/* ---------- 4. AUDIO: CONTENIDO COMPLETO, SIN RECORTE INFERIOR ---------- */
+body.experience-started #app > #audio.page.active{
+  position:fixed !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100dvh !important;
+  min-height:100dvh !important;
+  max-width:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  overflow:hidden !important;
+  isolation:isolate !important;
+}
+
+body.experience-started #app > #audio.page.active > #sr35Room{
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  min-height:0 !important;
+  max-height:none !important;
+  margin:0 !important;
+  box-sizing:border-box !important;
+  overflow-x:hidden !important;
+  overflow-y:auto !important;
+  -webkit-overflow-scrolling:touch !important;
+  overscroll-behavior-x:none !important;
+  overscroll-behavior-y:auto !important;
+  scrollbar-width:none !important;
+  padding-top:clamp(72px,8vh,96px) !important;
+  padding-right:clamp(10px,3vw,48px) !important;
+  padding-left:clamp(10px,3vw,48px) !important;
+  /* Espacio real para que footer + navegación inferior nunca queden
+     cortados por el borde del viewport o por la zona segura del móvil. */
+  padding-bottom:max(56px,calc(env(safe-area-inset-bottom) + 56px)) !important;
+}
+body.experience-started #app > #audio.page.active > #sr35Room::-webkit-scrollbar{
+  width:0 !important;
+  height:0 !important;
+  display:none !important;
+}
+
+/* El último bloque de Audio siempre puede entrar completo en pantalla. */
+body.experience-started #app > #audio.page.active .sr35-footer{
+  margin-bottom:18px !important;
+}
+body.experience-started #app > #audio.page.active #sr35Audio{
+  position:relative !important;
+  z-index:3 !important;
+}
+
+@media(max-width:700px){
+  body.experience-started #app > #audio.page.active > #sr35Room{
+    padding-top:clamp(72px,9vh,92px) !important;
+    padding-left:8px !important;
+    padding-right:8px !important;
+    padding-bottom:max(72px,calc(env(safe-area-inset-bottom) + 72px)) !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-stage{
+    height:clamp(250px,38vh,330px) !important;
+    min-height:250px !important;
+    flex:0 0 auto !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-carousel{
+    max-width:100% !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    flex:0 0 auto !important;
+    padding-bottom:14px !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-footer{
+    padding-bottom:6px !important;
+  }
+}
+
+@media(max-width:380px){
+  body.experience-started #app > #audio.page.active > #sr35Room{
+    padding-top:68px !important;
+    padding-left:6px !important;
+    padding-right:6px !important;
+    padding-bottom:max(78px,calc(env(safe-area-inset-bottom) + 78px)) !important;
+  }
+  body.experience-started #app > #audio.page.active .sr35-center{
+    width:min(68vw,300px) !important;
+  }
+}
+
+/* ---------- 5. AUDIO SE ACTIVA CON ENTER, NO AL CARGAR LA PÁGINA ---------- */
+/* El audio real queda en pausa hasta que ENTER entregue el gesto del usuario.
+   El fondo de video sí puede reproducirse en silencio desde el inicio. */
+
+/* ---------- 6. FONDO DE AUDIO SIN MARCOS ---------- */
+body.experience-started #app > #audio.page.active #sr35AudioBg,
+body.experience-started #app > #audio.page.active .sr35-audio-bg-shade{
+  position:fixed !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100dvh !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+}
+body.experience-started #app > #audio.page.active #sr35AudioBg{
+  object-fit:cover !important;
+  object-position:center center !important;
+  z-index:0 !important;
+  pointer-events:none !important;
+}
+body.experience-started #app > #audio.page.active .sr35-audio-bg-shade{
+  z-index:1 !important;
+  pointer-events:none !important;
+}
+
+/* ---------- 7. TRANSICIONES SEGURAS EN MÓVIL ---------- */
+@media(max-width:700px){
+  #app > .page,
+  #portalWelcome{
+    max-width:100% !important;
+    min-width:0 !important;
+  }
+  img,video,canvas,svg{
+    max-width:100%;
+  }
+}
+</style>
+
+<script id="ale-v77-final-controller">
+(function(){
+  'use strict';
+
+  function normalizeNavigation(){
+    var app=document.getElementById('app');
+    var portal=document.getElementById('portalWelcome');
+    var tab=document.getElementById('ale-clean-tab');
+    var menu=document.getElementById('ale-clean-menu');
+    if(!app)return;
+
+    var active=Array.prototype.filter.call(app.querySelectorAll(':scope > .page'),function(p){
+      return p.classList.contains('active');
+    });
+
+    if(document.body.classList.contains('portal-active') || document.body.classList.contains('inicio-open')){
+      active.forEach(function(p){
+        p.classList.remove('active','ale-page-enter');
+        p.setAttribute('aria-hidden','true');
+        p.style.setProperty('display','none','important');
+        p.style.setProperty('visibility','hidden','important');
+        p.style.setProperty('opacity','0','important');
+        p.style.setProperty('pointer-events','none','important');
+      });
+      if(tab){
+        tab.style.setProperty('display','none','important');
+        tab.style.setProperty('visibility','hidden','important');
+        tab.style.setProperty('opacity','0','important');
+        tab.style.setProperty('pointer-events','none','important');
+      }
+      if(menu)menu.classList.remove('is-open');
+      return;
+    }
+
+    /* Si hay más de una página activa, conserva solamente la primera.
+       Esto elimina cualquier posibilidad de superposición entre secciones. */
+    if(active.length>1){
+      active.slice(1).forEach(function(p){
+        p.classList.remove('active','ale-page-enter');
+        p.setAttribute('aria-hidden','true');
+        p.style.setProperty('display','none','important');
+        p.style.setProperty('visibility','hidden','important');
+        p.style.setProperty('opacity','0','important');
+        p.style.setProperty('pointer-events','none','important');
+      });
+    }
+
+    if(tab && document.body.classList.contains('experience-started')){
+      tab.style.removeProperty('display');
+      tab.style.removeProperty('visibility');
+      tab.style.removeProperty('opacity');
+      tab.style.removeProperty('pointer-events');
+      tab.setAttribute('aria-expanded',menu && menu.classList.contains('is-open')?'true':'false');
+    }
+  }
+
+  function startFirstTrack(){
+    try{
+      if(typeof window.__aleV35Start==='function'){
+        window.__aleV35Start();
+        return;
+      }
+      var a=document.getElementById('sr35Audio');
+      if(a){
+        a.src='music/01_chihiro.mp3';
+        a.volume=.35;
+        a.load();
+        var p=a.play();
+        if(p&&p.catch)p.catch(function(){});
+      }
+    }catch(e){}
+  }
+
+  function init(){
+    normalizeNavigation();
+
+    var enter=document.getElementById('enter');
+    if(enter){
+      /* No depende de los listeners históricos: este listener se ejecuta
+         en la fase de captura y arranca la pista directamente. */
+      enter.addEventListener('click',function(){
+        setTimeout(function(){
+          if(document.body.classList.contains('experience-started')){
+            startFirstTrack();
+            normalizeNavigation();
+          }
+        },0);
+      },true);
+    }
+
+    var app=document.getElementById('app');
+    if(app){
+      /* V79: no usamos MutationObserver aquí. La versión anterior observaba
+       los mismos atributos que normalizeNavigation modificaba, creando un
+       ciclo de mutaciones que podía congelar la interfaz al entrar. */
+    }
+
+    document.addEventListener('click',function(e){
+      var nav=e.target && e.target.closest ? e.target.closest('#ale-clean-menu button[data-nav]') : null;
+      if(nav){
+        setTimeout(normalizeNavigation,100);
+        return;
+      }
+      var card=e.target && e.target.closest ? e.target.closest('#portalWelcome .portal-card[data-portal-target]') : null;
+      if(card){
+        setTimeout(normalizeNavigation,100);
+      }
+    },true);
+  }
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
+  else init();
+})();
+</script>
+
+
+<!-- V79: ENTER SIN CONGELAMIENTO Y NAVEGACIÓN ESTABLE -->
+<style id="ale-v79-enter-fix">
+  #enter{position:relative!important;z-index:100000!important;pointer-events:auto!important;touch-action:manipulation!important;cursor:pointer!important;}
+  #intro .cinematic-content{position:relative!important;z-index:100001!important;pointer-events:auto!important;}
+  #intro:not(.hide) #enter{opacity:1!important;visibility:visible!important;}
+</style>
+<script id="ale-v79-enter-fix">
+(function(){
+  'use strict';
+  var busy=false;
+  function startExperience(e){
+    var hit=e.target && e.target.closest ? e.target.closest('#enter') : null;
+    if(!hit || busy) return;
+    busy=true;
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+
+    var intro=document.getElementById('intro');
+    var app=document.getElementById('app');
+    var portal=document.getElementById('portalWelcome');
+    var pages=app ? app.querySelectorAll(':scope > .page') : [];
+
+    if(intro) intro.classList.add('hide');
+    if(app) app.classList.add('show');
+    document.body.classList.add('experience-started','portal-active','inicio-open');
+    document.body.classList.remove('ale-history-mode');
+
+    pages.forEach(function(p){
+      p.classList.remove('active','ale-page-enter');
+      p.setAttribute('aria-hidden','true');
+      p.style.setProperty('display','none','important');
+      p.style.setProperty('visibility','hidden','important');
+      p.style.setProperty('pointer-events','none','important');
+    });
+
+    if(portal){
+      portal.classList.add('active');
+      portal.setAttribute('aria-hidden','false');
+      portal.style.setProperty('display','flex','important');
+      portal.style.setProperty('visibility','visible','important');
+      portal.style.setProperty('opacity','1','important');
+      portal.style.setProperty('pointer-events','auto','important');
+    }
+
+    var menu=document.getElementById('ale-clean-menu');
+    var tab=document.getElementById('ale-clean-tab');
+    if(menu) menu.classList.remove('is-open');
+    if(tab){
+      tab.setAttribute('aria-expanded','false');
+      tab.setAttribute('aria-label','Abrir menú');
+      tab.setAttribute('title','Abrir menú');
+    }
+
+    var bg=document.getElementById('aleInteriorBg');
+    if(bg){
+      bg.muted=true; bg.loop=true; bg.playsInline=true;
+      var bp=bg.play(); if(bp&&bp.catch)bp.catch(function(){});
+    }
+
+    /* Inicia la primera pista en el mismo gesto del usuario. */
+    try{
+      var audio=document.getElementById('sr35Audio');
+      if(audio){
+        audio.src='music/01_chihiro.mp3';
+        audio.volume=.35;
+        audio.load();
+        var ap=audio.play(); if(ap&&ap.catch)ap.catch(function(){});
+      }
+    }catch(err){}
+
+    window.scrollTo(0,0);
+    setTimeout(function(){busy=false;},500);
+  }
+
+  /* Window capture gana a los listeners históricos registrados en document. */
+  window.addEventListener('pointerup',startExperience,true);
+  window.addEventListener('click',startExperience,true);
+
+  /* Elimina listeners antiguos del propio botón y deja uno solo. */
+  function isolateButton(){
+    var old=document.getElementById('enter');
+    if(!old || old.dataset.v78Ready==='1') return;
+    var fresh=old.cloneNode(true);
+    fresh.dataset.v78Ready='1';
+    old.replaceWith(fresh);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',isolateButton,{once:true});
+  else isolateButton();
 })();
 </script>
 </body>
