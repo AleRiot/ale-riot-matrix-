@@ -1364,8 +1364,8 @@ body.experience-started{background:#050608!important}
 }
 </style>
 
-\n
-\n
+
+
 <style id="ale-v65-real-video-background">
 /* V65 — EL VIDEO ES EL FONDO DEL INTERIOR. NO ES UNA SECCIÓN NI UNA TARJETA. */
 #app{position:relative!important;isolation:isolate!important;background:transparent!important;min-height:100vh!important;}
@@ -1499,7 +1499,7 @@ body{position:relative!important;min-height:100vh!important;}
 /* Panel de navegación: debajo del icono, no centrado sobre la página. */
 #ale-clean-menu{
   position:fixed!important;
-  top:82px!important;
+  top:68px!important;
   right:24px!important;
   z-index:2147483000!important;
   width:min(230px,calc(100vw - 32px))!important;
@@ -1507,7 +1507,7 @@ body{position:relative!important;min-height:100vh!important;}
   margin:0!important;
   padding:10px!important;
   box-sizing:border-box!important;
-  transform:translateY(-8px)!important;
+  transform:translateY(-3px)!important;
   transform-origin:top right!important;
   border-radius:18px!important;
 }
@@ -2272,6 +2272,469 @@ body.experience-started .ale-interior-bg-shade{
 }
 </style>
 
+
+<style id="final-no-black-borders-fix">
+/* Corrección final de pantalla completa sin bandas negras */
+html, body {
+  width:100%;
+  min-height:100%;
+  margin:0;
+  background:#000;
+  overflow-x:hidden !important;
+  overflow-y:auto !important;
+}
+
+#intro,
+.intro,
+.cinematic-intro {
+  width:100vw !important;
+  height:100dvh !important;
+  min-height:100dvh !important;
+  background-size:cover !important;
+  background-position:center center !important;
+  background-repeat:no-repeat !important;
+  overflow:hidden !important;
+}
+
+/* Evita que capas internas creen espacios vacíos */
+#intro > *,
+.intro > *,
+.cinematic-intro > * {
+  max-width:100%;
+}
+
+/* Las pantallas internas deben ocupar su contenido, no una caja fija */
+.page,
+.section,
+.menu-page,
+#history,
+#gallery,
+#ale-riot,
+.history-card,
+.content-card {
+  height:auto !important;
+  min-height:100dvh !important;
+  overflow:visible !important;
+}
+
+/* ALE Riot: desplazamiento libre */
+#ale-riot,
+.ale-riot,
+#history {
+  -webkit-overflow-scrolling:touch;
+}
+
+/* Elimina textos de escape visibles */
+body {
+  white-space:normal !important;
+}
+</style>
+
+
+<style id="final-stability-fix">
+html, body{
+  width:100%;
+  min-width:100%;
+  margin:0;
+  padding:0;
+  overflow-x:hidden;
+  overflow-y:auto;
+  background:#050608;
+}
+body{
+  min-height:100dvh;
+}
+video,
+#intro video,
+.background-video,
+.bg-video,
+video.bg{
+  width:100vw!important;
+  height:100dvh!important;
+  min-height:100dvh!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  display:block!important;
+}
+#intro{
+  width:100vw!important;
+  height:100dvh!important;
+  overflow:hidden!important;
+}
+</style>
+
+<style id="anti-flash-stabilizer">
+html, body {
+  background:#08080f !important;
+  min-height:100%;
+  width:100%;
+  overflow-x:hidden;
+}
+*, *::before, *::after {
+  box-sizing:border-box;
+}
+body {
+  overscroll-behavior-y:none;
+}
+video, .background-video, .bg-video, .hero-video, .cinematic-video {
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  background:#08080f;
+}
+img, .background-image, .bg-image {
+  max-width:100%;
+}
+section, main, .page, .screen, .experience, .container {
+  max-width:100vw;
+}
+/* evita el frame negro mientras cargan animaciones */
+.fade-in, .intro, .cinematic-intro {
+  backface-visibility:hidden;
+  transform:translateZ(0);
+}
+</style>
+
+<style id="ale-final-polish">
+/* Pulido final móvil: elimina bandas negras y permite ver contenido completo */
+html, body {
+  width:100%;
+  min-height:100%;
+  margin:0;
+  padding:0;
+  background:#050608;
+  overflow-x:hidden !important;
+  overflow-y:auto !important;
+}
+
+body {
+  -webkit-overflow-scrolling:touch;
+}
+
+.app {
+  height:auto !important;
+  min-height:100dvh !important;
+  overflow:visible !important;
+}
+
+#intro {
+  height:100dvh !important;
+  min-height:100svh !important;
+}
+
+.page,
+section,
+main {
+  min-height:100dvh;
+  height:auto !important;
+  padding-bottom:120px !important;
+  overflow:visible !important;
+}
+
+.page.active {
+  display:block !important;
+}
+
+.menu {
+  bottom:20px;
+  top:auto !important;
+  transform:none !important;
+  max-height:calc(100dvh - 40px);
+}
+
+img, video {
+  max-width:100%;
+}
+
+* {
+  overscroll-behavior-x:none;
+}
+
+/* evita flashes/bordes durante transiciones */
+#intro.hide {
+  display:none !important;
+}
+</style>
+
+<style id="final-menu-fix">
+/* Corrección final menú: evita panel extendido y permite desplazamiento interno */
+#ale-clean-menu{
+  height:auto!important;
+  max-height:calc(100svh - 48px)!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  align-content:flex-start!important;
+  justify-content:flex-start!important;
+  top:50%!important;
+  bottom:auto!important;
+  overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+}
+#ale-clean-menu::-webkit-scrollbar{width:0!important;height:0!important}
+#ale-clean-menu button{flex:0 0 auto!important}
+body,html{min-height:100%!important}
+</style>
+
+<style id="menu-v7-close-no-flash">
+/* Ajuste puntual: menú más cercano al botón hamburguesa */
+#ale-clean-menu,
+.ale-clean-menu,
+.menu-panel,
+.side-menu,
+#menu-panel {
+    margin-top: 4px !important;
+    transform-origin: top center !important;
+}
+
+/* Evitar separación causada por animaciones */
+.menu-panel.open,
+#ale-clean-menu.open,
+.ale-clean-menu.open {
+    transform: translateY(0) !important;
+}
+
+/* Evitar flashes/destellos al abrir menú */
+.spark,
+.sparkle,
+.flash,
+.particle,
+.glow-particle {
+    animation-play-state: paused !important;
+}
+
+/* Mantener interacción */
+#menuBtn,
+.menu-button,
+.hamburger,
+button {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+</style>
+
+
+<style id="menu-v8-real-fix">
+/* Corrección real del menú: acercar panel sin activar efectos */
+
+/* Eliminar separación extra del panel */
+#ale-clean-menu,
+.ale-clean-menu,
+.menu-panel,
+.side-menu,
+#menu-panel {
+    top: 0 !important;
+    margin-top: 0 !important;
+    translate: 0 -8px !important;
+    transition: transform .25s ease, opacity .25s ease !important;
+}
+
+/* Evitar que animaciones globales generen destellos */
+.spark,
+.sparkle,
+.flash,
+.particle,
+.glow-particle,
+[class*="spark"],
+[class*="particle"],
+[class*="shine"] {
+    animation: none !important;
+}
+
+/* Mantener solo la animación del menú */
+#ale-clean-menu,
+.ale-clean-menu,
+.menu-panel {
+    will-change: transform, opacity !important;
+}
+</style>
+
+
+<style id="menu-v9-position-media">
+/* Ajuste fino: menú entre arriba y centro */
+#ale-clean-menu,
+.ale-clean-menu,
+.menu-panel,
+.side-menu,
+#menu-panel {
+    translate: 0 -3px !important;
+    margin-top: 0 !important;
+}
+</style>
+
+
+<style id="menu-v10-ajuste-real">
+/* Ajuste real de posición del panel respecto al botón hamburguesa */
+#ale-clean-menu,
+.ale-clean-menu,
+.menu-panel,
+.side-menu,
+#menu-panel {
+    translate: none !important;
+    margin-top: 0 !important;
+}
+
+/* El panel conserva cercanía pero baja ligeramente */
+#ale-clean-menu.open,
+.ale-clean-menu.open,
+.menu-panel.open,
+.side-menu.open,
+#menu-panel.open {
+    transform: translateY(18px) !important;
+}
+
+/* Evitar que la transición cambie la posición final */
+#ale-clean-menu,
+.ale-clean-menu,
+.menu-panel,
+.side-menu,
+#menu-panel {
+    transition: transform .25s ease, opacity .25s ease !important;
+}
+</style>
+
+
+<style id="menu-v11-posicion-corregida">
+/* Corrección: devolver el menú a una posición media */
+#ale-clean-menu.open,
+.ale-clean-menu.open,
+.menu-panel.open,
+.side-menu.open,
+#menu-panel.open {
+    transform: translateY(45px) !important;
+}
+
+/* Evitar desplazamientos heredados */
+#ale-clean-menu,
+.ale-clean-menu,
+.menu-panel,
+.side-menu,
+#menu-panel {
+    translate: none !important;
+}
+</style>
+
+
+<style id="menu-v12-position-real">
+/* Corrección definitiva de posición del menú abierto */
+#ale-clean-menu,
+.ale-clean-menu,
+.menu-panel,
+.side-menu,
+#menu-panel {
+    top: auto !important;
+}
+
+/* Separación visual desde el botón hamburguesa */
+#ale-clean-menu.open,
+.ale-clean-menu.open,
+.menu-panel.open,
+.side-menu.open,
+#menu-panel.open,
+.menu-panel[style*="display"],
+.side-menu[style*="display"] {
+    margin-top: 55px !important;
+    transform: none !important;
+    translate: none !important;
+}
+</style>
+
+
+<style id="menu-v13-final-position">
+/* Corrección basada en el contenedor real: neutraliza offsets acumulados */
+#ale-clean-menu,
+.ale-clean-menu,
+.menu-panel,
+.side-menu,
+#menu-panel {
+    top: unset !important;
+    bottom: unset !important;
+}
+
+/* Posición intermedia debajo del botón */
+#ale-clean-menu.open,
+.ale-clean-menu.open,
+.menu-panel.open,
+.side-menu.open,
+#menu-panel.open {
+    position: absolute !important;
+    top: 65px !important;
+    margin-top: 0 !important;
+    transform: none !important;
+    translate: none !important;
+}
+</style>
+
+
+<style id="menu-v14-js-target-fix">
+/* Corrección final del posicionamiento del menú abierto */
+#ale-clean-menu.open,
+.ale-clean-menu.open,
+.menu-panel.open,
+.side-menu.open,
+#menu-panel.open {
+    top: 55px !important;
+    margin-top: 0 !important;
+    transform: none !important;
+    translate: none !important;
+}
+
+/* Evita que animaciones de entrada modifiquen la posición final */
+#ale-clean-menu,
+.ale-clean-menu,
+.menu-panel,
+.side-menu,
+#menu-panel {
+    animation-fill-mode: forwards !important;
+}
+</style>
+<script id="menu-v14-inline-style-clean">
+document.addEventListener("click", function(){
+  const menus = document.querySelectorAll("#ale-clean-menu,.ale-clean-menu,.menu-panel,.side-menu,#menu-panel");
+  menus.forEach(m => {
+    if (m.classList.contains("open")) {
+      m.style.top = "55px";
+      m.style.transform = "none";
+      m.style.translate = "none";
+    }
+  });
+});
+</script>
+
+
+<style id="menu-v15-real-position">
+/* Corrección real: el menú estaba centrado por top:50% y translateY(-50%) */
+#ale-clean-menu {
+    top: 70px !important;
+    right: 28px !important;
+    transform: translateX(120px) !important;
+}
+
+/* Estado visible del menú */
+#ale-clean-menu.open,
+#ale-clean-menu.active,
+#ale-clean-menu.show {
+    transform: translateX(0) !important;
+}
+
+/* Mantener el panel cercano al botón */
+#ale-clean-menu {
+    margin-top: 0 !important;
+}
+</style>
+
+
+<style id="xatspace-v17-safe-fix">
+/* Mantener interacción del menú */
+#menuBtn,
+.hamburger,
+.menu-button,
+button {
+    pointer-events:auto !important;
+}
+</style>
+
 </head>
 <body>
 <!-- V63: VIDEO CINEMATOGRÁFICO PARA EL INTERIOR -->
@@ -2283,7 +2746,7 @@ body.experience-started .ale-interior-bg-shade{
     <div class="cinematic-kicker">PRIVATE DIGITAL SPACE · 3991</div>
     <div class="cinematic-line"></div>
     <h1>ALE <span>RIOT</span></h1>
-    <p>MORE THAN A CHATSPACE</p>
+    <p>MORE THAN A Xatspace</p>
     <button id="enter" type="button">ENTRAR A LA EXPERIENCIA <b>→</b></button>
     <div class="cinematic-scroll">DESLIZA PARA DESCUBRIR <i></i></div>
   </div>
@@ -2411,15 +2874,15 @@ Gracias por entrar a mi espacio. <strong>Bienvenidos.</strong>
   <div class="market-head">
     <div class="market-kicker">07 / MARKETPLACE</div>
     <h1>TIENDA</h1>
-    <p>Una vitrina preparada para comercializar ChatSpaces, fondos, packs y personalizaciones.</p>
+    <p>Una vitrina preparada para comercializar Xatspaces, fondos, packs y personalizaciones.</p>
   </div>
   <div class="shop-grid">
-    <article class="shop-card featured"><span class="shop-label">CHATSPACE</span><h2>Red Eclipse</h2><p>Experiencia completa con portada cinematográfica, galería, música y secciones personalizadas.</p><strong>Desde 2,500 Xats</strong><button type="button" data-buy="RED ECLIPSE · ChatSpace">VER PRODUCTO</button></article>
-    <article class="shop-card"><span class="shop-label">CHATSPACE</span><h2>Black Edition</h2><p>Espacio masculino elegante con portada animada y estética oscura.</p><strong>Desde 2,000 Xats</strong><button type="button" data-buy="BLACK EDITION · ChatSpace">VER PRODUCTO</button></article>
+    <article class="shop-card featured"><span class="shop-label">Xatspace</span><h2>Red Eclipse</h2><p>Experiencia completa con portada cinematográfica, galería, música y secciones personalizadas.</p><strong>Desde 2,500 Xats</strong><button type="button" data-buy="RED ECLIPSE · Xatspace">VER PRODUCTO</button></article>
+    <article class="shop-card"><span class="shop-label">Xatspace</span><h2>Black Edition</h2><p>Espacio masculino elegante con portada animada y estética oscura.</p><strong>Desde 2,000 Xats</strong><button type="button" data-buy="BLACK EDITION · Xatspace">VER PRODUCTO</button></article>
     <article class="shop-card"><span class="shop-label">WALL PACK</span><h2>Wallpaper Pack</h2><p>Fondos exclusivos para personalizar chats, perfiles y pantallas.</p><strong>Desde 1,000 Xats</strong><button type="button" data-buy="WALL PACK · Fondos">VER PRODUCTO</button></article>
     <article class="shop-card"><span class="shop-label">CUSTOM</span><h2>Custom Space</h2><p>Diseño completamente personalizado a partir de fotografías, colores, música y concepto.</p><strong>Cotización</strong><button type="button" data-buy="CUSTOM SPACE · Personalizado">SOLICITAR</button></article>
   </div>
-  <div class="shop-footer">ALE RIOT · CHATSPACE STUDIO · <span>DESIGN YOUR IDENTITY</span></div>
+  <div class="shop-footer">ALE RIOT · Xatspace STUDIO · <span>DESIGN YOUR IDENTITY</span></div>
 </section>
 
 </div>
@@ -4028,7 +4491,7 @@ body{overflow-x:hidden;scrollbar-width:none}
     const modal=document.createElement('div');
     modal.className='hybrid-modal';
     modal.setAttribute('aria-hidden','true');
-    modal.innerHTML='<div class="hybrid-modal-card" role="dialog" aria-modal="true"><div class="modal-kicker">ALE RIOT · CHATSPACE STUDIO</div><h2 id="hybridModalTitle">Producto</h2><p>Este espacio queda preparado para mostrar la descripción real, muestras, precio, condiciones de entrega y el medio de contacto o compra.</p><div class="hybrid-modal-actions"><button class="primary" id="hybridRequest">SOLICITAR</button><button id="hybridClose">CERRAR</button></div></div>';
+    modal.innerHTML='<div class="hybrid-modal-card" role="dialog" aria-modal="true"><div class="modal-kicker">ALE RIOT · Xatspace STUDIO</div><h2 id="hybridModalTitle">Producto</h2><p>Este espacio queda preparado para mostrar la descripción real, muestras, precio, condiciones de entrega y el medio de contacto o compra.</p><div class="hybrid-modal-actions"><button class="primary" id="hybridRequest">SOLICITAR</button><button id="hybridClose">CERRAR</button></div></div>';
     document.body.appendChild(modal);
     function close(){modal.classList.remove('is-open');modal.setAttribute('aria-hidden','true');}
     document.addEventListener('click',function(e){
@@ -4053,8 +4516,8 @@ body{overflow-x:hidden;scrollbar-width:none}
 })();
 </script>
 
-\n
-\n
+
+
 <div class="interior-video-overlay" aria-hidden="true"></div>
 <script id="ale-v65-video-controller">
 (function(){
@@ -4951,7 +5414,140 @@ body.experience-started #app > #audio.page.active > #sr35Room > :not(#sr35AudioB
   /* La lógica está integrada arriba en el controlador V35. Este marcador documenta la corrección. */
 })();
 </script>
+
+<style id="final-ale-riot-polish-v2">
+/* Estabilización final móvil */
+html,body{
+  min-height:100%;
+  height:auto !important;
+  overflow-x:hidden !important;
+  background:#000;
+}
+body{
+  overflow-y:auto !important;
+  overscroll-behavior-y:auto;
+}
+/* Evita flashes de capas al cargar */
+*,*::before,*::after{
+  backface-visibility:hidden;
+}
+/* Contenedores pantalla completa sin bandas */
+.fullscreen,.screen,.page,.section,.app-container{
+  min-height:100svh !important;
+  min-height:100dvh !important;
+}
+/* Menú: no forzar altura completa */
+nav,.menu,.menu-panel,.navigation-panel,.side-menu{
+  max-height:calc(100dvh - 24px) !important;
+  overflow-y:auto !important;
+  padding-bottom:env(safe-area-inset-bottom,24px) !important;
+}
+/* Quitar destellos demasiado agresivos */
+.spark,.sparkle,.flash,.particle-flash,.shine-flash{
+  animation-duration:0s !important;
+  opacity:.35 !important;
+}
+/* Evita parpadeo de fondos con blur */
+.background,.bg-layer,.cinematic-bg{
+  transform:translateZ(0);
+}
+</style>
+
+<!-- ESTEFI FINAL POLISH — MENU CLIP + STABILITY FIX -->
+<style id="estefi-final-polish-menu-fix">
+/* Evita que el panel del menú se extienda más allá de la pantalla */
+#ale-clean-menu{
+  max-height:calc(100svh - 110px)!important;
+  overflow:hidden!important;
+  contain:layout paint!important;
+}
+#ale-clean-menu .menu-content,
+#ale-clean-menu .ale-menu-content,
+#ale-clean-menu nav{
+  max-height:calc(100svh - 150px)!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain!important;
+}
+/* Evita destellos/parpadeos al abrir capas */
+#ale-clean-menu, #ale-clean-tab{
+  backface-visibility:hidden!important;
+  transform:translateZ(0);
+}
+html,body{
+  min-height:100%;
+  background-color:#050608!important;
+}
+</style>
+
+
+
 </body>
+
+<style id="estefi-final-v3-fix">
+/* V3: ajuste final de menú móvil, scroll y eliminación de flashes */
+html, body {
+  width:100%;
+  max-width:100%;
+  min-height:100%;
+  overflow-x:hidden !important;
+}
+
+body {
+  overflow-y:auto !important;
+}
+
+/* Evita bandas negras por capas de pantalla */
+.fullscreen, .screen, .page, .section, .app-container {
+  height:auto !important;
+  min-height:100svh;
+}
+
+/* Menú lateral: ocupa solo su contenido y permite desplazamiento */
+#ale-clean-menu,
+nav,
+.menu,
+.menu-panel,
+.navigation-panel,
+.side-menu {
+  height:auto !important;
+  min-height:0 !important;
+  max-height:calc(100dvh - 40px) !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  overscroll-behavior:contain;
+}
+
+/* Elimina espacios extra al final del menú */
+#ale-clean-menu {
+  padding-bottom:20px !important;
+}
+
+/* Evita que tarjetas internas corten contenido */
+#ale-clean-menu * {
+  max-height:none;
+}
+
+/* Desactiva destellos residuales */
+.spark,
+.sparkle,
+.flash,
+.particle-flash,
+.shine-flash,
+[class*="spark"],
+[class*="flash"] {
+  animation:none !important;
+  opacity:0 !important;
+  display:none !important;
+}
+
+/* Estabiliza fondos para evitar parpadeo al cambiar pantallas */
+.background,
+.bg-layer,
+.cinematic-bg {
+  transform:none !important;
+  backface-visibility:hidden;
+}
+</style>
 </html>
 
 <style id="estefi-v16-gallery-final">
