@@ -3322,6 +3322,148 @@ body:before{
 }
 </style>
 
+
+<style id="ale-v40-pc-desktop-polish">
+/* =========================================================
+   ALE RIOT V40 — PC / DESKTOP POLISH
+   Corrige la composición de la intro en pantallas grandes:
+   - evita que ENTRAR se encime con las tarjetas inferiores
+   - da más aire vertical al logotipo
+   - mantiene la referencia cinematográfica sin alterar móvil
+   - estabiliza el indicador EN LÍNEA en la esquina superior derecha
+   ========================================================= */
+@media (min-width:901px){
+  #intro.cinematic-intro .neon-content{
+    width:min(1080px,calc(100vw - 80px))!important;
+    padding:12px 30px 205px!important;
+    transform:translate3d(0,-28px,0)!important;
+  }
+
+  #intro.cinematic-intro .neon-kicker{
+    margin-bottom:14px!important;
+  }
+
+  #intro.cinematic-intro .neon-orbit{
+    width:92px!important;
+    height:92px!important;
+    margin-bottom:13px!important;
+  }
+
+  #intro.cinematic-intro .neon-content h1{
+    font-size:clamp(64px,7.2vw,100px)!important;
+    line-height:.88!important;
+    letter-spacing:-.045em!important;
+    margin:0!important;
+  }
+
+  #intro.cinematic-intro .neon-subtitle{
+    margin-top:13px!important;
+    margin-bottom:7px!important;
+  }
+
+  #intro.cinematic-intro .neon-micro{
+    margin-bottom:18px!important;
+  }
+
+  #intro.cinematic-intro .neon-content #enter.neon-enter{
+    position:relative!important;
+    z-index:35!important;
+    height:52px!important;
+    min-width:190px!important;
+    margin:0!important;
+  }
+
+  /* La tira inferior queda completamente separada del botón. */
+  #intro.cinematic-intro .neon-feature-strip{
+    bottom:22px!important;
+    width:min(820px,calc(100vw - 110px))!important;
+    gap:10px!important;
+    z-index:40!important;
+  }
+
+  #intro.cinematic-intro .neon-feature-strip>div{
+    min-height:62px!important;
+    padding:10px 9px!important;
+    border-radius:13px!important;
+  }
+
+  #intro.cinematic-intro .neon-feature-strip span{
+    font-size:15px!important;
+    margin-bottom:5px!important;
+  }
+
+  #intro.cinematic-intro .neon-feature-strip b{
+    font-size:7.5px!important;
+    letter-spacing:2.2px!important;
+  }
+
+  #intro.cinematic-intro .neon-feature-strip small{
+    font-size:5.5px!important;
+    margin-top:5px!important;
+  }
+
+  #intro.cinematic-intro .neon-signature{
+    right:42px!important;
+    bottom:112px!important;
+    font-size:14px!important;
+  }
+
+  /* Marco más limpio en PC. */
+  #intro.cinematic-intro .neon-frame-corners{
+    inset:16px!important;
+  }
+  #intro.cinematic-intro .neon-frame-corners i{
+    width:38px!important;
+    height:38px!important;
+  }
+
+  /* Presencia: azul neón, discreta y siempre legible. */
+  #intro.cinematic-intro .neon-topbar{
+    top:22px!important;
+    left:28px!important;
+    right:28px!important;
+    font-size:8px!important;
+    letter-spacing:2.2px!important;
+  }
+  #intro.cinematic-intro .neon-topbar .neon-status{
+    min-width:118px!important;
+    height:32px!important;
+    padding:0 14px!important;
+    gap:9px!important;
+    border:1px solid rgba(66,165,255,.58)!important;
+    border-radius:999px!important;
+    background:linear-gradient(135deg,rgba(8,35,75,.62),rgba(17,9,45,.50))!important;
+    color:rgba(235,247,255,.96)!important;
+    box-shadow:0 0 16px rgba(35,135,255,.14),inset 0 1px 0 rgba(190,225,255,.11)!important;
+    letter-spacing:.20em!important;
+  }
+  #intro.cinematic-intro .neon-topbar .neon-status b{
+    width:7px!important;
+    height:7px!important;
+    flex:0 0 7px!important;
+    background:#36a7ff!important;
+    box-shadow:0 0 5px #36a7ff,0 0 13px rgba(54,167,255,.72)!important;
+  }
+  #intro.cinematic-intro .neon-topbar .neon-status[data-status="away"]{
+    border-color:rgba(155,140,255,.48)!important;
+  }
+  #intro.cinematic-intro .neon-topbar .neon-status[data-status="offline"]{
+    border-color:rgba(150,162,184,.30)!important;
+  }
+}
+
+/* Pantallas medianas: conserva separación sin hacer el diseño gigante. */
+@media (min-width:701px) and (max-width:1100px){
+  #intro.cinematic-intro .neon-content{
+    padding-bottom:185px!important;
+    transform:translate3d(0,-18px,0)!important;
+  }
+  #intro.cinematic-intro .neon-feature-strip{
+    width:min(760px,calc(100vw - 60px))!important;
+    bottom:18px!important;
+  }
+}
+</style>
 </head>
 <body>
 <!-- V33: NUEVO DISEÑO NEON AZUL MAGENTA — CONSERVA LOS 3 VIDEOS EMBEBIDOS -->
