@@ -5,7 +5,7 @@
 <!-- ALE RIOT 3991 V35 SINGLE-FILE TEST -->
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1.0" name="viewport"/>
-<title>ALE Riot 3991 Experience — V33 Neon Blue Magenta</title>
+<title>ALE Riot 3991 Experience — Clean Premium V43</title>
 
 <style id="ale-v27-critical-first-frame">
 /*
@@ -3496,7 +3496,7 @@ body:before{
   </div>
 
   <div class="neon-feature-strip" aria-hidden="true">
-    <div><span>◌</span><b>CHAT</b><small>CONECTA</small></div>
+    <div><span>◈</span><b>HISTORIA</b><small>CONOCE</small></div>
     <div><span>♫</span><b>MÚSICA</b><small>SIENTE</small></div>
     <div><span>⌁</span><b>GALERÍA</b><small>RECUERDOS</small></div>
     <div><span>✦</span><b>MÁS</b><small>EXPLORA</small></div>
@@ -5273,19 +5273,7 @@ body{overflow-x:hidden;scrollbar-width:none}
 
 
 <div class="interior-video-overlay" aria-hidden="true"></div>
-<script id="ale-v65-video-controller">
-(function(){
-  function init(){
-    var v=document.getElementById('aleInteriorBg'); if(!v)return;
-    v.muted=true; v.loop=true; v.playsInline=true;
-    function play(){v.play().catch(function(){});}
-    var enter=document.getElementById('enter');
-    if(enter) enter.addEventListener('click',function(){setTimeout(play,150);},false);
-    document.addEventListener('visibilitychange',function(){if(!document.hidden && document.body.classList.contains('experience-started'))play();});
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-})();
-</script>
+
 
 <script id="ale-v66-menu-guard">
 document.addEventListener('DOMContentLoaded',function(){
@@ -5547,50 +5535,7 @@ document.addEventListener('DOMContentLoaded',function(){
 </script>
 
 
-<script id="ale-v71-showroom-runtime">
-(function(){
-  function keepInteriorBackground(){
-    var v=document.getElementById('aleInteriorBg');
-    var room=document.getElementById('sr35Room');
-    if(v){
-      v.style.display='block';
-      v.style.visibility='visible';
-      v.style.opacity='1';
-      v.muted=true;
-      v.loop=true;
-      v.playsInline=true;
-      var p=v.play();
-      if(p && p.catch)p.catch(function(){});
-    }
-    if(room){
-      room.style.background='transparent';
-      room.style.backgroundColor='transparent';
-      room.style.backgroundImage='none';
-    }
-  }
 
-  function init(){
-    keepInteriorBackground();
-
-    document.addEventListener('click',function(e){
-      var target=e.target;
-      if(target && target.closest && (
-        target.closest('[data-nav="audio"]') ||
-        target.closest('#audio') ||
-        target.closest('#sr35Room')
-      )){
-        setTimeout(keepInteriorBackground,20);
-      }
-    },true);
-  }
-
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',init,{once:true});
-  }else{
-    init();
-  }
-})();
-</script>
 
 
 <style id="ale-v73-audio-video-background">
@@ -5602,16 +5547,7 @@ document.addEventListener('DOMContentLoaded',function(){
   @media(max-width:700px){#audio .sr35-audio-bg{object-position:center center!important;filter:brightness(.43) saturate(.88) contrast(1.04)!important;}}
 </style>
 
-<script id="ale-v73-audio-video-control">
-(function(){
-  function playAudioBg(){var v=document.getElementById('sr35AudioBg');if(v){v.muted=true;var p=v.play();if(p&&p.catch)p.catch(function(){});}}
-  document.addEventListener('click',function(e){
-    var t=e.target&&e.target.closest&&e.target.closest('[data-target="audio"], [data-portal-target="audio"], #audio');
-    if(t) setTimeout(playAudioBg,80);
-  });
-  window.addEventListener('load',function(){setTimeout(function(){if(document.getElementById('audio')?.classList.contains('active'))playAudioBg();},150);});
-})();
-</script>
+
 
 <style id="ale-v73-mobile-audio-viewport-fix">
 /* V73 — CORRECCIÓN DE VIEWPORT MÓVIL PARA AUDIO
@@ -6163,11 +6099,7 @@ body.experience-started #app > #audio.page.active > #sr35Room > :not(#sr35AudioB
 </script>
 
 <!-- V33: ENTRAR activa el audio dentro del gesto del usuario; sin audio.load() antes de play() -->
-<script id="ale-v33-enter-music-hard-fix">
-(function(){
-  /* La lógica está integrada arriba en el controlador V35. Este marcador documenta la corrección. */
-})();
-</script>
+
 
 <style id="final-ale-riot-polish-v2">
 /* Estabilización final móvil */
@@ -7159,6 +7091,1592 @@ body.portal-active #portalWelcome{
 })();
 </script>
 
+
+<style id="ale-v41-no-chat-polish">
+/* V41 — La franja superior refleja únicamente secciones que existen. */
+.neon-feature-strip > div:first-child b{letter-spacing:.18em}
+</style>
+
+
+<!-- ALE RIOT V42 — ESTADO DE PRESENCIA DENTRO DEL ESPACIO -->
+<style id="ale-v42-inner-presence">
+  /* Indicador fijo y discreto: acompaña al usuario una vez dentro del espacio. */
+  #ale-space-presence{
+    position:fixed!important;
+    top:22px!important;
+    right:26px!important;
+    z-index:2147482998!important;
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:9px!important;
+    min-width:118px!important;
+    height:31px!important;
+    padding:0 13px!important;
+    box-sizing:border-box!important;
+    border:1px solid rgba(76,145,255,.42)!important;
+    border-radius:999px!important;
+    background:linear-gradient(135deg,rgba(8,27,57,.68),rgba(17,10,39,.60))!important;
+    box-shadow:0 0 16px rgba(45,115,255,.11),inset 0 1px 0 rgba(190,225,255,.10)!important;
+    color:rgba(232,244,255,.94)!important;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif!important;
+    font-size:9px!important;
+    font-weight:700!important;
+    letter-spacing:.18em!important;
+    line-height:1!important;
+    white-space:nowrap!important;
+    opacity:0!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+    transform:translateY(-8px)!important;
+    transition:opacity .35s ease,visibility .35s ease,transform .35s ease,border-color .35s ease,box-shadow .35s ease,background .35s ease,color .35s ease!important;
+    overflow:hidden!important;
+    isolation:isolate!important;
+  }
+  #ale-space-presence::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:inherit;
+    background:linear-gradient(105deg,transparent 0%,rgba(255,255,255,.06) 48%,transparent 68%);
+    transform:translateX(-125%);
+    animation:aleInnerPresenceSheen 6.5s ease-in-out infinite;
+    pointer-events:none;
+  }
+  #ale-space-presence .ale-space-dot{
+    position:relative;
+    z-index:2;
+    display:block;
+    width:7px;
+    height:7px;
+    flex:0 0 7px;
+    border-radius:50%;
+    background:#36a7ff;
+    box-shadow:0 0 5px #36a7ff,0 0 12px rgba(54,167,255,.70);
+    animation:aleInnerOnlinePulse 2.25s ease-in-out infinite;
+  }
+  #ale-space-presence .ale-space-label{position:relative;z-index:2;}
+
+  /* Solo aparece una vez que el visitante ha entrado al espacio. */
+  body.experience-started #ale-space-presence:not(.ale-presence-hidden){
+    opacity:1!important;
+    visibility:visible!important;
+    transform:translateY(0)!important;
+  }
+  body.portal-active #ale-space-presence{
+    opacity:0!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+    transform:translateY(-8px)!important;
+  }
+
+  #ale-space-presence[data-status="online"]{
+    border-color:rgba(66,165,255,.58)!important;
+    background:linear-gradient(135deg,rgba(8,39,78,.72),rgba(17,10,47,.62))!important;
+    box-shadow:0 0 18px rgba(45,115,255,.14),inset 0 1px 0 rgba(190,225,255,.12)!important;
+  }
+  #ale-space-presence[data-status="away"]{
+    border-color:rgba(155,140,255,.42)!important;
+    background:linear-gradient(135deg,rgba(39,31,76,.62),rgba(20,12,45,.58))!important;
+    color:rgba(238,235,255,.90)!important;
+  }
+  #ale-space-presence[data-status="away"] .ale-space-dot{
+    background:#9b8cff;
+    box-shadow:0 0 5px #9b8cff,0 0 11px rgba(155,140,255,.56);
+    animation:aleInnerAwayPulse 3.2s ease-in-out infinite;
+  }
+  #ale-space-presence[data-status="offline"]{
+    border-color:rgba(150,162,184,.26)!important;
+    background:linear-gradient(135deg,rgba(32,39,51,.48),rgba(16,18,27,.52))!important;
+    color:rgba(190,199,214,.72)!important;
+    box-shadow:0 0 10px rgba(60,75,100,.05),inset 0 1px 0 rgba(220,230,245,.04)!important;
+  }
+  #ale-space-presence[data-status="offline"] .ale-space-dot{
+    background:#758196;
+    box-shadow:0 0 4px rgba(117,129,150,.40);
+    animation:none!important;
+  }
+
+  @keyframes aleInnerOnlinePulse{
+    0%,100%{transform:scale(.88);opacity:.78;box-shadow:0 0 4px #36a7ff,0 0 9px rgba(54,167,255,.55)}
+    50%{transform:scale(1.18);opacity:1;box-shadow:0 0 6px #36a7ff,0 0 16px rgba(54,167,255,.78)}
+  }
+  @keyframes aleInnerAwayPulse{
+    0%,100%{transform:scale(.92);opacity:.68}
+    50%{transform:scale(1.08);opacity:.92}
+  }
+  @keyframes aleInnerPresenceSheen{
+    0%,64%,100%{transform:translateX(-125%);opacity:0}
+    70%{opacity:.48}
+    78%{transform:translateX(125%);opacity:0}
+  }
+
+  @media (max-width:900px){
+    #ale-space-presence{
+      top:15px!important;
+      right:16px!important;
+      min-width:104px!important;
+      height:29px!important;
+      padding:0 11px!important;
+      gap:8px!important;
+      font-size:8px!important;
+      letter-spacing:.16em!important;
+    }
+    #ale-space-presence .ale-space-dot{width:7px;height:7px;flex-basis:7px;}
+  }
+  @media (max-width:430px){
+    #ale-space-presence{
+      top:12px!important;
+      right:12px!important;
+      min-width:96px!important;
+      height:28px!important;
+      padding:0 10px!important;
+      font-size:7.5px!important;
+      letter-spacing:.14em!important;
+    }
+  }
+  @media (prefers-reduced-motion:reduce){
+    #ale-space-presence::after,
+    #ale-space-presence .ale-space-dot{animation:none!important;}
+    #ale-space-presence{transition:none!important;}
+  }
+</style>
+<script id="ale-v42-inner-presence-script">
+(function(){
+  'use strict';
+  if(window.__aleRiotV42InnerPresence) return;
+  window.__aleRiotV42InnerPresence=true;
+
+  function init(){
+    if(document.getElementById('ale-space-presence')) return;
+
+    var el=document.createElement('div');
+    el.id='ale-space-presence';
+    el.setAttribute('role','status');
+    el.setAttribute('aria-live','polite');
+    el.innerHTML='<span class="ale-space-dot" aria-hidden="true"></span><span class="ale-space-label">EN LÍNEA</span>';
+    document.body.appendChild(el);
+
+    var label=el.querySelector('.ale-space-label');
+    var source=document.querySelector('.neon-topbar .neon-status');
+    var labels={online:'EN LÍNEA',away:'AUSENTE',offline:'OFFLINE'};
+
+    function sync(){
+      if(!source) return;
+      var state=source.getAttribute('data-status') || 'online';
+      if(!labels[state]) state='online';
+      el.setAttribute('data-status',state);
+      label.textContent=labels[state];
+      el.setAttribute('aria-label','Estado: '+labels[state]);
+    }
+
+    /* El indicador interno comparte exactamente el mismo estado que el de la portada. */
+    sync();
+    if(source && window.MutationObserver){
+      var observer=new MutationObserver(function(mutations){
+        for(var i=0;i<mutations.length;i++){
+          if(mutations[i].attributeName==='data-status'){
+            sync();
+            break;
+          }
+        }
+      });
+      observer.observe(source,{attributes:true,attributeFilter:['data-status']});
+    }
+
+    /* Si el estado se crea un poco después por el script de presencia, lo enlazamos. */
+    var lateTimer=setInterval(function(){
+      if(!source){
+        source=document.querySelector('.neon-topbar .neon-status');
+        if(source){
+          sync();
+          clearInterval(lateTimer);
+        }
+      }else clearInterval(lateTimer);
+    },500);
+    setTimeout(function(){clearInterval(lateTimer);},10000);
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true});
+  else init();
+})();
+</script>
+
+
+<style id="ale-v43-clean-premium">
+/* =========================================================
+   ALE RIOT V43 — CLEAN PREMIUM / BLUE-MAGENTA SYSTEM
+   Objetivo: consolidar la apariencia sin reescribir la arquitectura.
+   - HOME/INTRO: jerarquía cinematográfica limpia.
+   - Azul neón como color principal, violeta/magenta como acento.
+   - Presencia unificada y discreta.
+   - PC y móvil tratados por separado.
+   - Menos blur/glow simultáneo para mejorar rendimiento.
+   ========================================================= */
+:root{
+  --ale43-blue:#39a7ff;
+  --ale43-blue2:#1976ff;
+  --ale43-violet:#8f6dff;
+  --ale43-magenta:#ff4bbd;
+  --ale43-white:#f6f8ff;
+  --ale43-muted:rgba(225,234,255,.68);
+  --ale43-line:rgba(86,164,255,.34);
+  --ale43-glass:rgba(5,12,30,.48);
+  --ale43-shadow:0 18px 55px rgba(0,0,0,.38);
+}
+
+/* ---------- BASE: evita que los parches históricos vuelvan a pintar rojo ---------- */
+#intro.cinematic-intro{
+  background:#020612!important;
+  color:var(--ale43-white)!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+}
+#intro.cinematic-intro::before{
+  background:radial-gradient(circle at 50% 40%,rgba(27,92,190,.13),transparent 42%),linear-gradient(180deg,rgba(1,6,18,.18),rgba(2,4,14,.46))!important;
+  opacity:1!important;
+}
+#intro .cinematic-vignette{
+  background:radial-gradient(circle at 50% 46%,transparent 20%,rgba(0,3,14,.16) 56%,rgba(0,2,10,.76) 100%)!important;
+  opacity:1!important;
+}
+#intro .cinematic-stars{opacity:.55!important;}
+
+/* ---------- TOP BAR ---------- */
+#intro .neon-topbar{
+  position:absolute!important;
+  top:clamp(20px,3.2vh,38px)!important;
+  left:clamp(24px,4vw,70px)!important;
+  right:clamp(24px,4vw,70px)!important;
+  width:auto!important;
+  display:grid!important;
+  grid-template-columns:1fr auto 1fr!important;
+  align-items:center!important;
+  gap:18px!important;
+  z-index:30!important;
+  color:rgba(220,234,255,.72)!important;
+  text-transform:uppercase!important;
+}
+#intro .neon-top-code{
+  justify-self:center!important;
+  font-size:clamp(8px,.62vw,11px)!important;
+  letter-spacing:.38em!important;
+  color:rgba(207,225,255,.74)!important;
+  text-shadow:0 0 12px rgba(57,167,255,.18)!important;
+}
+#intro .neon-menu-mark{
+  justify-self:start!important;
+  width:34px!important;
+  height:28px!important;
+  display:grid!important;
+  align-content:center!important;
+  gap:5px!important;
+  opacity:.76!important;
+}
+#intro .neon-menu-mark i{
+  display:block!important;
+  width:27px!important;
+  height:1px!important;
+  background:linear-gradient(90deg,var(--ale43-blue),rgba(143,109,255,.75))!important;
+  box-shadow:0 0 8px rgba(57,167,255,.26)!important;
+}
+#intro .neon-status{
+  justify-self:end!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:8px!important;
+  min-height:30px!important;
+  padding:0 13px!important;
+  border:1px solid rgba(57,167,255,.34)!important;
+  border-radius:999px!important;
+  background:rgba(3,12,30,.42)!important;
+  color:rgba(225,240,255,.82)!important;
+  box-shadow:0 0 16px rgba(25,118,255,.07),inset 0 1px 0 rgba(255,255,255,.06)!important;
+  font-size:8px!important;
+  font-weight:700!important;
+  letter-spacing:.22em!important;
+  white-space:nowrap!important;
+}
+#intro .neon-status b{
+  width:7px!important;height:7px!important;border-radius:50%!important;
+  background:var(--ale43-blue)!important;
+  box-shadow:0 0 5px var(--ale43-blue),0 0 13px rgba(57,167,255,.58)!important;
+}
+
+/* ---------- HERO ---------- */
+#intro .cinematic-content.neon-content{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:clamp(86px,9vh,110px) 28px clamp(106px,13vh,145px)!important;
+  display:grid!important;
+  grid-template-rows:auto auto auto auto auto 1fr auto!important;
+  justify-items:center!important;
+  align-content:center!important;
+  text-align:center!important;
+  z-index:10!important;
+}
+#intro .neon-kicker{
+  margin:0 0 clamp(10px,1.7vh,20px)!important;
+  color:rgba(207,225,255,.66)!important;
+  font-size:clamp(8px,.7vw,11px)!important;
+  letter-spacing:.52em!important;
+  line-height:1.2!important;
+  text-transform:uppercase!important;
+  text-shadow:0 0 12px rgba(57,167,255,.16)!important;
+}
+#intro .neon-orbit{
+  width:clamp(64px,6vw,92px)!important;
+  height:clamp(64px,6vw,92px)!important;
+  margin:0 0 clamp(14px,2vh,24px)!important;
+  opacity:.82!important;
+  filter:drop-shadow(0 0 11px rgba(57,167,255,.24))!important;
+  transform-origin:center!important;
+}
+#intro .neon-orbit-ring.ring-a{border-color:rgba(57,167,255,.48)!important;}
+#intro .neon-orbit-ring.ring-b{border-color:rgba(255,75,189,.28)!important;}
+#intro .neon-orbit-core{background:radial-gradient(circle,#dff5ff 0 9%,#39a7ff 22%,#7b5cff 48%,transparent 70%)!important;box-shadow:0 0 15px rgba(57,167,255,.65)!important;}
+#intro .neon-line{
+  width:min(300px,30vw)!important;
+  height:1px!important;
+  margin:0 auto clamp(10px,1.6vh,18px)!important;
+  background:linear-gradient(90deg,transparent,var(--ale43-blue),var(--ale43-violet),transparent)!important;
+  box-shadow:0 0 10px rgba(57,167,255,.18)!important;
+  opacity:.72!important;
+}
+#intro h1{
+  margin:0!important;
+  font-size:clamp(60px,8.4vw,142px)!important;
+  line-height:.86!important;
+  letter-spacing:-.045em!important;
+  font-weight:500!important;
+  color:#f7f8ff!important;
+  text-shadow:0 0 18px rgba(55,145,255,.16),0 12px 35px rgba(0,0,0,.32)!important;
+}
+#intro h1 span{
+  background:linear-gradient(100deg,#f7f8ff 0%,#dcecff 40%,#75c9ff 64%,#d7c7ff 86%,#ffb5e8 100%)!important;
+  -webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;
+  filter:none!important;
+}
+#intro .neon-subtitle{
+  margin:clamp(12px,2vh,22px) 0 0!important;
+  color:rgba(239,244,255,.80)!important;
+  font-size:clamp(10px,.9vw,14px)!important;
+  letter-spacing:.55em!important;
+  text-transform:uppercase!important;
+}
+#intro .neon-micro{
+  margin:clamp(18px,2.5vh,30px) 0 0!important;
+  color:rgba(218,229,255,.60)!important;
+  font-size:clamp(9px,.75vw,12px)!important;
+  letter-spacing:.34em!important;
+  text-transform:uppercase!important;
+}
+
+/* ---------- ENTER: protagonista, pero sin competir con el logo ---------- */
+#intro .neon-enter{
+  position:relative!important;
+  margin:clamp(22px,3.2vh,38px) 0 0!important;
+  min-width:210px!important;
+  height:58px!important;
+  padding:0 26px!important;
+  border:1px solid rgba(65,169,255,.62)!important;
+  border-radius:999px!important;
+  background:linear-gradient(110deg,rgba(16,54,111,.54),rgba(29,22,77,.48))!important;
+  color:#f2f7ff!important;
+  box-shadow:0 0 0 1px rgba(144,194,255,.05) inset,0 0 22px rgba(39,125,255,.13),0 18px 42px rgba(0,0,0,.24)!important;
+  letter-spacing:.30em!important;
+  font-size:10px!important;
+  font-weight:800!important;
+  transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease,background .25s ease!important;
+}
+#intro .neon-enter::before{
+  content:""!important;
+  position:absolute!important;inset:3px!important;border-radius:inherit!important;
+  border:1px solid rgba(255,255,255,.055)!important;
+  pointer-events:none!important;
+}
+#intro .neon-enter:hover{
+  transform:translateY(-2px)!important;
+  border-color:rgba(83,183,255,.82)!important;
+  background:linear-gradient(110deg,rgba(19,69,140,.64),rgba(42,28,104,.56))!important;
+  box-shadow:0 0 28px rgba(39,125,255,.18),0 20px 48px rgba(0,0,0,.28)!important;
+}
+#intro .neon-enter span{position:relative!important;z-index:1!important;}
+
+#intro .neon-scroll{
+  margin-top:clamp(12px,1.8vh,22px)!important;
+  color:rgba(210,224,250,.46)!important;
+  font-size:8px!important;
+  letter-spacing:.42em!important;
+  text-transform:uppercase!important;
+}
+
+/* ---------- FEATURE STRIP: cuatro módulos, sin CHAT ---------- */
+#intro .neon-feature-strip{
+  width:min(1160px,92vw)!important;
+  margin:clamp(24px,4vh,48px) auto 0!important;
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:12px!important;
+  align-self:end!important;
+}
+#intro .neon-feature-strip > div{
+  min-height:74px!important;
+  padding:14px 12px 11px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:5px!important;
+  border:1px solid rgba(72,153,255,.28)!important;
+  border-radius:16px!important;
+  background:linear-gradient(145deg,rgba(18,43,82,.48),rgba(20,13,47,.36))!important;
+  box-shadow:inset 0 1px 0 rgba(215,235,255,.07),0 12px 28px rgba(0,0,0,.20)!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+  color:rgba(232,241,255,.88)!important;
+  transition:transform .22s ease,border-color .22s ease,background .22s ease,box-shadow .22s ease!important;
+}
+#intro .neon-feature-strip > div:hover{
+  transform:translateY(-3px)!important;
+  border-color:rgba(68,169,255,.55)!important;
+  background:linear-gradient(145deg,rgba(21,61,111,.56),rgba(30,18,62,.46))!important;
+  box-shadow:inset 0 1px 0 rgba(215,235,255,.09),0 15px 34px rgba(0,0,0,.26),0 0 18px rgba(45,115,255,.07)!important;
+}
+#intro .neon-feature-strip span{
+  color:var(--ale43-blue)!important;
+  font-size:13px!important;
+  text-shadow:0 0 10px rgba(57,167,255,.35)!important;
+}
+#intro .neon-feature-strip > div:nth-child(2) span{color:#b98dff!important;}
+#intro .neon-feature-strip > div:nth-child(3) span{color:#6fc9ff!important;}
+#intro .neon-feature-strip > div:nth-child(4) span{color:#ff8dd4!important;}
+#intro .neon-feature-strip > div{font-size:9px!important;letter-spacing:.16em!important;text-transform:uppercase!important;}
+#intro .neon-feature-strip > div::first-line{font-weight:800!important;}
+
+#intro .neon-signature{
+  position:absolute!important;
+  right:clamp(24px,4vw,70px)!important;
+  bottom:clamp(20px,3vh,34px)!important;
+  color:rgba(221,229,250,.46)!important;
+  font-size:8px!important;
+  letter-spacing:.20em!important;
+  text-transform:uppercase!important;
+}
+#intro .neon-signature::first-line{color:rgba(255,139,212,.60)!important;}
+
+/* ---------- INTERIOR: misma gramática visual ---------- */
+#app > .page.active .portal-card,
+#app > .page.active .history-card,
+#app > .page.active .birthday-counter,
+#app > .page.active .ale-audio-panel,
+#app > .page.active .ale-profile-shell{
+  border-color:var(--ale43-line)!important;
+  box-shadow:var(--ale43-shadow),inset 0 1px 0 rgba(190,225,255,.075),0 0 22px rgba(45,115,255,.055)!important;
+}
+#app > .page.active h1,
+#app > .page.active h2,
+#app > .page.active h3{
+  text-shadow:0 0 16px rgba(57,167,255,.10)!important;
+}
+
+/* ---------- PRESENCIA INTERNA: misma identidad, más ligera ---------- */
+#ale-space-presence{
+  border-color:rgba(57,167,255,.42)!important;
+  background:linear-gradient(135deg,rgba(7,30,61,.64),rgba(19,13,45,.54))!important;
+  box-shadow:0 0 17px rgba(45,115,255,.09),inset 0 1px 0 rgba(190,225,255,.08)!important;
+}
+
+/* ---------- PERFORMANCE: no mantener animaciones caras en páginas ocultas ---------- */
+#app > .page:not(.active) *{
+  animation-play-state:paused!important;
+}
+#app > .page:not(.active) video{
+  visibility:hidden!important;
+}
+#intro .neon-feature-strip > div,
+#intro .neon-enter{
+  -webkit-tap-highlight-color:transparent!important;
+}
+
+/* ---------- TABLET ---------- */
+@media (max-width:900px){
+  #intro .neon-topbar{
+    top:18px!important;left:18px!important;right:18px!important;
+    grid-template-columns:auto 1fr auto!important;gap:10px!important;
+  }
+  #intro .neon-top-code{font-size:7px!important;letter-spacing:.25em!important;}
+  #intro .neon-status{min-height:28px!important;padding:0 10px!important;font-size:7px!important;letter-spacing:.16em!important;}
+  #intro .cinematic-content.neon-content{padding:72px 18px 96px!important;}
+  #intro h1{font-size:clamp(58px,12vw,96px)!important;}
+  #intro .neon-feature-strip{width:min(94vw,760px)!important;gap:9px!important;}
+  #intro .neon-feature-strip > div{min-height:66px!important;border-radius:14px!important;}
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width:700px){
+  #intro .neon-menu-mark{width:28px!important;transform:scale(.82)!important;transform-origin:left center!important;}
+  #intro .neon-top-code{font-size:6.6px!important;letter-spacing:.20em!important;white-space:nowrap!important;}
+  #intro .neon-status{min-height:27px!important;padding:0 9px!important;font-size:6.8px!important;gap:6px!important;letter-spacing:.13em!important;}
+  #intro .neon-status b{width:6px!important;height:6px!important;}
+  #intro .cinematic-content.neon-content{
+    padding:74px 14px 30px!important;
+    align-content:start!important;
+    grid-template-rows:auto auto auto auto auto auto 1fr!important;
+  }
+  #intro .neon-kicker{font-size:7px!important;letter-spacing:.34em!important;margin-bottom:10px!important;}
+  #intro .neon-orbit{width:58px!important;height:58px!important;margin-bottom:13px!important;}
+  #intro .neon-line{width:150px!important;margin-bottom:12px!important;}
+  #intro h1{font-size:clamp(54px,16vw,78px)!important;line-height:.90!important;letter-spacing:-.055em!important;}
+  #intro .neon-subtitle{font-size:8px!important;letter-spacing:.37em!important;margin-top:12px!important;}
+  #intro .neon-micro{font-size:7px!important;letter-spacing:.22em!important;line-height:1.7!important;margin-top:17px!important;}
+  #intro .neon-enter{min-width:178px!important;height:50px!important;margin-top:20px!important;font-size:9px!important;letter-spacing:.25em!important;}
+  #intro .neon-scroll{font-size:6.8px!important;margin-top:11px!important;}
+  #intro .neon-feature-strip{
+    width:100%!important;
+    margin-top:18px!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+    align-self:end!important;
+  }
+  #intro .neon-feature-strip > div{min-height:60px!important;padding:9px 6px!important;font-size:7px!important;letter-spacing:.12em!important;border-radius:13px!important;}
+  #intro .neon-feature-strip span{font-size:11px!important;}
+  #intro .neon-signature{display:none!important;}
+}
+
+@media (max-width:390px){
+  #intro .neon-top-code{font-size:6px!important;letter-spacing:.16em!important;}
+  #intro .neon-status{font-size:6.2px!important;min-width:0!important;}
+  #intro .cinematic-content.neon-content{padding-left:11px!important;padding-right:11px!important;}
+  #intro h1{font-size:53px!important;}
+  #intro .neon-feature-strip > div{min-height:56px!important;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  #intro *,
+  #ale-space-presence,
+  #ale-space-presence *{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition-duration:.001ms!important;
+  }
+}
+</style>
+
+<script id="ale-v43-performance-controller">
+(function(){
+  'use strict';
+  if(window.__aleRiotV43Performance) return;
+  window.__aleRiotV43Performance=true;
+
+  function allVideos(){ return Array.prototype.slice.call(document.querySelectorAll('video')); }
+  function syncVideos(){
+    var intro=document.getElementById('intro');
+    var interior=document.getElementById('aleInteriorBg');
+    var audio=document.getElementById('sr35AudioBg');
+    var started=document.body.classList.contains('experience-started');
+    var portal=document.body.classList.contains('portal-active') || document.body.classList.contains('inicio-open');
+    var visible=!document.hidden;
+
+    if(intro){
+      if(!started && visible && !intro.classList.contains('hide')){
+        try{intro.play().catch(function(){});}catch(e){}
+      }else if(intro.classList.contains('hide') || started || !visible){
+        try{intro.pause();}catch(e){}
+      }
+    }
+
+    if(interior){
+      var activePage=document.querySelector('#app > .page.active');
+      var shouldPlay=started && !portal && visible && !!activePage;
+      if(shouldPlay){
+        try{interior.play().catch(function(){});}catch(e){}
+      }else{
+        try{interior.pause();}catch(e){}
+      }
+    }
+
+    if(audio){
+      var audioActive=started && !portal && visible && !!document.querySelector('#audio.page.active');
+      if(audioActive){
+        try{audio.play().catch(function(){});}catch(e){}
+      }else{
+        try{audio.pause();}catch(e){}
+      }
+    }
+  }
+
+  function init(){
+    allVideos().forEach(function(v){
+      v.setAttribute('playsinline','');
+      if(v.id!=='intro') v.setAttribute('preload','none');
+    });
+    syncVideos();
+    document.addEventListener('visibilitychange',syncVideos,{passive:true});
+    var observer=new MutationObserver(function(){ syncVideos(); });
+    observer.observe(document.body,{attributes:true,attributeFilter:['class']});
+    Array.prototype.forEach.call(document.querySelectorAll('#app > .page'),function(page){
+      observer.observe(page,{attributes:true,attributeFilter:['class']});
+    });
+    window.setTimeout(syncVideos,700);
+    window.setTimeout(syncVideos,1800);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true});
+  else init();
+})();
+</script>
+
+<style id="ale-v44-performance-structure">
+/* ============================================================
+   ALE RIOT V44 — PERFORMANCE / STRUCTURE CLEANUP
+   Consolidación segura: no cambia la navegación ni el contenido.
+   ============================================================ */
+
+/* Menos trabajo de composición en elementos que ya están fuera de vista. */
+body:not(.experience-started) #app{visibility:hidden;}
+body.experience-started #intro{visibility:hidden;}
+
+/* El fondo interior y el fondo de audio siguen siendo capas únicas. */
+#aleInteriorBg,
+#sr35AudioBg{
+  will-change:auto !important;
+  backface-visibility:hidden !important;
+  -webkit-backface-visibility:hidden !important;
+}
+
+/* El estado interno permanece visible, pero no añade un segundo marco pesado. */
+.ale-inner-presence,
+.ale-online-inner,
+.ale-presence-inner{
+  contain:layout paint;
+}
+
+/* Reducimos pequeños repaints provocados por elementos puramente decorativos. */
+.neon-scanline,
+.neon-particles,
+.neon-stars,
+.ale-particles,
+.ale-starfield{
+  pointer-events:none !important;
+}
+
+@media (max-width:700px){
+  /* En móvil priorizamos estabilidad sobre filtros decorativos secundarios. */
+  .neon-scanline{opacity:.28 !important;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+</style>
+<script id="ale-v44-performance-unified">
+(function(){
+  'use strict';
+  if(window.__aleRiotV44Unified) return;
+  window.__aleRiotV44Unified=true;
+
+  function qs(s){return document.querySelector(s);}
+  function videoReady(v){
+    if(!v) return;
+    v.muted=true;
+    v.loop=true;
+    v.playsInline=true;
+    v.setAttribute('playsinline','');
+  }
+
+  function sync(){
+    var hidden=document.hidden;
+    var started=document.body && document.body.classList.contains('experience-started');
+    var portal=document.body && (document.body.classList.contains('portal-active') || document.body.classList.contains('inicio-open'));
+    var intro=document.querySelector('.cinematic-video');
+    var interior=document.getElementById('aleInteriorBg');
+    var audio=document.getElementById('sr35AudioBg');
+    videoReady(intro); videoReady(interior); videoReady(audio);
+
+    if(intro){
+      if(!started && !hidden && !intro.closest('#intro')?.classList.contains('hide')){
+        var ip=intro.play(); if(ip&&ip.catch)ip.catch(function(){});
+      }else{
+        try{intro.pause();}catch(e){}
+      }
+    }
+
+    if(interior){
+      var activePage=qs('#app > .page.active');
+      if(started && !portal && !hidden && activePage){
+        var p=interior.play(); if(p&&p.catch)p.catch(function(){});
+      }else{
+        try{interior.pause();}catch(e){}
+      }
+    }
+
+    if(audio){
+      var audioActive=started && !portal && !hidden && !!qs('#audio.page.active');
+      if(audioActive){
+        var ap=audio.play(); if(ap&&ap.catch)ap.catch(function(){});
+      }else{
+        try{audio.pause();}catch(e){}
+      }
+    }
+  }
+
+  function init(){
+    document.querySelectorAll('video').forEach(function(v){
+      videoReady(v);
+      if(v.id!=='cinematic-video' && !v.classList.contains('cinematic-video')) v.setAttribute('preload','none');
+    });
+    sync();
+    document.addEventListener('visibilitychange',sync,{passive:true});
+    document.addEventListener('click',function(e){
+      if(e.target && e.target.closest && (e.target.closest('#enter') || e.target.closest('[data-nav]') || e.target.closest('[data-portal-target]'))){
+        setTimeout(sync,60);
+      }
+    },true);
+    var mo=new MutationObserver(function(){sync();});
+    mo.observe(document.body,{attributes:true,attributeFilter:['class']});
+    document.querySelectorAll('#app > .page').forEach(function(page){
+      mo.observe(page,{attributes:true,attributeFilter:['class']});
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true});
+  else init();
+})();
+</script>
+
+
+<style id="ale-v45-visual-system">
+/* =========================================================
+   ALE RIOT V45 — VISUAL SYSTEM UNIFICATION
+   Safe final cascade: no structural markup changes.
+   ========================================================= */
+:root{
+  --ale-neon-blue:#4c91ff;
+  --ale-neon-blue-soft:rgba(76,145,255,.36);
+  --ale-neon-blue-halo:rgba(45,115,255,.065);
+  --ale-neon-violet:#8d7cff;
+  --ale-neon-magenta:#ff4fa0;
+  --ale-panel:rgba(13,8,13,.68);
+  --ale-panel-line:rgba(76,145,255,.36);
+  --ale-panel-inner:rgba(155,195,255,.11);
+  --ale-panel-shadow:0 26px 70px rgba(0,0,0,.42);
+}
+
+/* One contour language across the primary glass surfaces. */
+.portal-card,
+.birthday-counter,
+.history-card,
+.ale-audio-panel{
+  border-color:var(--ale-panel-line) !important;
+  box-shadow:
+    var(--ale-panel-shadow),
+    0 0 22px var(--ale-neon-blue-halo),
+    inset 0 1px 0 var(--ale-panel-inner) !important;
+}
+
+/* Keep the portal from falling back to the old red accent on hover. */
+.portal-card:hover,
+.portal-card:focus-visible{
+  border-color:rgba(76,145,255,.50) !important;
+  box-shadow:
+    var(--ale-panel-shadow),
+    0 0 30px rgba(45,115,255,.09),
+    inset 0 1px 0 rgba(175,210,255,.14) !important;
+}
+
+/* Shared interactive neon language. */
+.portal-card .enter,
+.portal-card .portal-enter,
+.ale-enter-btn,
+button.ale-enter-btn,
+a.ale-enter-btn{
+  border-color:rgba(76,145,255,.50);
+  box-shadow:0 0 18px rgba(45,115,255,.075), inset 0 1px 0 rgba(185,215,255,.12);
+}
+
+/* Avoid expensive decorative filters on very small screens while preserving the look. */
+@media (max-width:700px){
+  .portal-card,
+  .birthday-counter,
+  .history-card,
+  .ale-audio-panel{
+    backdrop-filter:blur(12px) saturate(112%);
+    -webkit-backdrop-filter:blur(12px) saturate(112%);
+    box-shadow:
+      0 18px 46px rgba(0,0,0,.36),
+      0 0 16px rgba(45,115,255,.055),
+      inset 0 1px 0 rgba(155,195,255,.09) !important;
+  }
+}
+
+/* Respect reduced-motion users and prevent legacy pulse layers from fighting the presence state. */
+@media (prefers-reduced-motion:reduce){
+  .portal-card,
+  .portal-card::before,
+  .portal-card::after,
+  .ale-enter-btn,
+  .neon-status,
+  .ale-online-indicator,
+  .ale-inner-presence{
+    animation:none !important;
+    transition:none !important;
+  }
+}
+
+/* Paint containment on repeated cards keeps glow/hover repaints local. */
+.portal-card{contain:paint;}
+</style>
+
+
+<style id="ale-v46-responsive-premium">
+/* =========================================================
+   ALE RIOT V46 — RESPONSIVE PREMIUM REAL
+   PC / LAPTOP / TABLET / MOBILE
+   Solo layout + responsive polish. No navigation/function removal.
+   ========================================================= */
+:root{
+  --ale-v46-vh: 1vh;
+  --ale-v46-gutter: clamp(16px,3vw,48px);
+  --ale-v46-content: min(1180px, calc(100vw - (var(--ale-v46-gutter)*2)));
+  --ale-v46-blue: rgba(76,145,255,.46);
+  --ale-v46-blue-soft: rgba(45,115,255,.10);
+}
+html{overflow-x:hidden;}
+body{min-width:0;overflow-x:hidden;}
+img,video,canvas,svg{max-width:100%;}
+button,a{touch-action:manipulation;}
+
+/* Shared page shell: keeps every interior page inside a predictable responsive frame. */
+#app>.page.active{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  overflow-x:clip!important;
+}
+#app>.page.active > :where(.history-card,.birthday-counter,.ale-audio-panel,.ale-history-stage){
+  box-sizing:border-box!important;
+  max-width:min(100%,1080px)!important;
+}
+
+/* HOME: use the viewport as the composition frame rather than document height. */
+#home.page.active,
+#home.page.active .portal-welcome{
+  min-height:calc(var(--ale-v46-vh) * 100)!important;
+  box-sizing:border-box!important;
+}
+#home.page.active .portal-welcome{
+  width:100%!important;
+  padding-left:var(--ale-v46-gutter)!important;
+  padding-right:var(--ale-v46-gutter)!important;
+}
+#home.page.active .portal-grid{
+  width:var(--ale-v46-content)!important;
+  max-width:1180px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  box-sizing:border-box!important;
+}
+
+/* PORTAL CARDS: responsive grid without changing navigation targets. */
+.portal-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:clamp(14px,2vw,24px)!important;
+}
+.portal-card{
+  min-width:0!important;
+  width:100%!important;
+  box-sizing:border-box!important;
+}
+
+/* INTRO / CINEMATIC: centered content with safe side gutters. */
+#intro.cinematic-intro .neon-content{
+  width:min(100%,1180px)!important;
+  box-sizing:border-box!important;
+  margin-inline:auto!important;
+  padding-inline:var(--ale-v46-gutter)!important;
+}
+#intro.cinematic-intro .neon-topbar{
+  box-sizing:border-box!important;
+  left:var(--ale-v46-gutter)!important;
+  right:var(--ale-v46-gutter)!important;
+}
+#intro.cinematic-intro .neon-feature-strip{
+  width:min(1180px,calc(100vw - (var(--ale-v46-gutter)*2)))!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  box-sizing:border-box!important;
+}
+
+/* -------------------------
+   LARGE DESKTOP 1440+
+   ------------------------- */
+@media (min-width:1440px){
+  #intro.cinematic-intro .neon-content{padding-top:clamp(20px,4vh,64px)!important;}
+  #intro.cinematic-intro .neon-content h1{font-size:clamp(76px,7vw,126px)!important;}
+  #intro.cinematic-intro .neon-feature-strip{gap:20px!important;}
+  #home.page.active .portal-grid{gap:26px!important;}
+  #app>.page.active{padding-left:clamp(36px,5vw,80px)!important;padding-right:clamp(36px,5vw,80px)!important;}
+}
+
+/* -------------------------
+   DESKTOP 1200–1439
+   ------------------------- */
+@media (min-width:1200px) and (max-width:1439px){
+  #intro.cinematic-intro .neon-content{padding-top:4vh!important;}
+  #intro.cinematic-intro .neon-content h1{font-size:clamp(70px,7vw,104px)!important;}
+  #intro.cinematic-intro .neon-feature-strip{gap:16px!important;}
+}
+
+/* -------------------------
+   LAPTOP 992–1199
+   ------------------------- */
+@media (min-width:992px) and (max-width:1199px){
+  :root{--ale-v46-gutter:clamp(24px,4vw,42px);}
+  #intro.cinematic-intro .neon-content{padding-top:3vh!important;}
+  #intro.cinematic-intro .neon-content h1{font-size:clamp(60px,8vw,86px)!important;}
+  #intro.cinematic-intro .neon-feature-strip{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important;}
+  #intro.cinematic-intro .neon-feature-strip > div{min-width:0!important;padding:12px 10px!important;}
+  #home.page.active .portal-grid{gap:16px!important;}
+  #app>.page.active{padding-top:clamp(72px,8vh,100px)!important;padding-bottom:60px!important;}
+}
+
+/* -------------------------
+   TABLET LANDSCAPE / SMALL LAPTOP 768–991
+   ------------------------- */
+@media (min-width:768px) and (max-width:991px){
+  :root{--ale-v46-gutter:24px;}
+  #intro.cinematic-intro .neon-topbar{top:18px!important;}
+  #intro.cinematic-intro .neon-content{padding-top:8vh!important;}
+  #intro.cinematic-intro .neon-content h1{font-size:clamp(54px,9vw,78px)!important;line-height:.92!important;}
+  #intro.cinematic-intro .neon-feature-strip{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important;}
+  #intro.cinematic-intro .neon-feature-strip > div{min-width:0!important;padding:10px 8px!important;}
+  #intro.cinematic-intro .neon-feature-strip b{font-size:10px!important;letter-spacing:1.5px!important;}
+  #home.page.active .portal-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important;}
+  .portal-card{padding:20px!important;border-radius:20px!important;}
+  #app>.page.active{padding:76px 24px 56px!important;}
+  #history.ale-history-mode,#history.page.active{min-height:0!important;}
+}
+
+/* -------------------------
+   TABLET PORTRAIT 600–767
+   ------------------------- */
+@media (min-width:600px) and (max-width:767px){
+  :root{--ale-v46-gutter:20px;}
+  #intro.cinematic-intro .neon-topbar{top:15px!important;}
+  #intro.cinematic-intro .neon-top-code{font-size:7px!important;letter-spacing:1.5px!important;}
+  #intro.cinematic-intro .neon-status{min-width:104px!important;height:29px!important;padding:0 11px!important;}
+  #intro.cinematic-intro .neon-content{padding-top:12vh!important;}
+  #intro.cinematic-intro .neon-content h1{font-size:clamp(48px,11vw,68px)!important;}
+  #intro.cinematic-intro .neon-feature-strip{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;}
+  #home.page.active .portal-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important;}
+  #home.page.active .portal-card{min-height:150px!important;padding:20px!important;}
+  #app>.page.active{padding:72px 20px 48px!important;}
+  #app>.page.active h1{font-size:clamp(30px,6vw,48px)!important;}
+}
+
+/* -------------------------
+   MOBILE 480–599
+   ------------------------- */
+@media (min-width:480px) and (max-width:599px){
+  :root{--ale-v46-gutter:16px;}
+  #intro.cinematic-intro .neon-topbar{top:12px!important;left:16px!important;right:16px!important;}
+  #intro.cinematic-intro .neon-top-code{font-size:6px!important;letter-spacing:1.1px!important;}
+  #intro.cinematic-intro .neon-status{min-width:96px!important;height:27px!important;padding:0 10px!important;font-size:7px!important;}
+  #intro.cinematic-intro .neon-content{padding-top:13vh!important;padding-bottom:110px!important;}
+  #intro.cinematic-intro .neon-content h1{font-size:clamp(42px,12vw,58px)!important;}
+  #intro.cinematic-intro .neon-feature-strip{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;bottom:22px!important;}
+  #home.page.active .portal-grid{grid-template-columns:1fr!important;gap:12px!important;max-width:520px!important;}
+  #home.page.active .portal-card{min-height:132px!important;padding:18px!important;}
+  #app>.page.active{padding:68px 16px 40px!important;}
+  #ale-clean-tab{right:16px!important;top:16px!important;}
+}
+
+/* -------------------------
+   SMALL MOBILE 360–479
+   ------------------------- */
+@media (max-width:479px){
+  :root{--ale-v46-gutter:13px;}
+  #intro.cinematic-intro .neon-topbar{top:10px!important;left:13px!important;right:13px!important;gap:7px!important;}
+  #intro.cinematic-intro .neon-menu-mark{transform:scale(.82)!important;transform-origin:left center!important;}
+  #intro.cinematic-intro .neon-top-code{font-size:5px!important;letter-spacing:.9px!important;white-space:nowrap!important;}
+  #intro.cinematic-intro .neon-status{min-width:88px!important;width:auto!important;height:25px!important;padding:0 8px!important;gap:6px!important;font-size:6px!important;letter-spacing:.12em!important;}
+  #intro.cinematic-intro .neon-status b{width:6px!important;height:6px!important;flex-basis:6px!important;}
+  #intro.cinematic-intro .neon-content{padding-top:12vh!important;padding-bottom:118px!important;}
+  #intro.cinematic-intro .neon-content h1{font-size:clamp(36px,13vw,50px)!important;line-height:.9!important;letter-spacing:.02em!important;}
+  #intro.cinematic-intro .neon-feature-strip{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important;bottom:14px!important;width:calc(100vw - 26px)!important;}
+  #intro.cinematic-intro .neon-feature-strip > div{padding:8px 6px!important;min-height:48px!important;}
+  #intro.cinematic-intro .neon-feature-strip span{font-size:12px!important;}
+  #intro.cinematic-intro .neon-feature-strip b{font-size:8px!important;letter-spacing:1px!important;}
+  #intro.cinematic-intro .neon-feature-strip small{font-size:6px!important;}
+  #home.page.active .portal-grid{grid-template-columns:1fr!important;gap:10px!important;max-width:100%!important;}
+  #home.page.active .portal-card{min-height:118px!important;padding:16px!important;border-radius:18px!important;}
+  #home.page.active .portal-card h3{font-size:20px!important;}
+  #home.page.active .portal-card p{font-size:12px!important;}
+  #app>.page.active{padding:62px 13px 34px!important;}
+  #app>.page.active h1{font-size:clamp(27px,8vw,38px)!important;}
+  #app>.page.active .history-card,#app>.page.active .birthday-counter,#app>.page.active .ale-audio-panel,#app>.page.active .ale-history-stage{width:100%!important;margin-left:0!important;margin-right:0!important;border-radius:18px!important;}
+  #ale-clean-tab{right:13px!important;top:13px!important;transform:scale(.9)!important;transform-origin:top right!important;}
+}
+
+/* Tiny devices: avoid crowding the top status and menu. */
+@media (max-width:359px){
+  #intro.cinematic-intro .neon-top-code{display:none!important;}
+  #intro.cinematic-intro .neon-status{min-width:84px!important;}
+  #intro.cinematic-intro .neon-topbar{justify-content:flex-end!important;}
+  #intro.cinematic-intro .neon-content h1{font-size:34px!important;}
+  #intro.cinematic-intro .neon-feature-strip{gap:5px!important;}
+}
+
+/* Interior history: preserve the existing desktop two-column composition,
+   but collapse safely before the browser runs out of width. */
+@media (min-width:1100px){
+  body.ale-history-mode #history{column-gap:clamp(24px,3vw,56px)!important;}
+}
+@media (max-width:1099px){
+  body.ale-history-mode #history{display:block!important;}
+  body.ale-history-mode #history>.birthday-counter,
+  body.ale-history-mode #history>.history-card{width:min(100%,900px)!important;margin-left:auto!important;margin-right:auto!important;}
+}
+
+/* Gallery: predictable columns at each tier, with no horizontal spill. */
+@media (min-width:1200px){#gallery .gallery{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:18px!important;}}
+@media (min-width:768px) and (max-width:1199px){#gallery .gallery{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important;}}
+@media (min-width:480px) and (max-width:767px){#gallery .gallery{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;}}
+@media (max-width:479px){#gallery .gallery{grid-template-columns:1fr!important;gap:10px!important;}}
+
+/* Audio: prevent the panel and controls from becoming wider than the viewport. */
+.ale-audio-panel{width:min(100%,760px)!important;box-sizing:border-box!important;}
+#audio .ale-audio-panel button,#audio .ale-audio-panel input{max-width:100%;}
+
+/* Presence inside the experience stays visible but never blocks content. */
+#ale-clean-tab{max-width:calc(100vw - 26px)!important;box-sizing:border-box!important;}
+
+/* Hover effects only on devices that actually have hover. */
+@media (hover:none){
+  .portal-card:hover{transform:none!important;}
+  .portal-card:hover:before{transform:translateX(-70%) rotate(20deg)!important;}
+}
+
+/* Motion safety: V46 adds no persistent movement when reduced motion is requested. */
+@media (prefers-reduced-motion:reduce){
+  #intro.cinematic-intro .neon-feature-strip,
+  #intro.cinematic-intro .neon-content,
+  .portal-card,
+  #ale-clean-tab{animation:none!important;transition:none!important;}
+}
+</style>
+<script id="ale-v46-viewport-controller">
+(function(){
+  'use strict';
+  function setVh(){
+    var h=(window.visualViewport&&window.visualViewport.height)||window.innerHeight||0;
+    if(h) document.documentElement.style.setProperty('--ale-v46-vh',(h*0.01)+'px');
+  }
+  setVh();
+  window.addEventListener('resize',setVh,{passive:true});
+  if(window.visualViewport) window.visualViewport.addEventListener('resize',setVh,{passive:true});
+  window.addEventListener('orientationchange',function(){setTimeout(setVh,120);},{passive:true});
+})();
+</script>
+
+
+<style id="ale-v47-ux-microinteractions">
+/* ALE RIOT V47 — UX & MICROINTERACCIONES PREMIUM
+   Scoped polish layer: navigation, controls, cards and presence.
+   Keeps existing structure/functions and honors reduced motion. */
+:root{
+  --ale-v47-blue: rgba(76,145,255,.95);
+  --ale-v47-blue-soft: rgba(76,145,255,.24);
+  --ale-v47-magenta: rgba(215,72,255,.78);
+  --ale-v47-focus: rgba(112,174,255,.72);
+  --ale-v47-ease: cubic-bezier(.22,.72,.18,1);
+}
+/* Make interactive elements feel deliberate without changing layout. */
+.portal-card,
+.birthday-counter,
+.history-card,
+.ale-audio-panel,
+.ale-history-stage,
+button,
+a,
+[role="button"],
+[tabindex]:not([tabindex="-1"]){
+  -webkit-tap-highlight-color: transparent;
+}
+.portal-card,
+button,
+a,
+[role="button"]{
+  transition:
+    transform .28s var(--ale-v47-ease),
+    border-color .28s ease,
+    box-shadow .28s ease,
+    filter .28s ease,
+    opacity .22s ease;
+}
+/* Keyboard focus: visible, quiet, blue — no layout shift. */
+:where(a,button,[role="button"],[tabindex]:not([tabindex="-1"])):focus-visible{
+  outline: 2px solid var(--ale-v47-focus);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(76,145,255,.10), 0 0 22px rgba(76,145,255,.12);
+}
+/* Desktop hover: lift only interactive cards, never the whole stage. */
+@media (hover:hover) and (pointer:fine){
+  .portal-card:hover{
+    transform: translateY(-3px);
+    border-color: rgba(76,145,255,.52) !important;
+    box-shadow:
+      0 22px 55px rgba(0,0,0,.32),
+      0 0 24px rgba(76,145,255,.08),
+      inset 0 1px 0 rgba(170,210,255,.12) !important;
+  }
+  .portal-card:hover .portal-card-arrow,
+  .portal-card:hover .enter,
+  .portal-card:hover .arrow,
+  .portal-card:hover [class*="arrow"]{
+    transform: translateX(3px);
+  }
+  .portal-card:active,
+  button:active,
+  [role="button"]:active{
+    transform: translateY(-1px) scale(.992);
+  }
+}
+/* Touch feedback: brief, not a persistent glow. */
+@media (hover:none){
+  .portal-card:active,
+  button:active,
+  a:active,
+  [role="button"]:active{
+    filter: brightness(1.06);
+  }
+}
+/* Main ENTER action: premium, restrained micro-glow. */
+:where(.enter-btn,.enter-button,.portal-enter,.hero-enter,.ale-enter,#enterBtn,#enterButton){
+  position:relative;
+  isolation:isolate;
+  transition: transform .28s var(--ale-v47-ease), box-shadow .3s ease, border-color .3s ease, filter .25s ease;
+}
+:where(.enter-btn,.enter-button,.portal-enter,.hero-enter,.ale-enter,#enterBtn,#enterButton)::after{
+  content:"";
+  position:absolute;
+  inset:-7px;
+  border-radius:inherit;
+  pointer-events:none;
+  opacity:0;
+  box-shadow:0 0 24px rgba(76,145,255,.18), 0 0 38px rgba(215,72,255,.08);
+  transition:opacity .3s ease;
+  z-index:-1;
+}
+@media (hover:hover) and (pointer:fine){
+  :where(.enter-btn,.enter-button,.portal-enter,.hero-enter,.ale-enter,#enterBtn,#enterButton):hover{
+    transform:translateY(-2px);
+    filter:brightness(1.06);
+    border-color:rgba(76,145,255,.68) !important;
+  }
+  :where(.enter-btn,.enter-button,.portal-enter,.hero-enter,.ale-enter,#enterBtn,#enterButton):hover::after{opacity:1}
+  :where(.enter-btn,.enter-button,.portal-enter,.hero-enter,.ale-enter,#enterBtn,#enterButton):active{transform:translateY(0) scale(.985)}
+}
+/* Presence pill: keep the state readable without stealing focus. */
+:where(.neon-status,.ale-online-status,.ale-presence,.ale-v42-presence,.ale-v39-status){
+  transition: opacity .25s ease, transform .25s var(--ale-v47-ease), filter .25s ease;
+}
+:where(.neon-status,.ale-online-status,.ale-presence,.ale-v42-presence,.ale-v39-status):hover{
+  filter:brightness(1.05);
+}
+/* Page transitions: if existing code exposes these classes, make the handoff softer. */
+:where(.page,.section,.screen,.view,.panel)[aria-hidden="true"]{
+  transition:opacity .22s ease, transform .28s var(--ale-v47-ease), visibility .22s ease;
+}
+/* Avoid accidental horizontal movement from focus/hover polish. */
+.portal-card,
+button,
+a,[role="button"]{ backface-visibility:hidden; }
+/* Reduced motion is a hard override. */
+@media (prefers-reduced-motion: reduce){
+  .portal-card,
+  button,a,[role="button"],
+  :where(.enter-btn,.enter-button,.portal-enter,.hero-enter,.ale-enter,#enterBtn,#enterButton),
+  :where(.neon-status,.ale-online-status,.ale-presence,.ale-v42-presence,.ale-v39-status){
+    transition:none !important;
+  }
+  :where(.enter-btn,.enter-button,.portal-enter,.hero-enter,.ale-enter,#enterBtn,#enterButton)::after{display:none !important}
+}
+</style>
+
+<script id="ale-v47-ux-controller">
+(function(){
+  'use strict';
+  if (window.__ALE_V47_UX__) return;
+  window.__ALE_V47_UX__ = true;
+
+  // Add a lightweight pending state to interactive controls during click/tap,
+  // without preventing any existing handlers or navigation.
+  document.addEventListener('pointerdown', function(e){
+    var el = e.target && e.target.closest ? e.target.closest('button,a,[role="button"]') : null;
+    if(!el) return;
+    el.classList.add('ale-v47-pressed');
+    window.setTimeout(function(){ el.classList.remove('ale-v47-pressed'); }, 180);
+  }, {passive:true});
+
+  // Make keyboard navigation feel intentional: remember keyboard modality only.
+  var usingKeyboard = false;
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Tab' || e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') usingKeyboard = true;
+  }, {passive:true});
+  document.addEventListener('pointerdown', function(){ usingKeyboard = false; }, {passive:true});
+  document.addEventListener('focusin', function(e){
+    if(usingKeyboard && e.target && e.target.setAttribute) e.target.setAttribute('data-ale-key-focus','1');
+  });
+  document.addEventListener('focusout', function(e){
+    if(e.target && e.target.removeAttribute) e.target.removeAttribute('data-ale-key-focus');
+  });
+
+  // Prevent sticky hover-like classes left behind by older layers after navigation.
+  function cleanTransient(){
+    document.querySelectorAll('.ale-v47-pressed').forEach(function(el){ el.classList.remove('ale-v47-pressed'); });
+  }
+  document.addEventListener('visibilitychange', cleanTransient, {passive:true});
+  window.addEventListener('pageshow', cleanTransient, {passive:true});
+})();
+</script>
+
+<style id="ale-v48-performance-final">
+/* =========================================================
+   ALE RIOT V48 — PERFORMANCE FINAL
+   Capa conservadora: mantiene navegación, presencia y UX.
+   ========================================================= */
+:root{--ale-v48-frame:1}
+/* Evita trabajo de pintura innecesario en contenido secundario sin ocultarlo. */
+.ale-v48-offscreen{animation-play-state:paused!important;transition:none!important}
+@media (max-width: 991px){
+  /* En tablet/móvil el glass conserva profundidad pero reduce el coste del desenfoque. */
+  .portal-card,.birthday-counter,.history-card,.ale-audio-panel{
+    -webkit-backdrop-filter:blur(10px) saturate(112%)!important;
+    backdrop-filter:blur(10px) saturate(112%)!important;
+  }
+}
+@media (max-width: 599px){
+  .portal-card,.birthday-counter,.history-card,.ale-audio-panel{
+    -webkit-backdrop-filter:blur(7px) saturate(108%)!important;
+    backdrop-filter:blur(7px) saturate(108%)!important;
+  }
+}
+</style>
+<script id="ale-v48-performance-controller">
+(()=>{
+  'use strict';
+  const root=document;
+  const media=[...root.querySelectorAll('video')];
+  const imgs=[...root.images];
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)');
+  const small=matchMedia('(max-width: 599px)');
+  const visible=new WeakMap();
+  const isIntro=v=>!!(v.closest('#intro, .intro, .neon-intro, [class*="intro"]') || /intro/i.test(v.id||''));
+  const isAudio=v=>!!(v.closest('.ale-audio-panel,[class*="audio"]') || /audio/i.test(v.id||''));
+  // Preserve the existing playback logic; only tune network decoding/preload.
+  media.forEach(v=>{
+    if(!v.hasAttribute('playsinline')) v.setAttribute('playsinline','');
+    if(!v.hasAttribute('preload')) v.setAttribute('preload', isIntro(v)?'auto':'metadata');
+    if(small.matches && !isIntro(v) && !isAudio(v)) v.setAttribute('preload','none');
+  });
+  imgs.forEach((img,i)=>{
+    if(!img.hasAttribute('decoding')) img.setAttribute('decoding','async');
+    // Keep the first visible/hero imagery eager; defer the rest.
+    if(i>2 && !img.hasAttribute('loading')) img.setAttribute('loading','lazy');
+  });
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        const el=e.target;
+        visible.set(el,e.isIntersecting);
+        if(e.isIntersecting) el.classList.remove('ale-v48-offscreen');
+        else el.classList.add('ale-v48-offscreen');
+      });
+    },{rootMargin:'120px 0px',threshold:0.01});
+    root.querySelectorAll('.portal-card,.birthday-counter,.history-card,.ale-audio-panel').forEach(el=>io.observe(el));
+  }
+  const pauseWhenHidden=()=>{
+    if(root.visibilityState==='hidden'){
+      media.forEach(v=>{ if(!v.paused){ v.dataset.aleV48WasPlaying='1'; try{v.pause()}catch(e){} } });
+    }else{
+      media.forEach(v=>{ if(v.dataset.aleV48WasPlaying==='1'){ delete v.dataset.aleV48WasPlaying; /* Existing controllers decide whether to resume. */ } });
+    }
+  };
+  root.addEventListener('visibilitychange',pauseWhenHidden,{passive:true});
+  // Keep decorative animation load predictable after first paint.
+  requestAnimationFrame(()=>document.documentElement.classList.add('ale-v48-ready'));
+})();
+</script>
+
+
+<style id="ale-v49-qa-stability">
+/* V49 — QA / ESTABILIDAD: capa conservadora. No reemplaza navegación ni funciones existentes. */
+html{overflow-x:hidden;}
+body{overscroll-behavior-x:none;}
+:where(button,[role="button"]){-webkit-tap-highlight-color:transparent;}
+:where(button,[role="button"]):focus-visible{outline:2px solid rgba(54,167,255,.78)!important;outline-offset:3px!important;}
+/* Evita que estados de interacción queden pegados después de tocar en móvil. */
+@media (hover:none),(pointer:coarse){
+  :where(.portal-card,.neon-enter,.ale-history-nav button,#ale-clean-tab,#ale-menu-trigger,#audioToggle,.v54-link):hover{transform:none!important;filter:none!important;}
+}
+/* Menos riesgo de doble toque accidental en controles durante una transición. */
+.ale-v49-transition-lock{pointer-events:none!important;}
+/* El contenido oculto no debe quedar accesible para teclado/lectores cuando el sistema de páginas lo oculta. */
+:where(.page[aria-hidden="true"]){pointer-events:none;}
+@media (prefers-reduced-motion:reduce){
+  :where(.portal-card,.neon-enter,.ale-history-nav button,#ale-clean-tab,#ale-menu-trigger,#audioToggle,.v54-link){transition:none!important;animation:none!important;}
+}
+</style>
+<script id="ale-v49-qa-stability-js">
+(function(){
+  'use strict';
+  if(window.__ALE_V49_QA__) return; window.__ALE_V49_QA__=true;
+  var hiddenMedia=[], lockTimer=0;
+  function allPages(){ return Array.prototype.slice.call(document.querySelectorAll('.page')); }
+  function syncPages(){
+    allPages().forEach(function(p){
+      var hidden=p.getAttribute('aria-hidden')==='true' || (!p.classList.contains('active') && p.style.display==='none');
+      if(hidden){ p.setAttribute('tabindex','-1'); } else { if(p.getAttribute('tabindex')==='-1') p.removeAttribute('tabindex'); }
+    });
+  }
+  function pauseBackgroundMedia(){
+    hiddenMedia=[];
+    document.querySelectorAll('video,audio').forEach(function(m){
+      if(!m.paused && !m.ended){ hiddenMedia.push(m); try{m.pause();}catch(e){} }
+    });
+  }
+  function resumeSafeMedia(){
+    if(document.hidden) return;
+    hiddenMedia.forEach(function(m){
+      if(!document.body.contains(m)) return;
+      try{ var p=m.play(); if(p && p.catch) p.catch(function(){}); }catch(e){}
+    });
+    hiddenMedia=[];
+  }
+  document.addEventListener('visibilitychange',function(){ if(document.hidden) pauseBackgroundMedia(); else setTimeout(resumeSafeMedia,120); },{passive:true});
+  window.addEventListener('pageshow',function(){ syncPages(); },{passive:true});
+  window.addEventListener('pagehide',function(){ pauseBackgroundMedia(); },{passive:true});
+  document.addEventListener('DOMContentLoaded',function(){
+    syncPages();
+    var root=document.body;
+    if(root){
+      var mo=new MutationObserver(function(){ syncPages(); });
+      mo.observe(root,{subtree:true,attributes:true,attributeFilter:['class','aria-hidden','style']});
+      setTimeout(function(){try{mo.disconnect();}catch(e){}},15000);
+    }
+    /* Evita clicks repetidos durante una transición sin alterar el handler original. */
+    document.addEventListener('click',function(e){
+      var el=e.target && e.target.closest ? e.target.closest('.neon-enter,#enter,.portal-card,.v54-link,[data-portal-target]') : null;
+      if(!el || el.disabled || el.classList.contains('ale-v49-transition-lock')) return;
+      el.classList.add('ale-v49-transition-lock');
+      clearTimeout(lockTimer); lockTimer=setTimeout(function(){
+        document.querySelectorAll('.ale-v49-transition-lock').forEach(function(x){x.classList.remove('ale-v49-transition-lock');});
+      },700);
+    },true);
+  });
+})();
+</script>
+
+<style id="ale-v50-final-premium">
+/* ALE RIOT V50 — FINAL PREMIUM / CANONICAL VISUAL LAYER */
+:root{
+  --ale-blue:#38bdf8;
+  --ale-blue-soft:rgba(56,189,248,.22);
+  --ale-violet:#a78bfa;
+  --ale-magenta:#e879f9;
+  --ale-cyan:#67e8f9;
+  --ale-panel:rgba(8,13,28,.62);
+  --ale-panel-strong:rgba(7,12,27,.78);
+  --ale-border:rgba(56,189,248,.72);
+  --ale-border-soft:rgba(56,189,248,.28);
+  --ale-shadow:0 0 0 1px rgba(56,189,248,.12),0 10px 34px rgba(0,0,0,.34),0 0 28px rgba(56,189,248,.10);
+}
+html{overflow-x:hidden;scroll-behavior:smooth}
+body{
+  overflow-x:hidden;
+  background-color:#030711;
+}
+button,[role="button"],a{ -webkit-tap-highlight-color:transparent; }
+:focus-visible{
+  outline:2px solid var(--ale-cyan);
+  outline-offset:3px;
+}
+.page[aria-hidden="true"]{
+  pointer-events:none;
+}
+.page{
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+}
+.portal-card,
+.neon-enter,
+.ale-history-nav button,
+#ale-clean-tab,
+#ale-menu-trigger,
+#audioToggle,
+.v54-link{
+  -webkit-transform:translateZ(0);
+  transform:translateZ(0);
+  will-change:transform;
+}
+.portal-card,
+.ale-history-nav button,
+.v54-link{
+  border-color:var(--ale-border);
+  box-shadow:var(--ale-shadow);
+}
+.portal-card:hover,
+.ale-history-nav button:hover,
+.v54-link:hover{
+  border-color:rgba(103,232,249,.88);
+  box-shadow:0 0 0 1px rgba(103,232,249,.14),0 12px 38px rgba(0,0,0,.38),0 0 32px rgba(56,189,248,.14);
+}
+.neon-enter{
+  border-color:var(--ale-border);
+  box-shadow:0 0 0 1px rgba(56,189,248,.14),0 10px 30px rgba(0,0,0,.34),0 0 26px rgba(56,189,248,.14);
+}
+.neon-enter:hover{
+  box-shadow:0 0 0 1px rgba(103,232,249,.18),0 12px 34px rgba(0,0,0,.38),0 0 34px rgba(56,189,248,.18);
+}
+.neon-status,
+.ale-online-status,
+.ale-presence,
+.ale-v42-presence,
+.ale-v39-status{
+  border-color:var(--ale-border-soft);
+}
+.ale-v50-transition-lock{
+  pointer-events:none!important;
+}
+@media (hover:none),(pointer:coarse){
+  .portal-card:hover,
+  .neon-enter:hover,
+  .ale-history-nav button:hover,
+  .v54-link:hover{
+    transform:none!important;
+    filter:none!important;
+  }
+}
+@media (max-width:991px){
+  :root{
+    --ale-panel:rgba(7,12,27,.72);
+    --ale-panel-strong:rgba(6,11,25,.84);
+  }
+  .portal-card,
+  .neon-enter,
+  .ale-history-nav button,
+  .v54-link{
+    box-shadow:0 0 0 1px rgba(56,189,248,.10),0 7px 24px rgba(0,0,0,.32),0 0 18px rgba(56,189,248,.08);
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,
+  *::before,
+  *::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+    scroll-behavior:auto!important;
+  }
+}
+</style>
+
+<script id="ale-v50-final-premium-js">
+(()=> {
+  if(window.__ALE_V50_FINAL__) return;
+  window.__ALE_V50_FINAL__ = true;
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root = document.documentElement;
+  const body = document.body;
+
+  const syncPages = () => {
+    document.querySelectorAll('.page').forEach(page=>{
+      const hidden = page.getAttribute('aria-hidden') === 'true' ||
+                     !page.classList.contains('active');
+      page.setAttribute('tabindex', hidden ? '-1' : '0');
+    });
+  };
+
+  const pauseMedia = () => {
+    document.querySelectorAll('video,audio').forEach(m=>{
+      if(!m.paused){
+        m.dataset.aleV50WasPlaying = '1';
+        try{ m.pause(); }catch(e){}
+      }
+    });
+  };
+
+  const resumeMedia = () => {
+    document.querySelectorAll('video,audio').forEach(m=>{
+      if(m.dataset.aleV50WasPlaying === '1'){
+        delete m.dataset.aleV50WasPlaying;
+        const p = m.play();
+        if(p && typeof p.catch === 'function') p.catch(()=>{});
+      }
+    });
+  };
+
+  const lock = el => {
+    if(reduced || !el || el.classList.contains('ale-v50-transition-lock')) return;
+    el.classList.add('ale-v50-transition-lock');
+    setTimeout(()=>el.classList.remove('ale-v50-transition-lock'),650);
+  };
+
+  syncPages();
+
+  document.addEventListener('click', e=>{
+    const target = e.target.closest?.('.neon-enter,#enter,.portal-card,.v54-link,[data-portal-target]');
+    if(target) lock(target);
+  }, true);
+
+  document.addEventListener('keydown', e=>{
+    if(e.key !== 'Enter' && e.key !== ' ') return;
+    const target = document.activeElement;
+    if(target?.matches?.('.neon-enter,#enter,.portal-card,.v54-link,[data-portal-target]')) lock(target);
+  }, true);
+
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden) pauseMedia();
+    else resumeMedia();
+  });
+
+  window.addEventListener('pageshow', syncPages, {passive:true});
+  window.addEventListener('pagehide', pauseMedia, {passive:true});
+
+  const observer = new MutationObserver(mutations=>{
+    let pageChanged = false;
+    for(const m of mutations){
+      if(m.type === 'attributes' &&
+         (m.attributeName === 'class' || m.attributeName === 'aria-hidden')){
+        pageChanged = true;
+        break;
+      }
+    }
+    if(pageChanged) syncPages();
+  });
+  observer.observe(body,{subtree:true,attributes:true,attributeFilter:['class','aria-hidden']});
+
+  /* Stop observing after the initial navigation settling period. */
+  setTimeout(()=>observer.disconnect(),18000);
+
+  /* Keep the horizontal viewport stable on mobile without touching layout widths. */
+  root.style.overflowX = 'hidden';
+})();
+</script>
 </body>
 
 <style id="estefi-final-v3-fix">
