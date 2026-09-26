@@ -1,3 +1,10 @@
 {
-  "videos": []
+  "videos": [
+    {
+      "title": "Mi primer video",
+      "description": "Video de prueba",
+      "file": "mi-video.mp4",
+      "poster": ""
+    }
+  ]
 }
